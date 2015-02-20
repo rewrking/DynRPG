@@ -1,0 +1,61 @@
+Structure of maps, events & their scripts (by their Class names):
+	(no prefix) indicates a pointer to another class
+	[] indicates an array of that class type
+	+ indicates an extended class
+	# indicates an enum
+	~ indicates a pointer that is currently unknown
+	() indicates something that was added to a class via function for the sake of continuity
+
+Map - First class. Current map environment
+	Character+Hero -- The hero could be on a particular map
+	Character+Vehicle -- Each vehicle could be on a particular map
+	[]Character+Event -- Array of events on a particular map
+		EventData
+			[]EventPage
+				~UnknownPointer
+				EventScriptList
+					EventScriptLine
+						#EventCommand
+						
+				EventPrecondition
+					#EventPreconditionFlag
+					#EventPreconditionVarLogic
+					
+				#Facing
+				#EventFrame
+				#EventMoveFrequency
+				MoveRoute
+				
+		EventPage - Current page for the event. See above^^
+			...
+	...
+	(MapProperties) - Can only get map properties for current map. Is this correct? Should this be in map tree somehow?
+		#MapWrapping
+		MapLmuFile
+			~UnknownPointer
+			~UnknownPointer - More Map properties??
+		~MapLmuFile -- ??
+			...
+		[]EventData -- See above... duplicate?? wtf is this?
+			...
+		MapGraphics
+			Tileset
+			~UnknownPointer - Graphics Sheet?
+		#DungeonGenType
+		#DungeonGenPassWidth
+	getEventLine() - Function to grab an event line
+		
+		
+===========================================
+		
+MapTree
+	MapTreeProperties
+		#MapTreeType
+		#MapMusicType
+		Music
+		#MapBgType
+		#MapAllowType
+		#MapAllowType
+		#MapAllowType
+		MapEncounter
+	MapStartPositions
