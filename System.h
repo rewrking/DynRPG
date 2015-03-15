@@ -16,7 +16,12 @@ namespace RPG {
 		SCENE_FILE, //!< Save <b>or</b> load menu
 		SCENE_TITLE, //!< Title screen
 		SCENE_GAME_OVER, //!< Game over screen
-		SCENE_DEBUG //!< Debug screen (\c F9 menu)
+		SCENE_DEBUG, //!< Debug screen (\c F9 menu)
+		// Custom scenes below
+		SCENE_9,
+		SCENE_GAMEJOLT = 18,
+		SCENE_UNI_DEBUG = 42
+		
 	};
 
 	//! One-byte version of RPG::Scene

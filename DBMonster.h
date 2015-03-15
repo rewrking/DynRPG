@@ -18,7 +18,7 @@ namespace RPG {
 	class DBMonster {
 		public:
 			void **vTable;
-			int id; //!< ID of the actor
+			int id; //!< ID of the monster
 			DStringPtr name; //!< Monster's name
 			DStringPtr filename; //!< Monster's filename
 			unsigned int colorAlteration; //!< The color hue of the monster graphic. 0 represents the center of the slider. 0-180 is the right side, while 180-350 is the left side
