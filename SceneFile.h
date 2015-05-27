@@ -22,7 +22,7 @@ namespace RPG {
 				AuroraBoard *AuroraBoard2; //!< Not even a little bit implemented...
 			bool initialized; //!< Has the enter hero name scene initialized?
 			Window *winInfo; //!< The info window (very top)
-			Window *winFile[15]; //!< The actual file windows
+			WindowSaveFile *winFile[15]; //!< The actual file windows
 			FileSceneMode_T mode; //!< The mode of the scene (save or load)
 			bool fromMenu; //!< Set to true to return to the main menu
 			int timesScrolled; //!< Times scrolled down?

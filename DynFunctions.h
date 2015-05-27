@@ -47,31 +47,27 @@ namespace RPG {
 			: "cc", "memory");
 		return out;
 	}
-	
 
-	/*void drawText(RPG::Image *image, int x, int y, std::string text, int color) { // doesn't work correctly yet
-		asm volatile("push %%eax"
-			:
+	void Image::drawString(int x, int y, std::string text, int color)
+	{
+		RPG::DStringPtr *par2 = new DStringPtr(text); // *cue holy music*
+		asm volatile("push %%eax" 
+			: 
 			: "a" (y));
-		asm volatile("push %%eax"
-			:
-			: "a" (text.c_str()));
-		asm volatile("push %%eax"
-			:
+		asm volatile("push %%eax" 
+			: 
+			: "a" (par2->str));
+		asm volatile("push %%eax" 
+			: 
 			: "a" (color));
-		asm volatile("call *%%esi"
-			:
-			: "S" (0x4892AC), "a" (RPG::system->systemGraphic), "d" (image), "c" (x)
+		asm volatile("call *%%esi" 
+			: 
+			: "S" (0x4892AC), "a" (RPG::system->systemGraphic), "d" (this), "c" (x) 
 			: "cc", "memory");
 	}
-	
-	// ignore this
-	const char * testText(std::string text) {
-		return text.c_str();
-	}
-	
-	
-	void drawText(RPG::Window *window, int x, int y, std::string text, int color) { // doesn't work correctly yet
+
+
+	/*void drawText(RPG::Window *window, int x, int y, std::string text, int color) { // doesn't work correctly yet
 		asm volatile("push %%eax"
 			:
 			: "a" (y));
