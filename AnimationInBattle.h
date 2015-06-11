@@ -35,7 +35,7 @@ namespace RPG {
 			bool isAnimationPlaying; //!< Is a battle animation playing?
 			AnimationCurrent *currentAnim; //!< The battle animation's data
 			int currentAnimationId; //!< The ID of the battle animation currently playing
-			AnimationTargetMonster currentAnimTarget; //!< The target of the battle animation currently playing (See RPG::AnimationTargetMonster)
+			int currentAnimTarget; //!< The target of the battle animation currently playing (See RPG::AnimationTargetMonster)
 			int currentAnimationFrame; //!< Current animation frame playing
 	};
 }

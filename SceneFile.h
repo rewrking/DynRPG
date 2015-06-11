@@ -29,7 +29,21 @@ namespace RPG {
 			int cursorPosition; //!< The position of the cursor
 			int timer; //!< Some kind of timer?
 			int scrollCounter; //!< For scrolling the windows?
+			
+			bool doesSaveExist(int saveId); //!< Checks whether a save file exists or not
 	};
+	
+	bool SceneFile::doesSaveExist(int saveId) {
+		//int eax = ( *reinterpret_cast<int **> (0x4CDF20) )[0];
+		int eax = 0;
+		bool out = 0;
+		asm volatile("call *%%esi"
+				: "=a" (out)
+				: "S" (0x4A5484), "a" (eax), "d" (saveId)
+				: "cc", "memory");
+		//out == 0 if file does not exist, 1 if file exists
+		return out;
+	}
 	
 	/*! \ingroup game_objects
 		\brief Access to the Save/Load scene

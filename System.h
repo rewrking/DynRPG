@@ -4,6 +4,9 @@ namespace RPG {
 		Each scene has its own drawing method and its own data.
 		You may also "invent" a new scene and draw its contents using the
 		\ref onFrame callback.
+		If you are creating a new scene for wide-spread use, please contact me (PepsiOtaku)
+		to reserve a scene ID and I will add it below. This will prevent any conflicts if two+
+		people use the same scene ID. 
 		\sa onFrame
 		\sa RPG::Screen::update
 	*/
@@ -19,9 +22,12 @@ namespace RPG {
 		SCENE_DEBUG, //!< Debug screen (\c F9 menu)
 		// Custom scenes below
 		SCENE_9,
-		SCENE_GAMEJOLT = 18,
-		SCENE_UNI_DEBUG = 42
-		
+		SCENE_GAMEJOLT = 18, //!< Scene #18 - PepsiOtaku's Game Jolt plugin
+		SCENE_ULT_SAVELOAD = 10, //!< Scene #19 - PepsiOtaku's Ultimate Save/Load Menu Plugin (forthcoming)
+		//SCENE_ULT_SYSTEM = 20, //!< Scene #20 - PepsiOtaku's Ultimate System Menu Plugin (forthcoming)
+		//SCENE_ULT_PARTY = 21, //!< Scene #21 - PepsiOtaku's Ultimate Party Menu Plugin (forthcoming)
+		SCENE_ULT_NAME = 22, //!< Scene #22 - PepsiOtaku's Ultimate Hero Rename Plugin (forthcoming)
+		SCENE_UNI_DEBUG = 42 //!< Scene #42 - Cherry's UniDebug Tool
 	};
 
 	//! One-byte version of RPG::Scene

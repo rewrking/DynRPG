@@ -68,6 +68,8 @@ namespace RPG {
 				\param window The window to be cleared
 			*/
 			static void destroy(RPG::Window *window);
+			
+			void drawString(int x, int y, std::string text, int color, bool initialize);
 	};
 	
 	RPG::Window::Window() {

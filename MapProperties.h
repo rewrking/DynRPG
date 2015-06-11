@@ -44,15 +44,15 @@ namespace RPG {
 			int chipsetId;
 			int width; //!< The width of the map
 			int height; //!< The height of the map
-			MapWrapping_T wrapping;
-			bool hasPanorama;
+			MapWrapping_T wrapping; //! The wrapping of the map, set via dropdown
+			bool hasPanorama; //!< Does the map use a panorama?
 			DStringPtr panoramaFilename; //!< The filename of the panorama's image
 			bool horScroll; //!< Is horizontal scrolling enabled?
 			bool verScroll;//!< Is vertical scrolling enabled?
 			bool horAutoscroll; //!< Is horizontal auto-scrolling enabled?
 			int horScrollSpeed; //!< If horizontal scrolling enabled, this is the defined speed
 			bool verAutoscroll;//!< Is vertical auto-scrolling enabled?
-			int verScrollSpeed; //!< If horizontal scrolling enabled, this is the defined speed
+			int verScrollSpeed; //!< If vertical scrolling enabled, this is the defined speed
 			MapLmuFile *currentLmuFile; //!< Lmu file pointer to the current map
 				MapLmuFile *_unknown_LmuFile; //!< Lmu file pointer to ???
 				int _unknown_3C; // Duplicate of map->events[##]->data (data is the same anyway...)

@@ -63,7 +63,7 @@ namespace RPG {
 	class MapTreeProperties {
 		public:
 			void **vTable;
-			int id; //!< ID of the map in the map tree. This INCLUDES areas
+			int id; //!< ID of the map in the map tree. This INCLUDES areas. The id = 0 if it's the top level (Name of your game)
 			DStringPtr name; //!< The name of the map in the map tree
 				int _unknown_0C;
 			int parentMapId; //!< ID of the parent map in the map tree
