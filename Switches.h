@@ -31,7 +31,7 @@ namespace RPG {
 			/*! \brief Gets the name of a switch
 				\return The name of the switch
 			*/
-			DStringPtr name(int index);
+			static DStringPtr name(int index);
 	};
 	
 	DStringPtr RPG::Switches::name(int index) {

@@ -14,7 +14,8 @@ namespace RPG {
 		MENU_QUIT,
 		MENU_STATUS,
 		MENU_ORDER,
-		MENU_ULT_SAVELOAD = 20 //!< PepsiOtaku's Ultimate Save/Load Menu Plugin (forthcoming)
+		MENU_ULT_SAVELOAD = 20, //!< PepsiOtaku's Ultimate Save/Load Menu Plugin (forthcoming)
+		MENU_ULT_SYSTEM = 21, //!< PepsiOtaku's Ultimate System Menu Plugin (forthcoming)
 	};
 
 	//! One-byte version of RPG::MenuSubScreen

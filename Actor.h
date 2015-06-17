@@ -181,6 +181,11 @@ namespace RPG {
 				\param id The database ID of the skill
 			*/
 			void removeSkill(int skillId);
+			
+			/*! \brief Built-in RM2k3 function that tests if a hero already knows a certain skill
+				\param id The database ID of the skill
+			*/
+			bool isSkillKnown(int skillId);
 	};
 
 	RPG::AnimationInBattle *&RPG::Actor::animData = (**reinterpret_cast<RPG::AnimationInBattle ***>(0x4CDDC8));
@@ -212,5 +217,14 @@ int zackHp = RPG::actors[1]->hp;
 			:
 			: "S" (0x4B7928), "a" (this), "d" (skillId)
 			: "cc", "memory");
+	}
+	
+	bool RPG::Actor::isSkillKnown(int skillId) {
+        bool out;
+		asm volatile("call *%%esi"
+			: "=a" (out)
+			: "S" (0x4B798C), "a" (this), "d" (skillId)
+			: "cc", "memory");
+		return out;
 	}
 }

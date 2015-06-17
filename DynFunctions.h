@@ -23,6 +23,16 @@ namespace RPG {
 			: "S" (0x46BC00)
 			: "cc", "memory");
 	}
+	
+	/*! \brief Quits the game, and runs through the proper quit procedure code.
+	*/
+	static void quitGame() {
+		asm volatile("push $0");   //nExitCode
+		asm volatile("call *%%esi"
+			:
+			: "S" (0x40729C)
+			: "cc", "memory");
+	}
 
 	/*static void openOrderMenu() {
 		asm volatile("call *%%esi"
@@ -55,7 +65,9 @@ namespace RPG {
 			: "cc", "memory");
 		return out;
 	}
-
+	
+	/*! \brief Built-in RM2k3 function that draws a string to an Image. (fixed version of drawText)
+	*/
 	void Image::drawString(int x, int y, std::string text, int color)
 	{
 		RPG::DStringPtr *par2 = new DStringPtr(text); // *cue holy music*
@@ -73,7 +85,9 @@ namespace RPG {
 			: "S" (0x4892AC), "a" (RPG::system->systemGraphic), "d" (this), "c" (x)
 			: "cc", "memory");
 	}
-
+	
+	/*! \brief Built-in RM2k3 function that draws a string to a Window. (experimental)
+	*/
 	void Window::drawString(int x, int y, std::string text, int color, bool initialize)
 	{
 		RPG::DStringPtr *par1 = new DStringPtr(text); // *cue holy music*
@@ -109,7 +123,10 @@ namespace RPG {
 			: "S" (0x4892AC), "a" (RPG::system->systemGraphic), "d" (window), "c" (x)
 			: "cc", "memory");
 	}*/
-
+	
+	/*! \brief Checks whether a save file exists
+		\return true if the save file exists.
+	*/
 	static bool doesSaveExist(int id) {
 		int eax = ( *reinterpret_cast<int **> (0x4CDF20) )[0];
 		bool out = false;
@@ -119,7 +136,9 @@ namespace RPG {
 			: "cc", "memory");
 		return out;
 	}
-
+	
+	/*! \brief Saves the game to a file. Menus, fades, transitions must be handled separately by the plugin!
+	*/
 	void saveFile(int saveId) {
 		/*RPG::menu->screen = RPG::MENU_MAIN;
         RPG::system->scene = RPG::SCENE_MAP;
@@ -131,8 +150,8 @@ namespace RPG {
 		//save game into specified save file
 	}
 
-	void loadFileAndCrash(int saveId) { // Incompatible with saveload patch
-		//RPG::screen->canvas->brightness = 0;
+	/*void loadFileAndCrash(int saveId) { // Incompatible with saveload patch
+		RPG::screen->canvas->brightness = 0;
 		asm volatile("call *%%esi"
 			:
 			: "S" (0x4A541C), "a" (( *reinterpret_cast<int **> (0x4CDF20) )[0]), "d" (saveId)
@@ -141,10 +160,12 @@ namespace RPG {
 		//bug: music, screen and events not properly updated
 		//bug: starts player from FileScene when saving normally
 		//please check if SaveXX.lsd exists before loading
-	}
-
+	}*/
+	
+	/*! \brief Loads a particular save file. RPG::loadFileUnpatch() must be run onLoadGame if you are to use this!!
+	*/
 	void loadFile(int saveId) {
-		//RPG::screen->canvas->brightness = 0;
+		RPG::screen->canvas->brightness = 0;
 		( *reinterpret_cast<char ***> (0x4CDC7C) )[0][4] = 5;       //forced SceneChange to FileScene
 		( *reinterpret_cast<int ***> (0x4CDFCC) )[0][22] = saveId;  //set SaveSlot to load from
 		( *reinterpret_cast<char *>(0x4913C8) ) = 0xE9;             //patch to skip drawing the FileScene
@@ -153,7 +174,9 @@ namespace RPG {
 		//patching direct access to FileScene (temporarily) to load SaveFile
 		//please check if SaveXX.lsd exists before loading
 	}
-
+	
+	/*! \brief Unpatches the stuff from the function RPG::loadFile(int). This must be run onLoadGame!!
+	*/
 	void loadFileUnpatch() {
 		( *reinterpret_cast<char *>(0x4913C8) ) = 0x80;             //patch to restore drawing the FileScene
 		( *reinterpret_cast<int *>(0x4913C9) ) = 0x75000C7B;        //patch to restore [...]
@@ -164,7 +187,7 @@ namespace RPG {
 
 	/*! \brief Open the main menu directly into a sub-menu. Experimental!!
 	*/
-	void OpenMenu(RPG::MenuSubScreen screen, int heroId = 1, int skillOrItemId = 1) {
+	void openMenu(RPG::MenuSubScreen screen, int heroId = 1, int skillOrItemId = 1) {
 		//RPG::menu->repaint = false;
 		
 		if(RPG::system->scene == RPG::SCENE_MENU && RPG::menu->screen == RPG::MENU_MAIN) {
@@ -267,8 +290,10 @@ namespace RPG {
 			}
 		}
 	}
-
-	void unpatchDirectMenuCode() {
+	
+	/*! \brief The unpatch code for using RPG::openMenu. Experimental!!
+	*/
+	void OpenMenuUnpatch() {
 		*reinterpret_cast<char *>(0x4A109A) = 0x10;
 		*reinterpret_cast<unsigned short *>(0x4A10D4) = 0x8B53;
 		*reinterpret_cast<char *>(0x4A17FC) = 0x53;

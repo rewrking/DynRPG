@@ -29,6 +29,11 @@ namespace RPG {
 				\sa RPG::Actor::animData
 			*/
 			static RPG::AnimationInBattle *&animData;
+			
+			/*! \brief Built-in RM2k3 function that transforms an enemy into a new monster (ATB unaltered)
+				\param id The database ID of the monster
+			*/
+			void transform(int monsterId);
 	};
 	
 	RPG::AnimationInBattle *&RPG::Monster::animData = (**reinterpret_cast<RPG::AnimationInBattle ***>(0x4CDE64));
@@ -47,4 +52,11 @@ int slimeHp = RPG::monsters[2]->hp; // read HP of third monster
 		\sa RPG::Actor::partyMember
 	*/
 	static RPG::CatalogPtr<RPG::Monster *> &monsters = (**reinterpret_cast<RPG::CatalogPtr<RPG::Monster *> **>(0x4CDE64));
+	
+	void RPG::Monster::transform(int monsterId) {
+		asm volatile("call *%%esi"
+			:
+			: "S" (0x4BDDD8), "a" (this), "d" (monsterId)
+			: "cc", "memory");
+	}
 }
