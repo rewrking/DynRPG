@@ -34,6 +34,7 @@ namespace RPG {
 			: "cc", "memory");
 	}
 
+
 	/*static void openOrderMenu() {
 		asm volatile("call *%%esi"
 			:

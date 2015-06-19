@@ -85,6 +85,16 @@ namespace RPG {
 				\param scene Scene to draw
 			*/
 			void update(RPG::Scene scene);
+			
+			/*! \brief Built-in RM2k3 function that changes between fullScreen and windowed mode
+			    \param fullScreen Change to windowed mode if false or change to fullScreen mode if true
+			*/
+			void toggleFullScreen(bool fullScreen);
+
+			/*! \brief Built-in RM2k3 function that changes game window size mode
+			    \param largeWindow Change to small mode if false or change to large mode if true
+			*/
+			void toggleLargeWindow(bool largeWindow);
 	};
 	
 	/*! \ingroup game_objects
@@ -92,4 +102,18 @@ namespace RPG {
 		canvas
 	*/
 	static RPG::Screen *&screen = (**reinterpret_cast<RPG::Screen ***>(0x4CDB24));
+	
+	void RPG::Screen::toggleFullScreen(bool fullScreen) {
+		asm volatile("call *%%esi"
+			:
+			: "S" (0x46B29C), "a" (this), "d" (fullScreen)
+			: "cc", "memory");
+	}
+
+	void RPG::Screen::toggleLargeWindow(bool largeWindow) {
+		asm volatile("call *%%esi"
+			:
+			: "S" (0x46B400), "a" (this), "d" (largeWindow)
+			: "cc", "memory");
+	}
 }
