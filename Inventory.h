@@ -85,7 +85,12 @@ namespace RPG {
 				\return If the actor is in the party, their party index is returned (0-3), otherwise -1 is returned.
 			*/
 			int getPartyIndex(int databaseId);
-
+			
+			/*! \brief Built-in RM2k3 function checks the inventory to see if an item is owned
+				\param id The database ID of the item
+			*/
+			bool isItemOwned(int id);
+			
 			/*! \brief Built-in RM2k3 function that adds an item to the inventory
 				\param id The database ID of the item
 				\param amount Amount of the item to add
@@ -114,6 +119,15 @@ int goldAmount = RPG::inventory->goldAmount;
 	*/
 	static RPG::Inventory *&inventory = (**reinterpret_cast<RPG::Inventory ***>(0x4CDB74));
 
+	
+	bool RPG::Inventory::isItemOwned(int id) { 
+		int out;
+		asm volatile("call *%%esi"
+			: "=a" (out)
+			: "S" (0x4A6440), "a" (this), "d" (id)
+			: "cc", "memory");
+		return out;
+	}
 
 	void RPG::Inventory::addItem(int id, int amount) { 
 		asm volatile("call *%%esi"
