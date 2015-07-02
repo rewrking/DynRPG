@@ -7,10 +7,10 @@ namespace RPG {
 		BNAV_BLANK, //!< Not used?
 		BNAV_ESCAPING
 	};
-	
+
 	//! One-byte version of RPG::BattleNavigationLevel
 	typedef unsigned char BattleNavigationLevel_T;
-	
+
 	//! Possible values for RPG::BattleData::battlePhase
 	enum BattlePhase {
 		BPHASE_BATTLE,
@@ -18,14 +18,14 @@ namespace RPG {
 		BPHASE_VICTORY,
 		BPHASE_END
 	};
-	
+
 	//! Possible values for RPG::BattleData::partyFormation
 	enum BattlePartyFormation {
 		BPFORM_TERRAIN,
 		BPFORM_LOOSE,
 		BPFORM_TIGHT
 	};
-	
+
 	//! Possible values for RPG::BattleData::encounterCondition
 	enum BattleEncounterCondition {
 		BENC_TYPE_NO_SPECIAL_CONDITIONS,
@@ -34,13 +34,13 @@ namespace RPG {
 		BENC_TYPE_SURROUND_ATTACK,
 		BENC_TYPE_PINCER_ATTACK,
 	};
-	
+
 	//! Possible values for RPG::BattleData::battleType
 	enum BattleType {
 		BTYPE_RANDOM_ENCOUNTER,
 		BTYPE_ENCOUNTER_BY_EVENT_COMMAND
 	};
-	
+
 	/*! \brief Used for the data and settings for the current battle. (OMG YES)
 
 		\sa RPG::battleData
@@ -60,12 +60,12 @@ namespace RPG {
 			bool escapeAllowed; //!< Is escaping allowed?
 			bool defeatAllowed; //!< Is defeat allowed? (This would cause a game over)
 			bool firstStrike; // More research
-				int _unknown_18; 
+				int _unknown_18;
 			Image *backdropImage; //!< The RPG::Image object of the backdrop
 			BattleNavigationLevel_T navLevel; //!< Which window or action has the focus?
 			bool isInitialized; //!< Has the battle been initialized?
 			Window *winParty; //!< The RPG::Window object of the party
-			Window *winFightEscape; //!< The RPG::Window object for fight/escape/autobattle 
+			Window *winFightEscape; //!< The RPG::Window object for fight/escape/autobattle
 			Window *winCommand; //!< The RPG::Window object for commands
 			Window *winSkill; //!< The RPG::Window object for skills
 			Window *winItem; //!< The RPG::Window object for items
@@ -80,8 +80,8 @@ namespace RPG {
 			int fleeChance; //!< Percentage for escape (Formula: 50 + (100 - 100 * Avg Enemy AGI / Avg Hero AGI))
 			DListPtr<int *> battleProgress; // More research
 			bool redrawCanvas; //!< Should the canvas be redrawn?
-			
-			/*! \brief If a hero is ready to act, their party index will be added to this array 
+
+			/*! \brief If a hero is ready to act, their party index will be added to this array
 				\note This array lists the heroes in the order that they become ready, so if hero 2 is the first to act, and hero 3 is next to act, readyPartySlot[0] = 1 (hero 2), readyPartySlot[1] = 2 (hero 3), readyPartySlot[2] = -1 (empty) and readyPartySlot[3] = -1 (empty)
 			*/
 			int readyPartySlot[4];
@@ -124,5 +124,6 @@ std::string backdropName = RPG::battleData->backdropFilename.s_str());
 		\endcode
 	*/
 	static RPG::BattleData *&battleData = (**reinterpret_cast<RPG::BattleData ***>(0x4CDD38));
+
 }
 

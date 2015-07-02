@@ -141,27 +141,26 @@ namespace RPG {
 	/*! \brief Saves the game to a file. Menus, fades, transitions must be handled separately by the plugin!
 	*/
 	void saveFile(int saveId) {
-		/*RPG::menu->screen = RPG::MENU_MAIN;
-        RPG::system->scene = RPG::SCENE_MAP;
-		RPG::menu->repaint = false;*/
 		asm volatile("call *%%esi"
 			:
-			: "S" (0x4A5524), "a" (( *reinterpret_cast<int **> (0x4CDF20) )[0]), "d" (saveId)
+			: "S" (0x45D2ED), "a" (( *reinterpret_cast<int **> (0x4CDF20) )[0]), "d" (saveId)
 			: "cc", "memory");
 		//save game into specified save file
 	}
-
-	/*void loadFileAndCrash(int saveId) { // Incompatible with saveload patch
+	
+	/*! \brief Loads a particular save file, but will ONLY load the file. Transitions & music changes are not called in this function. Use RPG::loadFile(id) & RPG::loadFileUnpatch(id) instead!
+	*/
+	void loadFileSimple(int saveId) { // Incompatible with saveload patch, experimental. 
 		RPG::screen->canvas->brightness = 0;
 		asm volatile("call *%%esi"
 			:
-			: "S" (0x4A541C), "a" (( *reinterpret_cast<int **> (0x4CDF20) )[0]), "d" (saveId)
+			: "S" (0x45D2E0), "a" (( *reinterpret_cast<int **> (0x4CDF20) )[0]), "d" (saveId)
 			: "cc", "memory");
 		//load game from specified save file
 		//bug: music, screen and events not properly updated
 		//bug: starts player from FileScene when saving normally
 		//please check if SaveXX.lsd exists before loading
-	}*/
+	}
 	
 	/*! \brief Loads a particular save file. RPG::loadFileUnpatch() must be run onLoadGame if you are to use this!!
 	*/

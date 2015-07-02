@@ -49,7 +49,8 @@ namespace RPG {
 			// Functions
 			Window();
 			~Window();
-			/*! \brief 
+
+			/*! \brief
 				\param window The window to be created
 				\param width The width of the window
 				\param height The height of the window
@@ -58,49 +59,57 @@ namespace RPG {
 				\param startHidden Start the window hidden?
 			*/
 			static void create(RPG::Window *window, int width, int height, int x, int y, bool startHidden);
-			
+
 			/*! \brief Clears the specified window of any text, so that it can be drawn on again.
 				\param window The window to be cleared
 			*/
 			static void clear(RPG::Window *window);
-			
+
 			/*! \brief Removes the specified window object and all of its components
 				\param window The window to be cleared
 			*/
 			static void destroy(RPG::Window *window);
-			
+
 			void drawString(int x, int y, std::string text, int color, bool initialize);
+
+			/*! \brief  Gets the index of a selection within a RPG::Window object (Example: int selected = RPG::battleData->winMonTarget->getSelected())
+				\return the zero-based index of the selection, or -1 if the RPG::Window object is not active
+			*/
+			int getSelected();
 	};
-	
+
 	RPG::Window::Window() {
 		int n = 1;
 		asm volatile("call *%%esi" : : "S" (0x4C6330), "a" (0x4C5F30), "d" (n) : "cc", "memory");
 	}
-	
+
 	void RPG::Window::create(RPG::Window *window, int width, int height, int x, int y, bool startHidden) {
 		asm volatile("push %%eax" : : "a" (width));
 		asm volatile("push %%eax" : : "a" (height));
 		asm volatile("push %%eax" : : "a" (startHidden));
 		asm volatile("call *%%esi" : : "S" (0x4C63DC), "a" (window), "d" (x), "c" (y) : "cc", "memory"); // cc = condition codes
 	}
-	
+
 	void RPG::Window::clear(RPG::Window *window){
 		asm volatile("call *%%esi" : : "S" (0x4C6640), "a" (window) : "cc", "memory");
 	}
-	
+
 	void RPG::Window::destroy(RPG::Window *window){ // destroys the window and all of its members
 		asm volatile("call *%%esi" : : "S" (0x4C66E4), "a" (window) : "cc", "memory");
 	}
-	
+
 	RPG::Window::~Window() {
 		int n = 1;
 		asm volatile("call *%%esi" : : "S" (0x40376), "a" (this) : "cc", "memory");
 	}
-	
-	
+
+	int RPG::Window::getSelected() {
+		if (this->choiceActive) {
+			return this->currentChoice;
+		} else return -1;
+	}
 
 	/*! \brief Used for message windows.
-
 		\sa RPG::SceneMenu
 	*/
 	class WindowMessage : public Window {
@@ -124,18 +133,18 @@ namespace RPG {
 			bool innIsActive; //!< Is the inn active?
 			int innCost; //!< The inn's cost
 			bool messageOpen; //!< Is a message box currently drawn?
-			
+
 			WindowMessage(); // constructor
 			~WindowMessage(); // destructor
 	};
 
 	static RPG::WindowMessage *&winMessage = (**reinterpret_cast<RPG::WindowMessage ***>(0x4CDEF4));
-	
+
 	RPG::WindowMessage::WindowMessage() {
 		int n = 1;
 		asm volatile("call *%%esi" : : "S" (0x4C712C), "a" (0x4C605C), "d" (n) : "cc", "memory"); // welp
 	}
-	
+
 	RPG::WindowMessage::~WindowMessage() {
 		int n = 1;
 		asm volatile("call *%%esi" : : "S" (0x40376), "a" (this) : "cc", "memory");
