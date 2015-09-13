@@ -105,15 +105,15 @@ namespace RPG {
 	
 	void RPG::Screen::toggleFullScreen(bool fullScreen) {
 		asm volatile("call *%%esi"
-			:
+			: "=a" (RPG::_eax), "=d" (RPG::_edx)
 			: "S" (0x46B29C), "a" (this), "d" (fullScreen)
-			: "cc", "memory");
+			: "ecx", "cc", "memory");
 	}
 
 	void RPG::Screen::toggleLargeWindow(bool largeWindow) {
 		asm volatile("call *%%esi"
-			:
+			: "=a" (RPG::_eax), "=d" (RPG::_edx)
 			: "S" (0x46B400), "a" (this), "d" (largeWindow)
-			: "cc", "memory");
+			: "ecx", "cc", "memory");
 	}
 }

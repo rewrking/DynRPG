@@ -34,8 +34,8 @@ namespace RPG {
 				int _unknown_08;
 			ActionKind_T kind; //!< The monster's action (Only AK_BASIC, AK_SKILL, & AK_TRANSFORM)
 			BasicAction_T basicActionId; //!< If \c kind is RPG::AK_BASIC: Kind of the basic action (see RPG::BasicAction)
-			int skillId; //!< If \c kind is RPG::AK_SKILL: Database ID of the skill (See RPG::ActionKing)
-			int monsterId; //!< If \c kind is RPG::AK_TRANSFORM: Database ID of the monster to transform into (See RPG::ActionKing)
+			int skillId; //!< If \c kind is RPG::AK_SKILL: Database ID of the skill (See RPG::ActionKind)
+			int monsterId; //!< If \c kind is RPG::AK_TRANSFORM: Database ID of the monster to transform into (See RPG::ActionKind)
 			MonsterPrecondition_T precondition; //!< The monster's precondition
 			int preconditionParam[2]; //!< Precondition parameters (amount vary depending on precondition)
 			bool preconditionSwitchId; //!< If precondition is set to MON_PRE_SWITCH (See RPG::MonsterPrecondition)

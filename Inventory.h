@@ -88,6 +88,7 @@ namespace RPG {
 			
 			/*! \brief Built-in RM2k3 function checks the inventory to see if an item is owned
 				\param id The database ID of the item
+				\return true if the item is owned, otherwise false
 			*/
 			bool isItemOwned(int id);
 			
@@ -123,31 +124,31 @@ int goldAmount = RPG::inventory->goldAmount;
 	bool RPG::Inventory::isItemOwned(int id) { 
 		int out;
 		asm volatile("call *%%esi"
-			: "=a" (out)
+			: "=a" (out), "=d" (RPG::_edx)
 			: "S" (0x4A6440), "a" (this), "d" (id)
-			: "cc", "memory");
+			: "ecx", "cc", "memory");
 		return out;
 	}
 
 	void RPG::Inventory::addItem(int id, int amount) { 
 		asm volatile("call *%%esi"
-			:
-			: "S" (0x4A620C), "a" (this), "d" (id), "c" (amount)
+			: "=a" (RPG::_eax), "=c" (RPG::_ecx), "=d" (RPG::_edx)
+			: "S" (0x4A620C), "a" (this), "c" (amount), "d" (id)
 			: "cc", "memory");
 	}
 	
 	void RPG::Inventory::removeItem(int id, int amount) { 
 		asm volatile("call *%%esi"
-			:
+			: "=a" (RPG::_eax), "=c" (RPG::_ecx), "=d" (RPG::_edx)
 			: "S" (0x4A6308), "a" (this), "d" (id), "c" (amount)
 			: "cc", "memory");
 	}
 	
 	void RPG::Inventory::incrementItemUses(int id) { 
 		asm volatile("call *%%esi"
-			:
+			: "=a" (RPG::_eax), "=d" (RPG::_edx)
 			: "S" (0x4A63BC), "a" (this), "d" (id)
-			: "cc", "memory");
+			: "ecx", "cc", "memory");
 	}
 
 	int getPartyIndex(int databaseId) {

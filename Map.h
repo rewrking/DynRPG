@@ -112,8 +112,8 @@ namespace RPG {
 	int RPG::Map::getLowerLayerTileId(int x, int y) {
 		int out;
 		asm volatile("call *%%esi"
-			: "=a" (out), "=d" (RPG::_edx), "=c" (RPG::_ecx)
-			: "S" (0x4A80CC), "a" (this), "d" (x), "c" (y)
+			: "=a" (out), "=c" (RPG::_ecx), "=d" (RPG::_edx)
+			: "S" (0x4A80CC), "a" (this), "c" (y), "d" (x)
 			: "cc", "memory");
 		return out;
 	}
@@ -121,8 +121,8 @@ namespace RPG {
 	int RPG::Map::getUpperLayerTileId(int x, int y) {
 		int out;
 		asm volatile("call *%%esi"
-			: "=a" (out), "=d" (RPG::_edx), "=c" (RPG::_ecx)
-			: "S" (0x4A80F4), "a" (this), "d" (x), "c" (y)
+			: "=a" (out), "=c" (RPG::_ecx), "=d" (RPG::_edx)
+			: "S" (0x4A80F4), "a" (this), "c" (y), "d" (x)
 			: "cc", "memory");
 		return out;
 	}
@@ -132,7 +132,7 @@ namespace RPG {
 		asm volatile("movl 20(%%eax), %%eax; call *%%esi"
 			: "=a" (out), "=d" (RPG::_edx)
 			: "S" (0x47D038), "a" (this), "d" (tileId)
-			: "cc", "memory");
+			: "ecx", "cc", "memory");
 		return out;
 	}
 

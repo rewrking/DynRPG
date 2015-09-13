@@ -7,12 +7,16 @@ namespace RPG {
 		\param maxValue the maximum number to return
 		\return A random number between 1 and the specified number
 	*/
-	static int getDiceRoll(int maxValue) { // 2k3 function that gets a random number from 0 to maxValue
+	int getDiceRoll(int maxValue) { // 2k3 function that gets a random number from 1 to maxValue
 		int out;
-		asm volatile("call *%%esi" : "=a" (out) : "S" (0x403054), "a" (maxValue) :"cc", "memory");
-		// If maxValue is 20, by default, 19 is the actual max that will be returned by the function, so out+1 is returned below
-		// This also ensures 1 is returned instead of 0, to simulate actual dice rolls
+		asm volatile("call *%%esi" 
+			: "=a" (out) 
+			: "S" (0x403054), "a" (maxValue) 
+			: "edx", "ecx", "cc", "memory");
+		// If maxValue is 20, by default, 19 is the actual max that will be returned by the function, so out+1 is returned below. This also ensures 1 is returned instead of 0, to simulate actual dice rolls
 		return out+1;
+		// Alternative:
+		//return rand() % maxValue +1;
 	}
 
 	/*! \brief Goes directly to the title screen.
@@ -21,17 +25,16 @@ namespace RPG {
 		asm volatile("call *%%esi"
 			:
 			: "S" (0x46BC00)
-			: "cc", "memory");
+			: "edx", "ecx", "eax", "cc", "memory");
 	}
 	
 	/*! \brief Quits the game, and runs through the proper quit procedure code.
 	*/
 	static void quitGame() {
-		asm volatile("push $0");   //nExitCode
-		asm volatile("call *%%esi"
+		asm volatile("push $0; call *%%esi"
 			:
 			: "S" (0x40729C)
-			: "cc", "memory");
+			: "edx", "ecx", "eax", "cc", "memory");
 	}
 
 
@@ -39,7 +42,7 @@ namespace RPG {
 		asm volatile("call *%%esi"
 			:
 			: "S" (0x4A0104)
-			: "cc", "memory");
+			: "edx", "ecx", "eax", "cc", "memory");
 
 	}*/
 
@@ -51,7 +54,7 @@ namespace RPG {
 		asm volatile("call *%%esi"
 			: "=a" (out)
 			: "S" (0x4A690C), "a" (RPG::inventory) // It doesn't make sense to put this function in inventory, even though it references it
-			: "cc", "memory");
+			: "edx", "ecx", "cc", "memory");
 		return out;
 	}
 
@@ -63,7 +66,7 @@ namespace RPG {
 		asm volatile("call *%%esi"
 			: "=a" (out)
 			: "S" (0x4BEDF4), "a" (RPG::inventory) // It doesn't make sense to put this function in inventory, even though it references it
-			: "cc", "memory");
+			: "edx", "ecx", "cc", "memory");
 		return out;
 	}
 	
@@ -82,8 +85,8 @@ namespace RPG {
 			:
 			: "a" (color));
 		asm volatile("call *%%esi"
-			:
-			: "S" (0x4892AC), "a" (RPG::system->systemGraphic), "d" (this), "c" (x)
+			: "=a" (RPG::_eax), "=c" (RPG::_ecx), "=d" (RPG::_edx)
+			: "S" (0x4892AC), "a" (RPG::system->systemGraphic), "c" (x), "d" (this)
 			: "cc", "memory");
 	}
 	
@@ -102,87 +105,10 @@ namespace RPG {
 			:
 			: "a" (initialize));
 		asm volatile("call *%%esi"
-			:
-			: "S" (0x4C6EA8), "a" (this), "d" (x), "c" (y)
+			: "=a" (RPG::_eax), "=c" (RPG::_ecx), "=d" (RPG::_edx)
+			: "S" (0x4C6EA8), "a" (this), "c" (y), "d" (x)
 			: "cc", "memory");
 		delete par1;
-	}
-
-
-	/*void drawText(RPG::Window *window, int x, int y, std::string text, int color) { // doesn't work correctly yet
-		asm volatile("push %%eax"
-			:
-			: "a" (y));
-		asm volatile("push %%eax"
-			:
-			: "a" (text.c_str()));
-		asm volatile("push %%eax"
-			:
-			: "a" (color));
-		asm volatile("call *%%esi"
-			:
-			: "S" (0x4892AC), "a" (RPG::system->systemGraphic), "d" (window), "c" (x)
-			: "cc", "memory");
-	}*/
-	
-	/*! \brief Checks whether a save file exists
-		\return true if the save file exists.
-	*/
-	static bool doesSaveExist(int id) {
-		int eax = ( *reinterpret_cast<int **> (0x4CDF20) )[0];
-		bool out = false;
-		asm volatile("call *%%esi"
-			: "=a" (out)
-			: "S" (0x4A5484), "a" (( *reinterpret_cast<int **> (0x4CDF20) )[0]), "d" (id)
-			: "cc", "memory");
-		return out;
-	}
-	
-	/*! \brief Saves the game to a file. Menus, fades, transitions must be handled separately by the plugin!
-	*/
-	void saveFile(int saveId) {
-		asm volatile("call *%%esi"
-			:
-			: "S" (0x45D2ED), "a" (( *reinterpret_cast<int **> (0x4CDF20) )[0]), "d" (saveId)
-			: "cc", "memory");
-		//save game into specified save file
-	}
-	
-	/*! \brief Loads a particular save file, but will ONLY load the file. Transitions & music changes are not called in this function. Use RPG::loadFile(id) & RPG::loadFileUnpatch(id) instead!
-	*/
-	void loadFileSimple(int saveId) { // Incompatible with saveload patch, experimental. 
-		RPG::screen->canvas->brightness = 0;
-		asm volatile("call *%%esi"
-			:
-			: "S" (0x45D2E0), "a" (( *reinterpret_cast<int **> (0x4CDF20) )[0]), "d" (saveId)
-			: "cc", "memory");
-		//load game from specified save file
-		//bug: music, screen and events not properly updated
-		//bug: starts player from FileScene when saving normally
-		//please check if SaveXX.lsd exists before loading
-	}
-	
-	/*! \brief Loads a particular save file. RPG::loadFileUnpatch() must be run onLoadGame if you are to use this!!
-	*/
-	void loadFile(int saveId) {
-		RPG::screen->canvas->brightness = 0;
-		( *reinterpret_cast<char ***> (0x4CDC7C) )[0][4] = 5;       //forced SceneChange to FileScene
-		( *reinterpret_cast<int ***> (0x4CDFCC) )[0][22] = saveId;  //set SaveSlot to load from
-		( *reinterpret_cast<char *>(0x4913C8) ) = 0xE9;             //patch to skip drawing the FileScene
-		( *reinterpret_cast<int *>(0x4913C9) ) = 0x000001CD;        //patch to skip [...]
-		( *reinterpret_cast<unsigned short *>(0x4915AD) ) = 0x03EB; //patch to skip closing the FileScene
-		//patching direct access to FileScene (temporarily) to load SaveFile
-		//please check if SaveXX.lsd exists before loading
-	}
-	
-	/*! \brief Unpatches the stuff from the function RPG::loadFile(int). This must be run onLoadGame!!
-	*/
-	void loadFileUnpatch() {
-		( *reinterpret_cast<char *>(0x4913C8) ) = 0x80;             //patch to restore drawing the FileScene
-		( *reinterpret_cast<int *>(0x4913C9) ) = 0x75000C7B;        //patch to restore [...]
-		( *reinterpret_cast<unsigned short *>(0x4915AD) ) = 0xCEE8; //patch to restore closing the FileScene
-		//DO use in conjunction with forced SceneChange to FileScene!
-		//restores default code
 	}
 
 	/*! \brief Open the main menu directly into a sub-menu. Experimental!!
@@ -200,7 +126,7 @@ namespace RPG {
 					asm volatile("call *%%esi"
 								:
 								: "S" (0x4A110C), "a" (RPG::menu)
-								: "cc", "memory");
+								: "edx", "ecx", "cc", "memory");
 					break;
 				}
 			case MENU_ITEM_USE:
@@ -212,7 +138,7 @@ namespace RPG {
 					asm volatile("call *%%esi"
 								:
 								: "S" (0x4A1144), "a" (RPG::menu)
-								: "cc", "memory");
+								: "edx", "ecx", "cc", "memory");
 					break;
 				}
 			case MENU_SKILL:
@@ -228,7 +154,7 @@ namespace RPG {
 					asm volatile("call *%%esi"
 								:
 								: "S" (0x4A1858), "a" (RPG::menu)
-								: "cc", "memory");
+								: "edx", "ecx", "cc", "memory");
 					break;
 				}
 			case MENU_SKILL_USE:
@@ -251,7 +177,7 @@ namespace RPG {
 					asm volatile("call *%%esi"
 								:
 								: "S" (0x4A22DC), "a" (RPG::menu)
-								: "cc", "memory");
+								: "edx", "ecx", "cc", "memory");
 					break;
 				}
 			case MENU_QUIT:
@@ -261,7 +187,7 @@ namespace RPG {
 					asm volatile("call *%%esi"
 								:
 								: "S" (0x4A2328), "a" (RPG::menu)
-								: "cc", "memory");
+								: "edx", "ecx", "cc", "memory");
 					break;
 				}
 			case MENU_STATUS:
@@ -274,7 +200,7 @@ namespace RPG {
 					asm volatile("call *%%esi"
 								:
 								: "S" (0x4A235C), "a" (RPG::menu)
-								: "cc", "memory");
+								: "edx", "ecx", "cc", "memory");
 					break;
 				}
 			case MENU_ORDER:
@@ -284,7 +210,7 @@ namespace RPG {
 					asm volatile("call *%%esi"
 								:
 								: "S" (0x4A23BC), "a" (RPG::menu)
-								: "cc", "memory");
+								: "edx", "ecx", "cc", "memory");
 					break;
 				}
 			}
