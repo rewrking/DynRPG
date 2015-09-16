@@ -34,6 +34,7 @@ namespace RPG {
 			    \param saveId The save ID to check for (can be greater than 15)
 				\return true of the save exists, false otherwise
 			*/
+			// Defined as static so it can be called via RPG::SceneFile::doesSaveExist() or RPG::fileSaveLoad->doesSaveExist()
 			static bool doesSaveExist(int saveId);
 
 			/*! \brief Built-in RM2k3 function to save the current game's data to a file.
@@ -72,18 +73,13 @@ namespace RPG {
 	};
 
 	bool SceneFile::doesSaveExist(int saveId) {
-		/*bool out = false;
-		asm volatile("call *%%esi"
-				: "=a" (out), "=d" (RPG::_edx)
-				: "S" (0x4A5484), "a" (this), "d" (saveId)
-				: "ecx", "cc", "memory");
-		return out;*/
-		//int eax = ( *reinterpret_cast<int **> (0x4CDF20) )[0];
  		bool out = false;
  		asm volatile("call *%%esi"
  			: "=a" (out), "=d" (RPG::_edx)
  			: "S" (0x4A5484), "a" (( *reinterpret_cast<int **> (0x4CDF20) )[0]), "d" (saveId)
  			: "ecx", "cc", "memory");
+			// Don't replace *reinterpret_cast..." with "this" in this function - If it's called in a plugin,
+			// it will seemingly work... until you hit the close button, when a mystery error sound occurs.
  		return out;
 	}
 

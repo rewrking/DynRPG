@@ -74,8 +74,8 @@ namespace RPG {
 			CatalogPtr<SkillProgression *> skillLearning; //!< Skill learning data
 				int _unknown_4FC;
 				int _unknown_500;
-			DArray<DamageMultiplier_T, 1> conditions; //!< Conditions Array (See RPG::DamageMultiplier)
-			DArray<DamageMultiplier_T, 1> attributes; //!< Attributes Array (See RPG::DamageMultiplier)
+			DArray<DamageMultiplier_T, 1> conditions; //!< Conditions Array (See RPG::DamageMultiplier). Ensure conditions.size is greater than 0 before reading from individual conditions!! Otherwise, the array will resize to fit the condition that was referenced, and set it to "0" (A), which will affect damage and confuse your brain. Explained in RPG::DArray::operator[]()
+			DArray<DamageMultiplier_T, 1> attributes; //!< Attributes Array (See RPG::DamageMultiplier). Ensure attributes.size is greater than 0 before reading from individual attributes!! Otherwise, the array will resize to fit the condition that was referenced, and set it to "0" (A), which will affect damage and confuse your brain. Explained in RPG::DArray::operator[]()
 			int classId; //!< Default class ID
 			int battleGraphicId; //!< Battle graphic ID
 				int _unknown_51C;

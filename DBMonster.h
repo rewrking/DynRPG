@@ -37,8 +37,8 @@ namespace RPG {
 			int critPercentage; //!< The probablity of getting the critical hit (percentage) (0-100)
 			bool oftenMiss; //!< Does the monster often miss?
 			bool isFlying; //!< Is the monster flying?
-			DArray<DamageMultiplier_T, 1> conditions; //!< Conditions Array (See RPG::DamageMultiplier)
-			DArray<DamageMultiplier_T, 1> attributes; //!< Attributes Array (See RPG::DamageMultiplier)
+			DArray<DamageMultiplier_T, 1> conditions; //!< Conditions Array (See RPG::DamageMultiplier). Ensure conditions.size is greater than 0 before reading from individual conditions!! Otherwise, the array will resize to fit the condition that was referenced, and set it to "0" (A), which will affect damage and confuse your brain. Explained in RPG::DArray::operator[]()
+			DArray<DamageMultiplier_T, 1> attributes; //!< Attributes Array (See RPG::DamageMultiplier). Ensure attributes.size is greater than 0 before reading from individual attributes!! Otherwise, the array will resize to fit the condition that was referenced, and set it to "0" (A), which will affect damage and confuse your brain. Explained in RPG::DArray::operator[]()
 			CatalogPtr<MonsterBehavior *> behavior; //!< Behavior Array (See RPG::MonsterBehavior)
 	};
 
