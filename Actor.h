@@ -45,7 +45,7 @@ namespace RPG {
 			short helmetId; //!< Database ID of the current helmet (zero for none)
 			short accessoryId; //!< Database ID of the current accessory (zero for none)
 			bool twoWeapons; //!< Can the actor hold two weapons?
-			bool lockEquipemnt; //!< Is the actor's equipment unchangable by the player?
+			bool lockEquipment; //!< Is the actor's equipment unchangable by the player?
 			bool autoBattle; //!< Is the battle AI activated for this actor?
 			bool mightyGuard; //!< Is the "mighty guard" mode activated for this actor?
 			int battleGraphicId; //!< Database ID of the battle graphic (zero for database default)
@@ -186,6 +186,17 @@ namespace RPG {
 				\param id The database ID of the skill
 			*/
 			bool isSkillKnown(int skillId);
+			
+			
+			/*! \brief Returns the attack value if actor has two weapons equipped (one weapon is ignored)
+				\return Attack value when normally attacking with two weapons (see RPG::Actor::usedWeaponSlot)
+			*/
+			int getTwoWeaponAttack();
+			
+			/*! \brief Returns the agility value if actor has two weapons equipped (one weapon is ignored)
+				\return Agility value when normally attacking with two weapons (see RPG::Actor::usedWeaponSlot)
+			*/
+			int getTwoWeaponAgility();
 	};
 
 	RPG::AnimationInBattle *&RPG::Actor::animData = (**reinterpret_cast<RPG::AnimationInBattle ***>(0x4CDDC8));
@@ -209,14 +220,14 @@ int zackHp = RPG::actors[1]->hp;
 		asm volatile("call *%%esi"
 			: 
 			: "S" (0x4B7884), "a" (this), "d" (skillId)
-			: "cc", "memory");
+			: "ecx", "cc", "memory");
 	}
 	
 	void RPG::Actor::removeSkill(int skillId) {
 		asm volatile("call *%%esi"
 			:
 			: "S" (0x4B7928), "a" (this), "d" (skillId)
-			: "cc", "memory");
+			: "ecx", "cc", "memory");
 	}
 	
 	bool RPG::Actor::isSkillKnown(int skillId) {
@@ -224,7 +235,25 @@ int zackHp = RPG::actors[1]->hp;
 		asm volatile("call *%%esi"
 			: "=a" (out)
 			: "S" (0x4B798C), "a" (this), "d" (skillId)
-			: "cc", "memory");
+			: "ecx", "cc", "memory");
+		return out;
+	}
+	
+	int RPG::Actor::getTwoWeaponAttack() {
+		int out;
+		asm volatile("call *%%esi"
+			: "=a" (out)
+			: "S" (0x4B7250), "a" (this)
+			: "ecx", "edx", "cc", "memory");
+		return out;
+	}
+	
+	int RPG::Actor::getTwoWeaponAgility() {
+		int out;
+		asm volatile("call *%%esi"
+			: "=a" (out)
+			: "S" (0x4B760C), "a" (this)
+			: "ecx", "edx", "cc", "memory");
 		return out;
 	}
 }
