@@ -95,13 +95,21 @@ namespace RPG {
 			    \param largeWindow Change to small mode if false or change to large mode if true
 			*/
 			void toggleLargeWindow(bool largeWindow);
+			
+			/*! \ingroup game_objects
+				\brief Pointer to the handler for various screen effects (WIP)
+			*/
+			static ScreenEffect *&effect;
+
 	};
+	
+	RPG::ScreenEffect *&RPG::Screen::effect = (**reinterpret_cast<RPG::ScreenEffect ***>(0x4CDDA8));
 	
 	/*! \ingroup game_objects
 		\brief The screen, including window properties, FPS and the drawing
 		canvas
 	*/
-	static RPG::Screen *&screen = (**reinterpret_cast<RPG::Screen ***>(0x4CDB24));
+	static RPG::Screen *&screen = (**reinterpret_cast<RPG::Screen ***>(0x4CDB24));	
 	
 	void RPG::Screen::toggleFullScreen(bool fullScreen) {
 		asm volatile("call *%%esi"

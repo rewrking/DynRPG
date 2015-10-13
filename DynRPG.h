@@ -65,6 +65,7 @@ namespace RPG {
 #include "Picture.h"
 #include "DBSystem.h" // Updated
 #include "System.h"
+#include "ScreenEffect.h"
 #include "Screen.h"
 #include "Variables.h"
 #include "Switches.h"

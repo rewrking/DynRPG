@@ -93,7 +93,7 @@ namespace RPG {
 				\sa RPG::MapProperties
 				\sa RPG::MapTreeProperties
 			*/
-			static RPG::MapProperties *&properties;
+			static MapProperties *&properties;
 
 	};
 

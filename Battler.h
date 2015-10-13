@@ -4,30 +4,30 @@ namespace RPG {
 		ROW_FRONT, //!< Front row
 		ROW_BACK //!< Back row
 	};
-	
+
 	//! \cond
 	enum {
 		DPT_START = 0x83
 	};
 	//! \endcond
-	
+
 	//! \brief Possible values for RPG::Battler::actionStatus
 	enum ActionStatus {
 		AS_IDLE, //!< No action is active
 		AS_WAITING, //!< Info window is displayed or action is otherwise waiting
 		AS_FINAL_PHASE //!< Final phase, damage is displayed, etc.
 	};
-	
+
 	//! \brief Possible values for RPG::Battler::actionType
 	enum ActionType {
 		AT_SHORT_ACTION,
 		AT_LONG_SKILL,
 		AT_LONG_ITEM
 	};
-	
+
 	/*! \brief Used for entities participating in battle, i.e. actors and
 		monsters
-		
+
 		Even though this is the base class of both RPG::Actor and RPG::Monster,
 		some members only apply to one of them.
 		\sa RPG::Row
@@ -39,9 +39,9 @@ namespace RPG {
 		public:
 			void **vTable;
 			/*! \brief One-based ID of the battler
-			
+
 				For actors this value is the database ID, for monsters it is the party member ID <b>plus one</b> (e.g. <tt>RPG::monsters[3]->id</tt> should always be \c 4).
-				
+
 				If you want to get the database ID of a monster, you have to use RPG::Monster::databaseId.
 			*/
 			int id;
@@ -58,18 +58,18 @@ namespace RPG {
 			*/
 			DArray<short, 1> attributes; // _unknown_2C - 0|1|2 = -1|+0|+1?
 			/*! \brief Turns elapsed in a certain condition (see details)
-				
+
 				This is an array which has as much possible members as there
 				are conditions in the database. The values tell you how many
 				turns the battler has taken while being affected by a
 				certain conditions. If a value is zero, the particular
 				condition does not affect this battler.
-				
+
 				For example, if <tt>conditions[2]</tt> were 4, this battler
 				would have been infected by poison (by default, condition \#2
 				is poison) for 4 turns. If it were zero, the battler would not
 				be poisoned at the moment.
-				
+
 				\warning If you remove all conditions from a hero in battle,
 				make sure that the \c animationId is not \c 9, otherwise the
 				RPG Maker will try to show the animation for condition \#0
@@ -85,7 +85,7 @@ if(battler->animationId == 9) battler->animationId = 0;
 				int _unknown_3C; // Random_Agi(?)
 			bool isCharging;
 			/*! \brief Current value of the ATB bar (\c 0 to \c 300000 - see details)
-				
+
 				Internally, the ATB bar can have a value between \c 0 and
 				\c 300000 where \c 0 means empty and \c 300000 means full.
 				If you set a battler's ATB value to a value greater than or
@@ -96,7 +96,7 @@ if(battler->animationId == 9) battler->animationId = 0;
 			bool mirrored; //!< \c true if the battler's image is mirrored
 			int frameCounter; //!< Internally used
 			/*! \brief ID of the battle graphic pose (see details)
-				
+
 				This member specifies which battle graphic pose is displayed.
 				Look into the "Animations 2" tab of the database to find out
 				what the different values mean (e.g. \c 6 means "Taking
@@ -121,11 +121,11 @@ if(battler->animationId == 9) battler->animationId = 0;
 				int _unknown_8C;
 			/*! \brief Intensity for flashing the battler (\c 0 to \c 31 -
 				will decrease until flashing is done)
-				
+
 				\note Values over 31 will cause the palette to go crazy. Of
 				course you can also use this as an intentional effect.
 			*/
-			double flashIntensity; 
+			double flashIntensity;
 			int flashTimer; //!< Frames left until flashing the battler finished (zero: no flashing active)
 			int shakeStrength; //!< If the battler is being shaken, the strength of the shake
 			int shakeSpeed; //!< If the battler is being shaken, the speed of the shake
@@ -138,7 +138,7 @@ if(battler->animationId == 9) battler->animationId = 0;
 			int jobClassId; //!< The job class ID. -1 if it's the database default
 				int _unknown_C0; // poseID (alt) ?? Maybe for job classes -- need to test
 			/*! \brief Conditions which will be displayed in the info window (see details)
-				
+
 				At target selection, there will be an info window displayed if
 				the target is affected by a condition. The info has five
 				columns for condition names. This array contains the database
@@ -146,63 +146,63 @@ if(battler->animationId == 9) battler->animationId = 0;
 				The content of this array will be reset on several occasions.
 				You can change this array in your \c onDrawBattleStatusWindow
 				handler.
-				
+
 				\note Conditions in the array are arranged from highest priority (0) to lowest (4).
 			*/
 			int displayedConditions[5];
-			
+
 			/*! \brief Returns the name of the actor or monster
 				\return The name
 			*/
 			std::string getName();
-			
+
 			/*! \brief Returns the maximal HP
 				\return Maximal HP value
 			*/
 			int getMaxHp();
-			
+
 			/*! \brief Returns the maximal MP
 				\return Maximal MP value
 			*/
 			int getMaxMp();
-			
+
 			/*! \brief Returns the attack value
 				\return Attack value
 			*/
 			int getAttack();
-			
+
 			/*! \brief Returns the defense value
 				\return Defense value
 			*/
 			int getDefense();
-			
+
 			/*! \brief Returns the intelligence value
 				\return Intelligence value
 			*/
 			int getIntelligence();
-			
+
 			/*! \brief Returns the agility value
 				\return Agility value
 			*/
 			int getAgility();
-			
+
 			/*! \brief Sets the current row
 				\param newRow New row
 				\note This function has no visible effect on monsters
 			*/
 			void setRow(Row newRow);
-			
+
 			/*! \brief Shows a damage popup with a number
-				
+
 				This function will make a number pop up on a battler.
 				\param number The number to show
 				\param color Color to use (\c 0 to \c 19)
 				\sa damagePopup(std::string)
 			*/
 			void damagePopup(int number, int color);
-			
+
 			/*! \brief Shows a damage popup with a small text
-				
+
 				This function will make a small text pop up on a battler.
 				\param text Text to show
 				\note It is not possible to show string popups with a color
@@ -210,13 +210,13 @@ if(battler->animationId == 9) battler->animationId = 0;
 				\sa damagePopup(int, int)
 			*/
 			void damagePopup(std::string text);
-			
+
 			/*! \brief Checks whether the battler is a monster or an actor
 				\return \c true if the battler is a monster, \c false if it is
 				an actor
 			*/
 			bool isMonster();
-			
+
 			/*! \brief Flashes a battler in a certain color
 				\param r Red value (\c 0 to \c 31)
 				\param g Green value (\c 0 to \c 31)
@@ -225,9 +225,9 @@ if(battler->animationId == 9) battler->animationId = 0;
 				\param duration Duration in frames
 			*/
 			void flash(int r, int g, int b, int intensity, int duration);
-			
+
 			/*! \brief Executes the action of a battler (<b>highly experimental!</b>)
-				
+
 				This function can be used to execute an action. You need to set
 				the content of the \c action object before.
 				\param skipPluginHandlers If \c true, no \ref onDoBattlerAction
@@ -243,5 +243,34 @@ if(battler->animationId == 9) battler->animationId = 0;
 				\sa RPG::Action
 			*/
 			bool executeAction(bool skipPluginHandlers = false);
+
+			/*! \brief Built-in RM2k3 functions that return the actual damage multiplier for
+				when the battler would be hit with a certain attribute
+				(considers the (Elemental) Resistance of equipment (max. one step towards dmgE)
+				 and the "Reduce / Increase Resistance" of skill effects)
+				\param id the attribute to get the multiplier from
+				\return Damage multiplier in percent
+			*/
+			int getAttributeResist(int id);
+	};
+
+	int RPG::Battler::getAttributeResist(int id) {
+		int out;
+		int tmp;
+		int tmp2;
+		asm volatile("call *%%esi"
+			: "=a" (tmp), "=d" (RPG::_edx)
+			: "S" (0x47B5D8), "a" (( *reinterpret_cast<int **> (0x4CDE44) )[0]), "d" (id)
+			: "ecx", "cc", "memory");
+		asm volatile("call *%%esi"
+			: "=a" (tmp2), "=d" (RPG::_edx)
+			: "S" (0x4BFDF8), "a" (this), "d" (( reinterpret_cast<int *> (tmp) )[1])
+			: "ecx", "cc", "memory");
+		asm volatile("call *%%esi"
+			: "=a" (out), "=d" (RPG::_edx)
+			: "S" (0x47B564), "a" (tmp), "d" (tmp2)
+			: "ecx", "cc", "memory");
+
+		return out;
 	};
 }
