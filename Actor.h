@@ -5,7 +5,7 @@ namespace RPG {
 		WEAPON_A,
 		WEAPON_B
 	};
-	
+
 	/*! \brief Used for the data of actors which can be changed in-game.
 
 		\note Many things are only stored in this class if they were changed
@@ -46,7 +46,8 @@ namespace RPG {
 			short accessoryId; //!< Database ID of the current accessory (zero for none)
 			bool twoWeapons; //!< Can the actor hold two weapons?
 			bool lockEquipment; //!< Is the actor's equipment unchangable by the player?
-			bool autoBattle; //!< Is the battle AI activated for this actor?
+			//bool autoBattle; //!< Is the battle AI activated for this actor?
+			bool aiControl; //!< Is the battle AI activated for this actor?
 			bool mightyGuard; //!< Is the "mighty guard" mode activated for this actor?
 			int battleGraphicId; //!< Database ID of the battle graphic (zero for database default)
 			bool customBattleCommands; //!< \c true if the \c battleCommands member is valid, otherwise the database default should be used
@@ -171,32 +172,37 @@ namespace RPG {
 				\sa RPG::Monster::animData
 			*/
 			static RPG::AnimationInBattle *&animData;
-			
+
 			/*! \brief Built-in RM2k3 function that adds a skill to a hero
 				\param id The database ID of the skill
 			*/
 			void addSkill(int skillId);
-			
+
 			/*! \brief Built-in RM2k3 function that removes a skill from a hero
 				\param id The database ID of the skill
 			*/
 			void removeSkill(int skillId);
-			
+
 			/*! \brief Built-in RM2k3 function that tests if a hero already knows a certain skill
 				\param id The database ID of the skill
 			*/
 			bool isSkillKnown(int skillId);
-			
-			
+
+
 			/*! \brief Returns the attack value if actor has two weapons equipped (one weapon is ignored)
 				\return Attack value when normally attacking with two weapons (see RPG::Actor::usedWeaponSlot)
 			*/
 			int getTwoWeaponAttack();
-			
+
 			/*! \brief Returns the agility value if actor has two weapons equipped (one weapon is ignored)
 				\return Agility value when normally attacking with two weapons (see RPG::Actor::usedWeaponSlot)
 			*/
 			int getTwoWeaponAgility();
+
+			/*! \brief
+				\param
+			*/
+			//void changeClass(RPG::DBClass *index);
 	};
 
 	RPG::AnimationInBattle *&RPG::Actor::animData = (**reinterpret_cast<RPG::AnimationInBattle ***>(0x4CDDC8));
@@ -214,22 +220,22 @@ int zackHp = RPG::actors[1]->hp;
 		\sa RPG::dbActors
 	*/
 	static RPG::NamedCatalogPtr<RPG::Actor *> &actors = (**reinterpret_cast<RPG::NamedCatalogPtr<RPG::Actor *> **>(0x4CDDC8));
-	
+
 
 	void RPG::Actor::addSkill(int skillId) {
 		asm volatile("call *%%esi"
-			: 
+			:
 			: "S" (0x4B7884), "a" (this), "d" (skillId)
 			: "ecx", "cc", "memory");
 	}
-	
+
 	void RPG::Actor::removeSkill(int skillId) {
 		asm volatile("call *%%esi"
 			:
 			: "S" (0x4B7928), "a" (this), "d" (skillId)
 			: "ecx", "cc", "memory");
 	}
-	
+
 	bool RPG::Actor::isSkillKnown(int skillId) {
         bool out;
 		asm volatile("call *%%esi"
@@ -238,7 +244,7 @@ int zackHp = RPG::actors[1]->hp;
 			: "ecx", "cc", "memory");
 		return out;
 	}
-	
+
 	int RPG::Actor::getTwoWeaponAttack() {
 		int out;
 		asm volatile("call *%%esi"
@@ -247,7 +253,7 @@ int zackHp = RPG::actors[1]->hp;
 			: "ecx", "edx", "cc", "memory");
 		return out;
 	}
-	
+
 	int RPG::Actor::getTwoWeaponAgility() {
 		int out;
 		asm volatile("call *%%esi"
@@ -256,4 +262,21 @@ int zackHp = RPG::actors[1]->hp;
 			: "ecx", "edx", "cc", "memory");
 		return out;
 	}
+
+	// Doesn't work yet
+	/*void RPG::Actor::changeClass(RPG::DBClass *toClass) {
+		bool int1 = 1;
+		bool int2 = 1;
+		bool int3 = 1;
+		bool int4 = 1;
+		bool int5 = 1;
+		int toClass2 = 5;
+		asm volatile("push %%eax" : : "a" (int3));
+		asm volatile("push %%eax" : : "a" (int2));
+		asm volatile("push %%eax" : : "a" (int1));
+		asm volatile("call *%%esi"
+			: "=a" (_eax), "=d" (_edx), "=c" (_ecx)
+			: "S" (0x4B11B8), "a" (this), "d" (toClass2), "c" (int4)
+			: "cc", "memory");
+	}*/
 }

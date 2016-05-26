@@ -1,6 +1,8 @@
 namespace RPG {
-	//! Array class
-	template <class T = void *, int base_ = 0>
+	/*! Array class
+		\param resizeValue When a DArray is resized larger than its current size, this is the value to assign to the new items. Currently used only for DBActor::conditions, DBActor::attributes, DBClass::conditions, DBClass::attributes, DBMonster::conditions & DBMonster::attributes
+	*/
+	template <class T = void *, int base_ = 0, int resizeValue = 0>
 	class DArray {
 		public:
 			int size; //!< Size of the array
@@ -31,7 +33,7 @@ namespace RPG {
 			void resize(int newSize) {
 				int bytes = newSize * sizeof(T);
 				asm volatile("call *%%esi" : "=a" (_eax), "=d" (_edx) : "S" (0x4027AC), "a" (&items), "d" (bytes) : "ecx", "cc", "memory");
-				for(int i = size; i < newSize; i++) items[i] = 0;
+				for(int i = size; i < newSize; i++) items[i] = resizeValue;
 				size = newSize;
 			}
 	};

@@ -31,6 +31,40 @@ namespace RPG {
 		KEY_DECIMAL
 	};
 	
+	/*! \brief Detectable keys to determine whether one is pressed, tapped, or held
+		\sa RPG::input::isPressed
+		\sa RPG::input::isHeld
+		\sa RPG::input::isTapped
+	*/
+	enum KeyDown {
+		KEYD_NONE,
+		KEYD_DOWN,
+		KEYD_LEFT,
+		KEYD_RIGHT = 4,
+		KEYD_UP = 8,
+		KEYD_DECISION = 16,
+		KEYD_CANCEL = 32,
+		KEYD_MOUSE_LBUT = 64,
+		KEYD_MOUSE_RBUT = 128
+	};
+	
+	//! One-byte version of RPG::KeyDown
+	typedef unsigned char KeyDown_T;
+	
+	/*! \brief Special keys to determine whether one is pressed, tapped, or held
+		\sa RPG::input::isShiftCtrlPressed
+		\sa RPG::input::isShiftCtrlHeld
+		\sa RPG::input::isShiftCtrlTapped
+	*/
+	enum KeyDownAlt {
+		KEYH_NONE,
+		KEYH_SHIFT,
+		KEYH_CTRL
+	};
+	
+	//! One-byte version of RPG::KeyDownAlt
+	typedef unsigned char KeyDownAlt_T;
+	
 	/*! \brief Used for key input
 		\sa RPG::input
 	*/
@@ -38,7 +72,10 @@ namespace RPG {
 		public:
 			void **vTable;
 			int joystickId; //!< The ID of the first joystick
-				int _unknown_08;
+				char _unknown_08;
+				char _unknown_09;
+				char _unknown_0A;
+				char _unknown_0B;
 			/*! \brief Array of key codes assigned to the different RPG::Key
 				values (part 1)
 				
@@ -93,6 +130,31 @@ namespace RPG {
 				\sa key
 			*/
 			int keys2k3[120];
+			int resolutionTime; //!< In milliseconds
+				int _unknown_330;
+			int uTimerId; //!< 0 if timerEvent for input not existing
+			KeyDown_T isPressed; //!< Are a combination of keys pressed & released (See RPG::KeyDown)
+			KeyDownAlt_T isShiftCtrlPressed; //!< Are the Shift or Ctrl keys & released (See RPG::KeyDownAlt)
+				char _unknown_33A;
+				char _unknown_33B;
+				int _unknown_33C;
+			KeyDown_T isHeld; //!< Are a combination of keys held (See RPG::KeyDown)
+			KeyDownAlt_T isShiftCtrlHeld; //!< Are the Shift or Ctrl keys held (See RPG::KeyDownAlt)
+				char _unknown_342;
+				char _unknown_343;
+			KeyDown_T isTapped; //!< Are a combination of keys tapped (See RPG::KeyDown)
+			KeyDownAlt_T isShiftCtrlTapped; //!< Are the Shift or Ctrl keys tapped (See RPG::KeyDownAlt)
+				char _unknown_34A;
+				char _unknown_34B;
+			int joyInfo[4]; //!< JOYINFO button state?
+				int _unknown_35C;
+			int keyHoldTimer; //!< Amount of time a key is held?
+			char leftRight;
+				char _unknown_365;
+				char _unknown_366;
+				char _unknown_367;
+			int directionNumpad; //!< down (2), left (4), right (6), up (8)
+			bool joyRepsonseFlag; //!< If 1, response for button status of joy device took too long & don't process JoyInput
 			
 			/*! \brief Provides easy access to the key assignments
 				

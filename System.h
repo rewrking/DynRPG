@@ -41,10 +41,12 @@ namespace RPG {
 		public:
 			void **vTable;
 			Image *systemImage; //!< \c %System image
-				int _unknown_8;
+			Image *exFont; //!< Image file for glyphs
+			
 			//! \cond
 			Canvas *font;
 			//! \endcond
+			
 				int _unknown_10;
 				int _unknown_14;
 			Image *system2Image; //!< \c System2 image
@@ -152,7 +154,7 @@ namespace RPG {
 			bool menuAllowed; //!< Is the game menu allowed?
 			DStringPtr defaultBackdrop; //!< Filename of default backdrop
 			int saveCount; //!< Number of times saved
-			int lastSavedSlot;
+			int lastSavedSlot; //!< The last save slot called
 			ATBMode_T atbMode; //!< ATB mode
 
 	#define defaultAccessorBGM(_member_, _function_) RPG::Music *_function_()

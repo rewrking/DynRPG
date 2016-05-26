@@ -34,11 +34,45 @@ namespace RPG {
 			int itemId; //!< The ID of the item rewarded (0 = no item)
 			int itemProbability; //!< The probability of getting the item (percentage) (0-100)
 			bool critFlag; //!< Can the monster perform a critical hit?
-			int critPercentage; //!< The probablity of getting the critical hit (percentage) (0-100)
+			int critPercentage; //!< The probability of getting the critical hit (percentage) (0-100)
 			bool oftenMiss; //!< Does the monster often miss?
 			bool isFlying; //!< Is the monster flying?
-			DArray<DamageMultiplier_T, 1> conditions; //!< Conditions Array (See RPG::DamageMultiplier). Ensure conditions.size is greater than 0 before reading from individual conditions!! Otherwise, the array will resize to fit the condition that was referenced, and set it to "0" (A), which will affect damage and confuse your brain. Explained in RPG::DArray::operator[]()
-			DArray<DamageMultiplier_T, 1> attributes; //!< Attributes Array (See RPG::DamageMultiplier). Ensure attributes.size is greater than 0 before reading from individual attributes!! Otherwise, the array will resize to fit the condition that was referenced, and set it to "0" (A), which will affect damage and confuse your brain. Explained in RPG::DArray::operator[]()
+				
+			/*! \brief Condition Resistance Array (See RPG::DamageMultiplier)
+				
+				If at a certain point, the resistance of a condition and all conditions higher than it are C, the conditions.size will equal the number of the highest non-C condition. 
+				
+				\b Example: 
+				
+					Cond1: A
+					Cond2: B
+					Cond3: C
+					Cond4: C
+					Cond5: C
+					
+				Because Cond3 is C, and those above it are C, conditions.size will be 2, because Cond2 is the last non-C condition.
+					
+				\warning This can be confusing, because if you need to use conditions[15], but check for conditions.size to be 15 first, it could be 10 if 11-15 are all C, so the check would be false. The solution would be to use RPG::conditions.count() for the check instead. This would resize the array once a condition higher than conditions.size is called, but because of the resizeValue in the template for RPG::DArray, conditions 11-15 would be correctly assigned to C
+			*/
+			DArray<DamageMultiplier_T, 1, 2> conditions;
+			
+			/*! \brief Attribute Resistance Array (See RPG::DamageMultiplier)
+				
+				If at a certain point, the resistance of an attribute and all attributes higher than it are C, the attributes.size will equal the number of the highest non-C attribute. 
+				
+				\b Example: 
+				
+					Attr1: A
+					Attr2: B
+					Attr3: C
+					Attr4: C
+					Attr5: C
+					
+				Because Attr3 is C, and those above it are C, attributes.size will be 2, because Attr2 is the last non-C attribute.
+					
+				\warning This can be confusing, because if you need to use attributes[15], but check for attributes.size to be 15 first, it could be 10 if 11-15 are all C, so the check would be false. The solution would be to use RPG::attributes.count() for the check instead. This would resize the array once an attribute higher than attributes.size is called, but because of the resizeValue in the template for RPG::DArray, attributes 11-15 would be correctly assigned to C
+			*/
+			DArray<DamageMultiplier_T, 1, 2> attributes;
 			CatalogPtr<MonsterBehavior *> behavior; //!< Behavior Array (See RPG::MonsterBehavior)
 	};
 

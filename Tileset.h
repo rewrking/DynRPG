@@ -64,8 +64,8 @@ namespace RPG {
 			DStringPtr name; //!< The name of the tileset in the database
 			DStringPtr filename; //!< The filename of the tileset
 			unsigned short lowerTileTerrainId[162]; //!< The lower tile layer's terrain ID (See RPG::Terrain)
-			TilePassability_T lowerTilePassability[162]; //!< The lower tile layer's passability (See RPG::TilePassability)
-			TilePassability_T upperTilePassability[144]; //!< The upper tile layer's passability (See RPG::TilePassability)
+			RPG::TilePassability_T lowerTilePassability[162]; //!< The lower tile layer's passability (See RPG::TilePassability)
+			RPG::TilePassability_T upperTilePassability[144]; //!< The upper tile layer's passability (See RPG::TilePassability)
 			WaterAnimation waterAnim; //!< The tileset's water animation sequence (See RPG::WaterAnimation)
 			WaterSpeed waterSpeed; //!< The tileset's water speed value (See RPG::WaterSpeed)
 	};

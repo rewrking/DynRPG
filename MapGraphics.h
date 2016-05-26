@@ -11,6 +11,6 @@ namespace RPG {
 			void **vTable;
 			Tileset *tileset; //!< The referenced tileset 
 			DStringPtr filename; //!< The filename of the tileset (again...)
-				UnknownPointer *_unknown_0C; // (GraphicSheet?)
+			Image *chipsetImage; //!< The chipset's image
 	};
 }

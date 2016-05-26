@@ -72,8 +72,8 @@ namespace RPG {
 			int pincersAtkPercent; //!< "Pincers Attack" battle type percentage
 			TerrainGridDepth gridDepth; //!< The terrain's grid depth of field
 			int gridTopY; //!< Y-position of the top of the grid
-			int gridElongation; // test this
-			int gridInclination; // test this
+			int gridElongation; //!< The top/bottom stretch value of the grid
+			int gridInclination; //!< The value of the grid's inward stretch towards the top
 			
 			DStringPtr frameBgFilename; //!< The name of the terrain's background frame
 			bool frameBgHorScroll; //!< Does the frame bg horizontally scroll?

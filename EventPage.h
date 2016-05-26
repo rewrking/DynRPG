@@ -38,7 +38,7 @@ namespace RPG {
 	class EventPage {
 		public:
 			void **vTable;
-			int id;
+			int id; //!< ID of the event page (1-100)
 				int _unknown_08;
 				int _unknown_0C;
 				UnknownPointer *_unknown_10;
@@ -48,7 +48,7 @@ namespace RPG {
 			int charsetId; //!< The ID of the character within the charset (0-7)
 			Facing charsetDir; //!< The direction the charset is facing in
 			EventFrame charsetFrame; //!< The starting frame of animation for the charset (See RPG::EventFrame)
-			bool isTransparent;
+			bool isTransparent; //!< Is the event graphic transparent?
 			int moveSpeed; //!< The event's movement speed (1-8)
 				UnknownPointer *_unknown_34;
 			EventMoveFrequency moveFrequency; //!< The event's movement frequency (See RPG::EventMoveFrequency)

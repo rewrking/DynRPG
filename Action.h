@@ -62,8 +62,8 @@ namespace RPG {
 			int itemId; //!< If \c kind is RPG::AK_ITEM: Database ID of the item
 				int _unknown_14;
 				//int _unknown_18;
-			int switchIdOn;
-			int switchIdOff;
+			int switchIdOn; //!< If the action turns on a switch: The ID of the switch
+			int switchIdOff; // !< If the action turns off a switch: The ID of the switch
 			Target_T target; //!< %Target of the action (see RPG::Target)
 			int targetId; //!< If \c target is RPG::TARGET_ACTOR or RPG::TARGET_MONSTER: Zero-based party member index of the target
 	};

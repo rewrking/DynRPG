@@ -17,7 +17,7 @@ namespace RPG {
 				int _unknown_18; // Battle animation ID?
 				int _unknown_1C;
 			AnimationMoveBeforeAttack movement; //!< Movement before attack (See RPG::AnimationMoveBeforeAttack)
-			bool addAfterImage; //!< After Image None/Add (See RPG::AnimationAfterImage)
+			bool addAfterImage; //!< After Image None (0) / Add (1)
 				/*int _unknown_28;
 				int _unknown_2C;
 				int _unknown_30;

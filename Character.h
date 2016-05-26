@@ -63,7 +63,7 @@ namespace RPG {
 			int id; //!< ID of the event (zero if not an ordinary event)
 				int _unknown_8;
 			bool enabled; //!< Is the event visible and enabled?
-			int mapId; //!< %Map ID (only relevant for vehicles which are not supported yet)
+			int mapId; //!< %Map ID (only relevant for vehicles)
 			int x; //!< X coordinate (tiles)
 			int y; //!< Y coordinate (tiles)
 			Direction_T direction; //!< Direction for moving (see RPG::Direction)
@@ -76,7 +76,7 @@ namespace RPG {
 					<li>\c 2: Right</li>
 					<li>\c 3: Middle</li></ul>
 			*/
-			AnimationFrameCharset step; //!< The stepping frame of the charset graphic
+			int step; //!< The stepping frame of the charset graphic
 			int transparency; //!< Transparency value, between \c 0 (completely visible) to \c 8 (completely invisible)
 			/*! \brief Frames left until movement is completed (see details)
 
@@ -150,7 +150,7 @@ namespace RPG {
 			bool isFlying; //!< Flying flag for airship
 			DStringPtr charsetFilename; //!< Filename of the current charset
 			int charsetId; //!< ID of the current charset
-			bool onMap;
+				bool eventUpdatedThisFrame; // corrected from onMap
 			int flashR; //!< The red value for sprite flashing
 			int flashG; //!< The green value for sprite flashing
 			int flashB; //!< The blue value for sprite flashing
@@ -294,8 +294,9 @@ RPG::hero->move(moves.c_str(), moves.length());
 				int _unknown_94;
 			EventData *data; //!< Pointer to the RPG::EventData of this event
 			EventPage *currentPage; //!< The currently loaded event page
-			bool isWaiting; //!< Is the event waiting?
+			bool isWaiting; //!< Is the event waiting? Set to true to run the event's code, but has some dependency with facing/direction event to hero relationships that affect whether it runs or not.
 				int _unknown_A4;
+				int _unknown_A8;
 				int _unknown_AC; // Pointer to More scriptData? See 
 			
 			/*! \brief Checks whether a certain event page exists
@@ -306,7 +307,21 @@ RPG::hero->move(moves.c_str(), moves.length());
 				\return \c true if the event page exists, \c false otherwise
 			*/
 			bool doesEventPageExist(int id);
+			
+			/*! \brief Built-in function to run various checks after a step has been made (NOT map collision!)... event-related checks (not all known)
+			*/
+			void act();
+			
 	};
+	
+	void RPG::Event::act() {
+		asm volatile("call *%%esi" 
+			: "=a" (_eax) 
+			: "S" (vTable[15]), "a" (this) 
+			: "edx", "ecx", "cc", "memory");
+			// 0x?????, vTable[15]
+	}
+	
 
 	//! Possible values for RPG::Hero::vehicle and RPG::Vehicle::type
 	enum HeroVehicle {
@@ -370,7 +385,21 @@ RPG::hero->move(moves.c_str(), moves.length());
 				\sa getControlMode
 			*/
 			void setControlMode(RPG::HeroControlMode controlMode);
+			
+			/*! \brief Built-in function to run various checks after a step has been made (NOT map collision!)... enemy encounters most importantly, event-related checks (not all known)
+			
+				Use this function if the hero's movement behavior is being altered dramatically (pixel movement for instance), but still need enemy encounter checks.
+			*/
+			void act();
 	};
+	
+	void RPG::Hero::act() {
+		asm volatile("call *%%esi" 
+			: "=a" (_eax) 
+			: "S" (0x4A9A04), "a" (this) 
+			: "edx", "ecx", "cc", "memory");
+			// 0x4A9A04, vTable[15]
+	}
 
 	/*! \ingroup game_objects
 		\brief The hero (which moves around on the map, similar to an event)
@@ -383,8 +412,8 @@ RPG::hero->move(moves.c_str(), moves.length());
 	class Vehicle : public Character {
 		public:
 			HeroVehicle type; //!< The id of the vehicle
-			int takeOffTimer; //!< Timer for when taking off. 256-0 when rising into the air (if HeroVehicle is HV_AIRSHIP)
-			int landingTimer; //!< Timer for landing. 256-0 when rising into the air (if HeroVehicle is HV_AIRSHIP)
+			int takeOffTimer; //!< Timer for when taking off. 256-0 when rising into the air (if RPG::HeroVehicle is RPG::HV_AIRSHIP)
+			int landingTimer; //!< Timer for landing. 256-0 when rising into the air (if RPG::HeroVehicle is RPG::HV_AIRSHIP)
 	};
 
 	/*! \ingroup game_objects

@@ -44,7 +44,7 @@ namespace RPG {
 			int chipsetId;
 			int width; //!< The width of the map
 			int height; //!< The height of the map
-			MapWrapping_T wrapping; //! The wrapping of the map, set via dropdown
+			MapWrapping_T wrapping; //!< The wrapping of the map, set via dropdown
 			bool hasPanorama; //!< Does the map use a panorama?
 			DStringPtr panoramaFilename; //!< The filename of the panorama's image
 			bool horScroll; //!< Is horizontal scrolling enabled?

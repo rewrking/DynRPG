@@ -46,6 +46,8 @@ namespace RPG {
 	class SceneShop {
 		public:
 			void **vTable;
+				//Image *winTest1; //!< Experimental
+				//Image *winTest2; //!< Experimental
 				AuroraBoard *AuroraBoard1; //!< Not even a little bit implemented...
 				AuroraBoard *AuroraBoard2; //!< Not even a little bit implemented...
 			ShopSubScene_T screen; //!< The RPG::ShopSubScene currently being displayed

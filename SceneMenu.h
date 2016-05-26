@@ -4,16 +4,17 @@ namespace RPG {
 		The sub-screen the user is currently on.
 	*/
 	enum MenuSubScreen {
-		MENU_MAIN, // Starts at 256 if MenuSubScreen_T is not used
-		MENU_ITEM,
-		MENU_ITEM_USE,
-		MENU_SKILL,
-		MENU_SKILL_USE,
-		MENU_TELEPORT,
-		MENU_EQUIP,
-		MENU_QUIT,
-		MENU_STATUS,
-		MENU_ORDER,
+		// Starts at 256 if MenuSubScreen_T is not used
+		MENU_MAIN, //!< Main menu screen
+		MENU_ITEM, //!< Item screen
+		MENU_ITEM_USE, //!< Item sub-screen for when an item is used on a hero
+		MENU_SKILL, //!< Skill screen
+		MENU_SKILL_USE, //!< Skill sub-screen for when a skill is used on a hero
+		MENU_TELEPORT, //!< ???
+		MENU_EQUIP, //!< Equip screen
+		MENU_QUIT, //!< Quit confirm/cancel screen
+		MENU_STATUS, //!< Status screen
+		MENU_ORDER, //!< Order screen
 		MENU_ULT_SAVELOAD = 20, //!< PepsiOtaku's Ultimate Save/Load Menu Plugin (forthcoming)
 		MENU_ULT_SYSTEM = 21, //!< PepsiOtaku's Ultimate System Menu Plugin (forthcoming)
 	};
@@ -45,12 +46,12 @@ namespace RPG {
 			Window *winTeleport; //!< Pointer to the Teleport pseudo-window's objects.
 			WindowMenuEquip *winEquip; //!< Pointer to the Equip window's objects. (See RPG::WindowMenuEquip)
 			WindowMenuEnd *winQuit; //!< Pointer to the Quit window's objects. (See RPG::WindowMenuEnd)
-				int _unknown_34;
+			int ScrollUpCountItem; //!< The number of rows off-screen after a scroll (for items)
 			/*! \brief The item selection index (relative to the screen).
 				\note indexes are zero-based starting from the top-left, and zig-zag to the right position, followed by the down-left position.
 			*/
 			int inventoryPositionItem;
-				int _unknown_3C;
+			int scrollUpCountSkill; //!< The number of rows off-screen after a scroll (for skills)
 			/*! \brief The skill selection index (relative to the screen).
 				\note indexes are zero-based starting from the top-left, and zig-zag to the right position, followed by the down-left position.
 			*/

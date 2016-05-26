@@ -83,7 +83,7 @@ if(battler->animationId == 9) battler->animationId = 0;
 			*/
 			DArray<short, 1> conditions;
 				int _unknown_3C; // Random_Agi(?)
-			bool isCharging;
+			bool isCharging; //!< Is the battler (monster) currently using the "Charge Up" action
 			/*! \brief Current value of the ATB bar (\c 0 to \c 300000 - see details)
 
 				Internally, the ATB bar can have a value between \c 0 and
@@ -266,10 +266,13 @@ if(battler->animationId == 9) battler->animationId = 0;
 			: "=a" (tmp2), "=d" (RPG::_edx)
 			: "S" (0x4BFDF8), "a" (this), "d" (( reinterpret_cast<int *> (tmp) )[1])
 			: "ecx", "cc", "memory");
+		asm volatile("mov %0, %%eax": : "a" (this));
+		asm volatile("push %ebp; mov %eax, %ebp; push %edx; push %eax");
 		asm volatile("call *%%esi"
 			: "=a" (out), "=d" (RPG::_edx)
 			: "S" (0x47B564), "a" (tmp), "d" (tmp2)
 			: "ecx", "cc", "memory");
+		asm volatile("pop %edx; pop %edx; pop %ebp");
 
 		return out;
 	};

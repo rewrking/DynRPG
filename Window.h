@@ -14,8 +14,8 @@ namespace RPG {
 			*/
 			int choicesPerRow;
 			Image *image; //!< The actual image of the window after it's been drawn.
-				int _unknown_0C; // AuroraSheet?
-				int _unknown_10; // AuroraSheet?
+			Image *imageFrame; //!< The window's frame & background (if redrawn).
+			Image *imageText; //!< The window's text (if redrawn), but can only draw underneath.
 			int x; //!< The window's x-position
 			int y; //!< The window's y-position
 			int width; //!< The window's width
@@ -29,8 +29,8 @@ namespace RPG {
 			int cursorHeight; //!< The height of the cursor
 			int totalChoices; //!< The total number of choices in the window
 			int currentChoice; //!< The current choice selected (zero-based)
-			int scrollUp; //!< Amount of choices above window
-			int scrollDown; //!< Amount of choices below window
+			int currentScroll; //!< Amount of choices above current choice
+			int scrollTimer; //!< The timer between cursor movements (-12 or 12, minus or plus 4 each frame until it's 0)
 			bool choiceVisible; //!< Has the choice bar been drawn? (It can still be considered visible if another window is active)
 			bool choiceActive; //!< Is the choice bar of the window active?
 			int choiceTimer; //!< The number of frames the choice has been selected
@@ -40,17 +40,17 @@ namespace RPG {
 			int rollOn1;
 			int rollOn2;
 			int winTimer; //!< The total number of frames the window has been visible before a RPG::Scene change
-			DStringPtr string; //!< The window's text (doesn't work yet)
+			DListPtr<char> *text; //!< The window's text (doesn't work yet)
 				int _unknown_68;
 			int fontSet;  //!< The window's font set?
 				int _unknown_70;
 				int _unknown_74;
 
 			// Functions
-			Window();
-			~Window();
+			Window(); //!< Experimental
+			~Window(); //!< Experimental
 
-			/*! \brief
+			/*! \brief Experimental
 				\param window The window to be created
 				\param width The width of the window
 				\param height The height of the window
@@ -58,17 +58,21 @@ namespace RPG {
 				\param y The Y-coordinate of the window, based on the upper-left
 				\param startHidden Start the window hidden?
 			*/
-			static void create(RPG::Window *window, int width, int height, int x, int y, bool startHidden);
-
+			void create(int width, int height, int x, int y, bool startHidden);
+			
+			void redraw(); //!< Experimental
+			
 			/*! \brief Clears the specified window of any text, so that it can be drawn on again.
 				\param window The window to be cleared
 			*/
-			static void clear(RPG::Window *window);
+			void clear(); //!< Experimental
+			
+			void refresh(); //!< Experimental
 
 			/*! \brief Removes the specified window object and all of its components
 				\param window The window to be cleared
 			*/
-			static void destroy(RPG::Window *window);
+			void destroy(); //!< Experimental
 
 			void drawString(int x, int y, std::string text, int color, bool initialize);
 
@@ -80,28 +84,38 @@ namespace RPG {
 
 	RPG::Window::Window() {
 		int n = 1;
-		asm volatile("call *%%esi" : : "S" (0x4C6330), "a" (0x4C5F30), "d" (n) : "cc", "memory");
+		asm volatile("call *%%esi" : : "S" (0x4C6330), "a" (0x4C5F30), "d" (n) : "ecx",  "cc", "memory");
 	}
 
-	void RPG::Window::create(RPG::Window *window, int width, int height, int x, int y, bool startHidden) {
+	void RPG::Window::create(int width, int height, int x, int y, bool startHidden) {
 		asm volatile("push %%eax" : : "a" (width));
 		asm volatile("push %%eax" : : "a" (height));
 		asm volatile("push %%eax" : : "a" (startHidden));
-		asm volatile("call *%%esi" : : "S" (0x4C63DC), "a" (window), "d" (x), "c" (y) : "cc", "memory"); // cc = condition codes
+		asm volatile("call *%%esi" : : "S" (0x4C63DC), "a" (this), "d" (x), "c" (y) : "cc", "memory"); // cc = condition codes
 	}
 
-	void RPG::Window::clear(RPG::Window *window){
-		asm volatile("call *%%esi" : : "S" (0x4C6640), "a" (window) : "cc", "memory");
+	void RPG::Window::clear(){
+		asm volatile("call *%%esi" : : "S" (0x4C63A0), "a" (this) : "edx", "ecx", "cc", "memory");
+	}
+	
+	void RPG::Window::redraw(){
+		asm volatile("call *%%esi" : : "S" (0x4C6CF8), "a" (this), "d" (width), "c" (height) : "cc", "memory");
+	}
+	
+	void RPG::Window::refresh(){
+		asm volatile("call *%%esi" : : "S" (0x4C6640), "a" (this) : "edx", "ecx", "cc", "memory");
 	}
 
-	void RPG::Window::destroy(RPG::Window *window){ // destroys the window and all of its members
-		asm volatile("call *%%esi" : : "S" (0x4C66E4), "a" (window) : "cc", "memory");
+	void RPG::Window::destroy(){ // destroys the window and all of its members
+		asm volatile("call *%%esi" : : "S" (0x4C66E4), "a" (this) : "edx", "ecx", "cc", "memory");
 	}
 
 	RPG::Window::~Window() {
 		int n = 1;
-		asm volatile("call *%%esi" : : "S" (0x40376), "a" (this) : "cc", "memory");
+		asm volatile("call *%%esi" : : "S" (0x40376), "a" (this) : "edx", "ecx", "cc", "memory");
 	}
+	
+	
 
 	int RPG::Window::getSelected() {
 		if (this->choiceActive) {
@@ -114,7 +128,7 @@ namespace RPG {
 	*/
 	class WindowMessage : public Window {
 		public:
-			Window *winGold; //!< Pointer to cold window
+			Window *winGold; //!< Pointer to gold window
 				int _unknown_7C; // Message box text... not yet implemented // Doesn't crash: DList<DStringPtr > *text
 			int currentTextRow; //!< The current row of the text being drawn (1-4)
 			int currentTextColumn; //!< The current column of the text being drawn (1-??)
@@ -134,8 +148,8 @@ namespace RPG {
 			int innCost; //!< The inn's cost
 			bool messageOpen; //!< Is a message box currently drawn?
 
-			WindowMessage(); // constructor
-			~WindowMessage(); // destructor
+			WindowMessage(); //!< Experimental
+			~WindowMessage(); //!< Experimental
 	};
 
 	static RPG::WindowMessage *&winMessage = (**reinterpret_cast<RPG::WindowMessage ***>(0x4CDEF4));
@@ -183,7 +197,13 @@ namespace RPG {
 			DList<int> *skillSubsets; //!< Zero-based Array of skill subsets. Unsure about this though...
 			bool isSkillSubset; //!< Is the selected skill a subset?
 			//Window *winHeroMp; // ????
+			
+			void refreshSkills();
 	};
+	
+	void RPG::WindowMenuSkill::refreshSkills(){
+		asm volatile("call *%%esi" : : "S" (0x4C9274), "a" (this) : "edx", "ecx", "cc", "memory");
+	}
 
 	/*! \brief Used for equip menu from the main menu.
 

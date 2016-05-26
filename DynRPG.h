@@ -108,9 +108,9 @@ namespace RPG {
     #include "AnimationCurrent.h"
     #include "AnimationInBattle.h"
 #include "DBActor.h" // Updated
+    #include "DBClass.h"
 #include "Actor.h" // Updated
 #include "Monster.h" // Updated
-    #include "DBClass.h"
     #include "DBMonster.h"
     #include "Inventory.h"
     #include "Attribute.h"

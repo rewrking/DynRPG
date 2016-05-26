@@ -80,12 +80,19 @@ namespace RPG {
 			int getUpperLayerTileId(int x, int y);
 			
 			/*! \brief Gets the terrain ID for the tile ID specified
-				\param map The map being checked. For now, just RPG::map is supported as it's not (yet?) possible to check maps the player isn't on
-				\param x The Y coordinate of the tile
-				\param y The Y coordinate of the tile
+				\param tileId The tile's id
 				\sa RPG::Tileset::lowerTileTerrainId
 			*/
 			int getTerrainId(int tileId);
+			
+			/*! \brief Gets the event ID at the position specified, or 
+				\param x The Y coordinate of the event
+				\param y The Y coordinate of the event
+				\return The event ID, or 0 if no event was found
+			*/
+			int getEventAt(int x, int y);
+			
+			
 
 			/*! \brief Returns the map properties information for the map that is
 				currently loaded
@@ -134,6 +141,27 @@ namespace RPG {
 			: "S" (0x47D038), "a" (this), "d" (tileId)
 			: "ecx", "cc", "memory");
 		return out;
+	}
+	
+	int RPG::Map::getEventAt(int x, int y) {
+    // Since the map->events array goes by event ID, create a counter that increments
+    // when an event is not found at a specific array location, thus ensuring
+    // all events get checked
+    // example: events 1 and 10 exist on the map, while 2-9 were deleted at some point
+		int counter = RPG::map->events.count();
+		for (int i = 1; i <= counter;  i++) {
+			// Ensures the event exists
+			if (RPG::map->events[i]) {
+				// Checks the x & y coordinates
+				if (RPG::map->events[i]->x == x && RPG::map->events[i]->y == y) {
+					// Return the event's ID
+					return i;
+				}
+			} else {
+				counter++;
+			}
+		}
+		return 0;
 	}
 
 	/*! \brief Easily returns an event line.

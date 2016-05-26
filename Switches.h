@@ -6,7 +6,7 @@ namespace RPG {
 	class Switch {
 		public:
 			void **vTable;
-			void **id; // Not needed since its index is used in RPG::switches
+			void **id; //!< Not needed since its index is used in RPG::switches
 			DStringPtr name; //!< The name of the switch
 	};
 	

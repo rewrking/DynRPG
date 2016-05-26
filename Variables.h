@@ -6,7 +6,7 @@ namespace RPG {
 	class Variable {
 		public:
 			void **vTable;
-			void **id; // Not needed since its index is used in RPG::variables
+			void **id; //!< Not needed since its index is used in RPG::variables
 			DStringPtr name; //!< The name of the variable
 	};
 
