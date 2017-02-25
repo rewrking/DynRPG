@@ -88,6 +88,7 @@ namespace RPG {
 			: "=a" (RPG::_eax), "=c" (RPG::_ecx), "=d" (RPG::_edx)
 			: "S" (0x4892AC), "a" (RPG::system->systemGraphic), "c" (x), "d" (this)
 			: "cc", "memory");
+		delete par2;
 	}
 	
 	/*! \brief Built-in RM2k3 function that draws a string to a Window. (experimental)

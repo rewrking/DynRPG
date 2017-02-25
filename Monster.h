@@ -34,6 +34,13 @@ namespace RPG {
 				\param id The database ID of the monster to transform into
 			*/
 			void transform(int monsterId);
+			
+			/*! \brief Built-in RM2k3 function that loads a new monster group into the current one (retains battle commands).
+			
+				Call by using RPG::Monster::loadMonsterGroup(int) since each of the RPG::monsters[i] get replaced.
+				\param id The database ID of the new monster group to load
+			*/
+			static void loadMonsterGroup(int id);
 	};
 	
 	RPG::AnimationInBattle *&RPG::Monster::animData = (**reinterpret_cast<RPG::AnimationInBattle ***>(0x4CDE64));
@@ -57,6 +64,13 @@ int slimeHp = RPG::monsters[2]->hp; // read HP of third monster
 		asm volatile("call *%%esi"
 			: "=a" (RPG::_eax), "=d" (RPG::_edx)
 			: "S" (0x4BDDD8), "a" (this), "d" (monsterId)
+			: "ecx", "cc", "memory");
+	}
+	
+	void RPG::Monster::loadMonsterGroup(int id) {
+		asm volatile("call *%%esi" 
+			: "=a" (RPG::_eax), "=d" (RPG::_edx) 
+			: "S" (0x4BE8E0), "a" (RPG::monsters.ptr), "d" (id) 
 			: "ecx", "cc", "memory");
 	}
 }

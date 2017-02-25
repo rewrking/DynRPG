@@ -59,14 +59,16 @@ namespace RPG {
 				\param startHidden Start the window hidden?
 			*/
 			void create(int width, int height, int x, int y, bool startHidden);
-			
+
 			void redraw(); //!< Experimental
-			
+
+			void updateCursor(int choice); //!< Experimental
+
 			/*! \brief Clears the specified window of any text, so that it can be drawn on again.
 				\param window The window to be cleared
 			*/
 			void clear(); //!< Experimental
-			
+
 			void refresh(); //!< Experimental
 
 			/*! \brief Removes the specified window object and all of its components
@@ -97,11 +99,15 @@ namespace RPG {
 	void RPG::Window::clear(){
 		asm volatile("call *%%esi" : : "S" (0x4C63A0), "a" (this) : "edx", "ecx", "cc", "memory");
 	}
-	
+
 	void RPG::Window::redraw(){
 		asm volatile("call *%%esi" : : "S" (0x4C6CF8), "a" (this), "d" (width), "c" (height) : "cc", "memory");
 	}
-	
+
+	void RPG::Window::updateCursor(int choice){
+		asm volatile("call *%%esi" : : "S" (0x4C6810), "a" (this), "d" (choice) : "ecx", "cc", "memory");
+	}
+
 	void RPG::Window::refresh(){
 		asm volatile("call *%%esi" : : "S" (0x4C6640), "a" (this) : "edx", "ecx", "cc", "memory");
 	}
@@ -114,8 +120,8 @@ namespace RPG {
 		int n = 1;
 		asm volatile("call *%%esi" : : "S" (0x40376), "a" (this) : "edx", "ecx", "cc", "memory");
 	}
-	
-	
+
+
 
 	int RPG::Window::getSelected() {
 		if (this->choiceActive) {
@@ -124,12 +130,37 @@ namespace RPG {
 	}
 
 	/*! \brief Used for message windows.
+		\sa RPG::WindowMessage
+	*/
+	class WindowMessageBox {
+		public:
+			void **vTable;
+				int _unknown_08;
+				int _unknown_0C;
+				int _unknown_10;
+			DStringPtr *txt;
+			int count;
+				int _unknown_1C; // total lines?? (always seems to be 4)
+
+			std::string getLine(int line);
+			void setLine(int line, std::string text);
+	};
+
+	std::string RPG::WindowMessageBox::getLine(int line) {
+		return txt[line*2].s_str();
+	}
+	void RPG::WindowMessageBox::setLine(int line, std::string text) {
+		txt[line*2] = text;
+	}
+
+	/*! \brief Used for message windows.
 		\sa RPG::SceneMenu
 	*/
 	class WindowMessage : public Window {
 		public:
 			Window *winGold; //!< Pointer to gold window
-				int _unknown_7C; // Message box text... not yet implemented // Doesn't crash: DList<DStringPtr > *text
+				//int _unknown_7C; // Message box text... not yet implemented // Doesn't crash: DList<DStringPtr > *text
+			WindowMessageBox *text;
 			int currentTextRow; //!< The current row of the text being drawn (1-4)
 			int currentTextColumn; //!< The current column of the text being drawn (1-??)
 			int currentTextX; //!< The x-coordinate of the text being drawn, relative to where the text started drawing
@@ -197,10 +228,10 @@ namespace RPG {
 			DList<int> *skillSubsets; //!< Zero-based Array of skill subsets. Unsure about this though...
 			bool isSkillSubset; //!< Is the selected skill a subset?
 			//Window *winHeroMp; // ????
-			
+
 			void refreshSkills();
 	};
-	
+
 	void RPG::WindowMenuSkill::refreshSkills(){
 		asm volatile("call *%%esi" : : "S" (0x4C9274), "a" (this) : "edx", "ecx", "cc", "memory");
 	}

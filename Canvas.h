@@ -155,8 +155,11 @@ namespace RPG {
 			*/
 			static inline unsigned int convert16To24Bit(unsigned short pixel16) {
 				unsigned int ret = (unsigned int)(pixel16 & 0xF800) >> 8;
+				ret |= (unsigned int)(pixel16 & 0xE000) >> 13;
 				ret |= (unsigned int)(pixel16 & 0x7E0) << 5;
-				ret |= (unsigned int)(pixel16 & 0x3F) << 19;
+				ret |= (unsigned int)(pixel16 & 0x600) >> 1;
+				ret |= (unsigned int)(pixel16 & 0x1F) << 19;
+				ret |= (unsigned int)(pixel16 & 0x1C) << 14;
 				return ret;
 			}
 			

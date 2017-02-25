@@ -13,10 +13,10 @@ namespace RPG {
 
 	//! Possible values for RPG::BattleData::battlePhase
 	enum BattlePhase {
-		BPHASE_BATTLE,
-		BPHASE_DEATH,
-		BPHASE_VICTORY,
-		BPHASE_END
+		BPHASE_BATTLE, //!< From the moment the battle starts until a victory/death condition
+		BPHASE_DEATH, //!< After the party has died
+		BPHASE_VICTORY, //!< After the party has achieved a victory
+		BPHASE_END //!< After the battle screen has faded out before going back to the map
 	};
 
 	//! Possible values for RPG::BattleData::partyFormation
@@ -60,10 +60,13 @@ namespace RPG {
 			bool escapeAllowed; //!< Is escaping allowed?
 			bool defeatAllowed; //!< Is defeat allowed? (This would cause a game over)
 			bool firstStrike; // More research
+				bool _unknown_17;
 				int _unknown_18;
 			Image *backdropImage; //!< The RPG::Image object of the backdrop
 			BattleNavigationLevel_T navLevel; //!< Which window or action has the focus?
 			bool isInitialized; //!< Has the battle been initialized?
+				bool _unknown_22;
+				bool _unknown_23;
 			Window *winParty; //!< The RPG::Window object of the party
 			Window *winFightEscape; //!< The RPG::Window object for fight/escape/autobattle
 			Window *winCommand; //!< The RPG::Window object for commands
@@ -78,8 +81,8 @@ namespace RPG {
 				int _unknown_50;
 				int _unknown_54;
 			int fleeChance; //!< Percentage for escape (Formula: 50 + (100 - 100 * Avg Enemy AGI / Avg Hero AGI))
-			DListPtr<int *> battleProgress; // More research
-			bool redrawCanvas; //!< Should the canvas be redrawn?
+			DListPtr<char> battleProgress; // More research
+			bool canvasRedrawn; //!< Was the canvas redrawn?
 
 			/*! \brief If a hero is ready to act, their party index will be added to this array
 				\note This array lists the heroes in the order that they become ready, so if hero 2 is the first to act, and hero 3 is next to act, readyPartySlot[0] = 1 (hero 2), readyPartySlot[1] = 2 (hero 3), readyPartySlot[2] = -1 (empty) and readyPartySlot[3] = -1 (empty)
@@ -88,7 +91,12 @@ namespace RPG {
 				int _unknown_74;
 			bool isSys2CursorShown; //!< Is the system2 cursor currently on the screen?
 			BattlePhase battlePhase; //!< The phase of the battle (you can use this for special conditions)
-			int battlEndTimer; // More research
+			/*! \brief Timer between the frame the last monster is defeated, and the end of battle message windows.
+			
+				Starts at 60 the moment the last enemy is defeated and counts back to 0 each frame (60 = 1 second)
+			
+			*/
+			int battlEndTimer;
 			bool isDefeat; //!< Was the party defeated? (you can use this for special actions upon losing the battle)
 			bool isVictory; //!< Was the party victorious (you can use this for special actions upon winning the battle)
 			int sys2CursorX; //!< The x-position of the System2 cursor
@@ -113,8 +121,10 @@ namespace RPG {
 			bool continueBattle; // More research
 			bool eventReady; //!< Is an event command ready to be executed?
 			bool delay; //!< Delay the battle (might be able to use this for long actions & animations)
+				bool _unknown_C3;
+			
 	};
-
+	
 	/*! \ingroup game_objects
 		\brief Data and settings for the current battle.
 

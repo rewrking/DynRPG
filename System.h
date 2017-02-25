@@ -32,7 +32,14 @@ namespace RPG {
 
 	//! One-byte version of RPG::Scene
 	typedef unsigned char Scene_T;
-
+	
+	// Temp structure for FontImage
+	class FontImage {
+		public:
+			void **vTable;
+	};
+	
+	
 	/*! \brief Used to store the system and "system2" graphics
 		\sa RPG::System
 		\sa RPG::Image::setSystemPalette
@@ -44,11 +51,11 @@ namespace RPG {
 			Image *exFont; //!< Image file for glyphs
 			
 			//! \cond
-			Canvas *font;
+			FontImage font;
 			//! \endcond
 			
-				int _unknown_10;
-				int _unknown_14;
+			bool systemTiled; //!< Is the window background tiled? (in-game version of RPG::DBSystem::systemTiled)
+			SystemFont systemFont; //!< MS Gothic or MS Mincho? (in-game version of RPG::DBSystem::systemFont)  (See RPG::SystemFont)
 			Image *system2Image; //!< \c System2 image
 
 			/*! \brief Loads the font used for text drawing
@@ -56,7 +63,25 @@ namespace RPG {
 				\warning This is an experimental function.
 			*/
 			void loadFont(std::string fontName);
+			
+			/*! \brief Changes the system graphic
+				\param fontName Name of the font
+				\warning This is an experimental function.
+			*/
+			void change(std::string systemGraphicName, bool isTiled, bool isMincho);
 	};
+	
+	void RPG::SystemGraphic::change(std::string systemGraphicName, bool isTiled = false, bool isMincho = false) { 
+		RPG::DStringPtr *par = new DStringPtr(systemGraphicName); // *cue holy music*
+		asm volatile("push %%eax"
+			:
+			: "a" (isTiled));
+		asm volatile("call *%%esi"
+			: "=a" (RPG::_eax), "=c" (RPG::_ecx), "=d" (RPG::_edx)
+			: "S" (0x4AE280), "a" (this), "d" (isMincho), "c" (par->str)
+			: "cc", "memory");
+		delete par;
+	}
 
 	//! Possible values for RPG::System::messagePosition
 	enum MessagePosition {

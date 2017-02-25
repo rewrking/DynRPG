@@ -71,7 +71,7 @@ namespace RPG {
 			MapTreeType_T treeEntryType; //!< The type of entry in the map tree.
 				int _unknown_1C; // 86 on AREAs
 				int _unknown_20; // -75 on AREAs
-			bool isArea; //!< Is the map tree entry an area?
+			bool isNotArea; //!< true if the map is not an area
 			MapMusicType_T bgmType; //!< The type of music defined on the map
 			Music *bgmSpecify; //!< The music pointer for the BGM file (See RPG::Music)
 			MapBgType_T battleBgType; //!< The type of battle background defined on the map
@@ -81,6 +81,11 @@ namespace RPG {
 			MapAllowType_T saveType; //!< Is saving allowed?
 			CatalogPtr<MapEncounter *> encounterList; //!< The list of enemy encounters on the map
 			int encounterRate; //!< The encounter rate on the map
+			int areaStartX; //!< If the map is an area, the X value of the top-left.
+			int areaStartY; //!< If the map is an area, the Y value of the top-left.
+			int areaEndX; //!< If the map is an area, the X value of the bottom-right PLUS 1. Internally, 2k3 includes the top-left of a tile through the bottom-right of a tile for the area's rectangle, while the editor just considers the top-left. 
+			int areaEndY; //!< If the map is an area, the Y value of the bottom-right PLUS 1. Internally, 2k3 includes the top-left of a tile through the bottom-right of a tile for the area's rectangle, while the editor just considers the top-left. 
+				int _unknown_50;
 	};
 
 }

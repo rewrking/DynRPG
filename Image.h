@@ -47,7 +47,7 @@ namespace RPG {
 	class Image {
 		public:
 			void **vTable;
-			unsigned char *pixels; //!< Pointer to direct pixel data (stored from top to bottom)
+			unsigned char *pixels; //!< Pointer to direct pixel data (stored from top to bottom). Each pixel contains the palette ID (so one could reference it as image->palette[image->pixels[i]] to get the color of a pixel at the location in GGBBRR order)
 			int palette[256]; //!< Palette array (24 bit)
 			short appliedPalette[256]; //!< Processed palette array (16 bit - do not use directly)
 			int width; //!< Width of the image
@@ -62,7 +62,7 @@ namespace RPG {
 			//! Applies palette changes
 			void applyPalette();
 
-			/*! \brief Returns a reference to a certain pixel
+			/*! \brief Returns a reference to a certain pixel. Each pixel contains the palette ID (so one could do image->palette[image->pixel(x,y)] to get the color of a pixel at a certain x/y coordinate in GGBBRR order)
 				\param x X coordinate of the pixel
 				\param y Y coordinate of the pixel
 				\return Reference to the pixel

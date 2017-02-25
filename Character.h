@@ -297,8 +297,8 @@ RPG::hero->move(moves.c_str(), moves.length());
 			bool isWaiting; //!< Is the event waiting? Set to true to run the event's code, but has some dependency with facing/direction event to hero relationships that affect whether it runs or not.
 				int _unknown_A4;
 				int _unknown_A8;
-				int _unknown_AC; // Pointer to More scriptData? See 
-			
+				int _unknown_AC; // Pointer to More scriptData? See
+
 			/*! \brief Checks whether a certain event page exists
 
 				This function may be used to check for a certain event page
@@ -307,21 +307,21 @@ RPG::hero->move(moves.c_str(), moves.length());
 				\return \c true if the event page exists, \c false otherwise
 			*/
 			bool doesEventPageExist(int id);
-			
+
 			/*! \brief Built-in function to run various checks after a step has been made (NOT map collision!)... event-related checks (not all known)
 			*/
 			void act();
-			
+
 	};
-	
+
 	void RPG::Event::act() {
-		asm volatile("call *%%esi" 
-			: "=a" (_eax) 
-			: "S" (vTable[15]), "a" (this) 
+		asm volatile("call *%%esi"
+			: "=a" (_eax)
+			: "S" (vTable[15]), "a" (this)
 			: "edx", "ecx", "cc", "memory");
 			// 0x?????, vTable[15]
 	}
-	
+
 
 	//! Possible values for RPG::Hero::vehicle and RPG::Vehicle::type
 	enum HeroVehicle {
@@ -346,6 +346,16 @@ RPG::hero->move(moves.c_str(), moves.length());
 		HPTS_NORMAL = 32,
 		HPTS_TWICE_NORMAL = 64,
 		HPTS_FOUR_TIMES_NORMAL = 128
+	};
+
+	//! Event trigger
+	enum EventTrigger {
+		ET_ACTION_KEY,
+		ET_PLAYER_TOUCH,
+		ET_EVENT_TOUCH,
+		ET_AUTOSTART,
+		ET_PARALLEL,
+		ET_NONE
 	};
 
 	/*! \brief Used for the hero as subtype of characters
@@ -385,20 +395,38 @@ RPG::hero->move(moves.c_str(), moves.length());
 				\sa getControlMode
 			*/
 			void setControlMode(RPG::HeroControlMode controlMode);
-			
+
 			/*! \brief Built-in function to run various checks after a step has been made (NOT map collision!)... enemy encounters most importantly, event-related checks (not all known)
-			
+
 				Use this function if the hero's movement behavior is being altered dramatically (pixel movement for instance), but still need enemy encounter checks.
 			*/
 			void act();
+
+			void checkEventOverlapTrigger(EventTrigger triggerType, bool startedByActionButton);
+
+			void checkEventInFrontTrigger(EventTrigger triggerType, bool startedByActionButton);
 	};
-	
+
 	void RPG::Hero::act() {
-		asm volatile("call *%%esi" 
-			: "=a" (_eax) 
-			: "S" (0x4A9A04), "a" (this) 
+		asm volatile("call *%%esi"
+			: "=a" (_eax)
+			: "S" (0x4A9A04), "a" (this)
 			: "edx", "ecx", "cc", "memory");
 			// 0x4A9A04, vTable[15]
+	}
+
+	void RPG::Hero::checkEventOverlapTrigger(EventTrigger triggerType, bool startedByActionButton) {
+		asm volatile("call *%%esi"
+			: "=a" (RPG::_eax), "=d" (RPG::_edx), "=c" (RPG::_ecx)
+			: "S" (0x4AA8CC), "a" (this), "d" (triggerType), "c" (startedByActionButton)
+			: "cc", "memory");
+	}
+
+	void RPG::Hero::checkEventInFrontTrigger(EventTrigger triggerType, bool startedByActionButton) {
+		asm volatile("call *%%esi"
+		: "=a" (RPG::_eax), "=d" (RPG::_edx), "=c" (RPG::_ecx)
+		: "S" (0x4AA978), "a" (this), "d" (triggerType), "c" (startedByActionButton)
+		: "cc", "memory");
 	}
 
 	/*! \ingroup game_objects

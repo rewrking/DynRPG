@@ -153,8 +153,8 @@ namespace RPG {
 
 	//! The test play flag
 	/*! This flag may also be changed at runtime, but it probably wouldn't make sense. */
-	//static bool &isBattleTest = (**reinterpret_cast<bool **>(0x4CDCB8));
-	static bool &isBattleTest = (**reinterpret_cast<bool **>(0x4CDCB4)); // 0x4CDCB4 is what's documented by bugmenot... check both
+	static bool &isBattleTest = (**reinterpret_cast<bool **>(0x4CDCB8));
+	//static bool &isBattleTest = (**reinterpret_cast<bool **>(0x4CDCB4)); // 0x4CDCB4 is what's documented by bugmenot... check both
 
 	//! Should the title screen be shown (according to the "Show Title" button in the %RPG Maker)?
 	/*! This flag may also be changed at runtime, but it probably wouldn't make sense. */

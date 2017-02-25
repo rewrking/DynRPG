@@ -32,14 +32,16 @@ namespace RPG {
 				int _unknown_54;
 				int _unknown_58;
 				int _unknown_5C;
-				int _unknown_60;
+				//int _unknown_60;
+			HWND movieHWND;
 				int _unknown_64;
 				int _unknown_68;
 				int _unknown_6C;
-				int _unknown_70;
+				/*int _unknown_70;
 				int _unknown_74;
 				int _unknown_78;
-				int _unknown_7C;
+				int _unknown_7C;*/
+			RECT moviePosition;
 				int _unknown_80;
 				int _unknown_84;
 				int _unknown_88;
@@ -52,7 +54,11 @@ namespace RPG {
 				int _unknown_A4;
 				int _unknown_A8;
 				int _unknown_AC;
-				int _unknown_B0;
+				//int _unknown_B0;
+			bool movieIsPlaying;
+			bool isIdle; // movieIsIdle?
+			bool wasScreenSaver;
+				bool _unknown_B3; // stub. needed?
 				int _unknown_B4;
 				int _unknown_B8;
 				int _unknown_BC;

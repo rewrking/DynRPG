@@ -244,7 +244,7 @@ if(battler->animationId == 9) battler->animationId = 0;
 			*/
 			bool executeAction(bool skipPluginHandlers = false);
 
-			/*! \brief Built-in RM2k3 functions that return the actual damage multiplier for
+			/*! \brief Built-in RM2k3 function that returns the actual damage multiplier for
 				when the battler would be hit with a certain attribute
 				(considers the (Elemental) Resistance of equipment (max. one step towards dmgE)
 				 and the "Reduce / Increase Resistance" of skill effects)
@@ -252,6 +252,23 @@ if(battler->animationId == 9) battler->animationId = 0;
 				\return Damage multiplier in percent
 			*/
 			int getAttributeResist(int id);
+			
+			/*! \brief Built-in RM2k3 function that returns the strength of an attack (not the final attack value)
+				Rough formula (a lot still not taken into account): if (critical hit) atk*3, else if (charge up) atk*2
+				
+				\param target the target Battler of the attack
+				\return The damage value (again, not final!)
+			*/
+			int getAttackPower(RPG::Battler *target);
+			
+			/*! \brief Built-in RM2k3 function that returns the strength of a skill on a certain target, 
+				however, it's before the miss probability based on agility and statuses is calculated.
+				
+				\param skillId the id of the skill
+				\param target the target Battler of the attack
+				\return The damage value (again, not final!)
+			*/
+			int getSkillPower(int skillId, RPG::Battler *target);
 	};
 
 	int RPG::Battler::getAttributeResist(int id) {
@@ -275,5 +292,23 @@ if(battler->animationId == 9) battler->animationId = 0;
 		asm volatile("pop %edx; pop %edx; pop %ebp");
 
 		return out;
-	};
+	}
+
+	int RPG::Battler::getAttackPower(RPG::Battler *target) {
+		int power;
+		asm volatile("call *%%esi"
+			: "=a" (power), "=d" (RPG::_edx)
+			: "S" (0x4C0B2C), "a" (this), "d" (target)
+			: "ecx", "cc", "memory");
+		return power;
+	}
+
+	int RPG::Battler::getSkillPower(int skillId, RPG::Battler *target) {
+		int power;
+		asm volatile("call *%%esi"
+			: "=a" (power), "=d" (RPG::_edx), "=c" (RPG::_ecx)
+			: "S" (0x4C0DBC), "a" (this), "d" (skillId), "c" (target)
+			: "cc", "memory");
+		return power;
+	}
 }
