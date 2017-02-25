@@ -50,9 +50,7 @@ namespace RPG {
 			Image *systemImage; //!< \c %System image
 			Image *exFont; //!< Image file for glyphs
 			
-			//! \cond
 			FontImage font;
-			//! \endcond
 			
 			bool systemTiled; //!< Is the window background tiled? (in-game version of RPG::DBSystem::systemTiled)
 			SystemFont systemFont; //!< MS Gothic or MS Mincho? (in-game version of RPG::DBSystem::systemFont)  (See RPG::SystemFont)
