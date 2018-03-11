@@ -25,23 +25,19 @@ namespace RPG {
 			bool fullScreen; //!< Is fullscreen active?
 			bool largeWindow; //!< Is the large window (640x480) active?
 			Canvas *canvas; //!< RPG::Canvas which should be used for drawing on the screen
-				int _unknown_44;
-				int _unknown_48;
-				int _unknown_4C;
-				int _unknown_50;
+			RECT canvasRect;
 				int _unknown_54;
-				int _unknown_58;
-				int _unknown_5C;
-				//int _unknown_60;
-			HWND movieHWND;
-				int _unknown_64;
-				int _unknown_68;
-				int _unknown_6C;
-				/*int _unknown_70;
-				int _unknown_74;
-				int _unknown_78;
-				int _unknown_7C;*/
-			RECT moviePosition;
+				
+				// Cast these after including directx sdk in your project
+				// IVideoWindow *videoContext = reinterpret_cast<IVideoWindow>(RPG::screen->IVideoWindow);
+				void *FilgraphManager;
+				void *IGraphBuilder;
+				void *IVideoWindow;
+				void *IMediaControl;
+				void *IMediaEvent;
+				void *IMediaSeeking;
+			RECT movieRect;
+			//int _unknown_7C;
 				int _unknown_80;
 				int _unknown_84;
 				int _unknown_88;
@@ -60,8 +56,8 @@ namespace RPG {
 			bool wasScreenSaver;
 				bool _unknown_B3; // stub. needed?
 				int _unknown_B4;
-				int _unknown_B8;
-				int _unknown_BC;
+				int _unknown_B8; 
+				int _unknown_BC; 
 			double millisecondsPerFrame; //!< Milliseconds a frame should take
 			int maxFPS; //!< Maximum FPS
 			

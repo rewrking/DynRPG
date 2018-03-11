@@ -6,7 +6,7 @@ namespace RPG {
 		\ref onFrame callback.
 		If you are creating a new scene for wide-spread use, please contact me (PepsiOtaku)
 		to reserve a scene ID and I will add it below. This will prevent any conflicts if two+
-		people use the same scene ID. 
+		people use the same scene ID.
 		\sa onFrame
 		\sa RPG::Screen::update
 	*/
@@ -27,19 +27,20 @@ namespace RPG {
 		SCENE_ULT_SAVELOAD = 19, //!< Scene #19 - PepsiOtaku's Ultimate Save/Load Menu Plugin (forthcoming)
 		SCENE_ULT_NAME = 20, //!< Scene #22 - PepsiOtaku's Ultimate Hero Rename Plugin (forthcoming)
 		//SCENE_ULT_PARTY = 21, //!< Scene #21 - PepsiOtaku's Ultimate Party Menu Plugin (forthcoming)
-		SCENE_UNI_DEBUG = 42 //!< Scene #42 - Cherry's UniDebug Tool
+		SCENE_UNI_DEBUG = 42, //!< Scene #42 - Cherry's UniDebug Tool,
+		SCENE_OGL_OPTIONS = 77
 	};
 
 	//! One-byte version of RPG::Scene
 	typedef unsigned char Scene_T;
-	
+
 	// Temp structure for FontImage
 	class FontImage {
 		public:
 			void **vTable;
 	};
-	
-	
+
+
 	/*! \brief Used to store the system and "system2" graphics
 		\sa RPG::System
 		\sa RPG::Image::setSystemPalette
@@ -49,9 +50,9 @@ namespace RPG {
 			void **vTable;
 			Image *systemImage; //!< \c %System image
 			Image *exFont; //!< Image file for glyphs
-			
+
 			FontImage font;
-			
+
 			bool systemTiled; //!< Is the window background tiled? (in-game version of RPG::DBSystem::systemTiled)
 			SystemFont systemFont; //!< MS Gothic or MS Mincho? (in-game version of RPG::DBSystem::systemFont)  (See RPG::SystemFont)
 			Image *system2Image; //!< \c System2 image
@@ -61,15 +62,15 @@ namespace RPG {
 				\warning This is an experimental function.
 			*/
 			void loadFont(std::string fontName);
-			
+
 			/*! \brief Changes the system graphic
 				\param fontName Name of the font
 				\warning This is an experimental function.
 			*/
 			void change(std::string systemGraphicName, bool isTiled, bool isMincho);
 	};
-	
-	void RPG::SystemGraphic::change(std::string systemGraphicName, bool isTiled = false, bool isMincho = false) { 
+
+	void RPG::SystemGraphic::change(std::string systemGraphicName, bool isTiled = false, bool isMincho = false) {
 		RPG::DStringPtr *par = new DStringPtr(systemGraphicName); // *cue holy music*
 		asm volatile("push %%eax"
 			:
