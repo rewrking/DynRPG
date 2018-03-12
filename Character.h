@@ -435,6 +435,9 @@ RPG::hero->move(moves.c_str(), moves.length());
 	static RPG::Hero *&hero = (**reinterpret_cast<RPG::Hero ***>(0x4CDE54));
 
 	/*! \brief Used for the vehicles as subtype of characters
+		\sa RPG::vehicleSkiff
+		\sa RPG::vehicleShip
+		\sa RPG::vehicleAirship
 		\sa RPG::hero
 	*/
 	class Vehicle : public Character {
