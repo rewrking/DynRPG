@@ -66,6 +66,8 @@
 	#include <DynRPG/Audio/Music.hpp>
 	#include <DynRPG/Audio/Sound.hpp>
 	//
+	#include <DynRPG/Battle/BattleSettings.hpp> // Some weird dependency issue here
+	//
 	#include <DynRPG/Battle/BattleCommand.hpp>
 	#include <DynRPG/Battle/BattleCommandArchetype.hpp>
 	#include <DynRPG/Battle/BattleData.hpp>
@@ -78,7 +80,6 @@
 	#include <DynRPG/Battle/BattleNavigationLevel.hpp>
 	#include <DynRPG/Battle/BattlePartyFormation.hpp>
 	#include <DynRPG/Battle/BattlePhase.hpp>
-	#include <DynRPG/Battle/BattleSettings.hpp>
 	#include <DynRPG/Battle/BattleType.hpp>
 	#include <DynRPG/Battle/RandomEncounterDeath.hpp>
 	#include <DynRPG/Battle/TriggerFlag.hpp>

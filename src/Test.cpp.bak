@@ -1,0 +1,6 @@
+#include <DynRPG/DynRPG.hpp>
+
+bool onStartup(char* pluginName)
+{
+	return true;
+}

@@ -2,6 +2,7 @@
 MAX_PARALLEL_JOBS := 8
 CLEAN_OUTPUT := true
 DUMP_ASSEMBLY := false
+BUILD_STATIC := false
 
 CC := g++.exe
 

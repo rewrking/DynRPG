@@ -187,13 +187,13 @@ void Image::drawText(int x, int y, std::string text, int color)
  *****************************************************************************/
 void Image::drawString(int x, int y, std::string text, int color)
 {
-	DStringPtr* par2 = new DStringPtr(text); // *cue holy music*
+	DStringPtr par2(text);
 	asm volatile("push %%eax"
 				 :
 				 : "a"(y));
 	asm volatile("push %%eax"
 				 :
-				 : "a"(par2->str));
+				 : "a"(par2.str));
 	asm volatile("push %%eax"
 				 :
 				 : "a"(color));
@@ -201,7 +201,6 @@ void Image::drawString(int x, int y, std::string text, int color)
 				 : "=a"(_eax), "=c"(_ecx), "=d"(_edx)
 				 : "S"(0x4892AC), "a"(system->systemGraphic), "c"(x), "d"(this)
 				 : "cc", "memory");
-	delete par2;
 }
 
 /******************************************************************************

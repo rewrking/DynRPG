@@ -2,6 +2,7 @@
 #define RPG_BATTLE_SETTINGS_HPP
 
 #include <DynRPG/Battle/BattleCommand.hpp>
+#include <DynRPG/Battle/BattleLayout.hpp>
 #include <DynRPG/Battle/RandomEncounterDeath.hpp>
 #include <DynRPG/Battler/Battler.hpp>
 #include <DynRPG/Catalog/CatalogPtr.hpp>
