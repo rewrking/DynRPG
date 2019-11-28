@@ -2,8 +2,6 @@
 SUFFIXES =
 .SUFFIXES: .c .cpp .h .hpp .rc .res .inl .o .d .asm
 
-$(VERBOSE).SILENT:
-
 #==============================================================================
 MAKEFLAGS += --no-print-directory
 #==============================================================================
@@ -224,6 +222,7 @@ $(TARGET): $(_PCH_GCH) $(OBJS) $(ASMS) $(TEST_DIR)
 	$(color_reset)
 	$(if $(_CLEAN),@echo; echo 'Linking: $(TARGET)')
 ifeq ($(BUILD_STATIC),true)
+	-$(_Q)rm -rf $(BLD_DIR)/lib$(_NAMENOEXT).a
 	ar.exe -r -s $(BLD_DIR)/lib$(_NAMENOEXT).a $(OBJS)
 else
 	-$(_Q)rm -rf $(BLD_DIR)/lib$(_NAMENOEXT).def $(BLD_DIR)/lib$(_NAMENOEXT).a

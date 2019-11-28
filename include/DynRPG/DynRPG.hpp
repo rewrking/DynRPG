@@ -25,10 +25,13 @@
 	#error Sorry, this DynRPG version needs at least GNU C++ version 4.7.1! See gcc.gnu.org
 #endif
 
-// Note: Do not change the include order unless you know what you're doing!
+// clang-format off
+#include <DynRPG/Utility/Win32.hpp>
+#include <DynRPG/Utility/Defines.hpp>
 
 // Some friendly helper types (uchar, uint, etc)
 #include <DynRPG/Utility/Types.hpp>
+// clang-format on
 
 #ifndef DYNRPG_MIN
 	#include <DynRPG/Actor/Actor.hpp>
@@ -262,9 +265,10 @@
 	#include <DynRPG/Window/WindowSaveFile.hpp>
 #endif // DYNRPG_MIN
 
+// clang-format off
 #include <DynRPG/Globals.hpp>
-
 #include <DynRPG/DynCore/PluginCallbacks.hpp>
+// clang-format on
 
 #ifdef AUTO_DLLMAIN
 	#warning AUTO_DLLMAIN is deprecated as automatically adding a DllMain function is the default behaviour now. Use #define CUSTOM_DLLMAIN to achieve the reverse.

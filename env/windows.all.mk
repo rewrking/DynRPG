@@ -2,7 +2,7 @@
 MAX_PARALLEL_JOBS := 8
 CLEAN_OUTPUT := true
 DUMP_ASSEMBLY := false
-BUILD_STATIC := false
+BUILD_STATIC := true
 
 CC := g++.exe
 
@@ -24,13 +24,7 @@ PRODUCTION_EXCLUDE := \
 	Thumbs.db \
 	.DS_Store
 
-_MINGW := C:/mingw32/bin
 PRODUCTION_DEPENDENCIES := \
 	bin/Release/libDynRPG.a \
-	bin/Release/libDynRPG.def \
-	$(_MINGW)/libgcc_s_dw2-1.dll \
-	$(_MINGW)/libstdc++-6.dll \
-	$(_MINGW)/libwinpthread-1.dll
+	bin/Release/libDynRPG.def
 
-BUILD_FLAGS := \
-	-mwindows

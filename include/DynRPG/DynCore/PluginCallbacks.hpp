@@ -1,6 +1,12 @@
 #ifndef RPG_PLUGIN_CALLBACKS_HPP
 #define RPG_PLUGIN_CALLBACKS_HPP
 
+// #include <DynRPG/Battler/Battler.hpp>
+// #include <DynRPG/Character/Character.hpp>
+// #include <DynRPG/Comment/ParsedCommentData.hpp>
+// #include <DynRPG/Event/EventScriptData.hpp>
+// #include <DynRPG/Event/EventScriptLine.hpp>
+// #include <DynRPG/Graphics/Picture.hpp>
 #include <DynRPG/Scene/Scene.hpp>
 #include <DynRPG/Utility/Defines.hpp>
 #include <DynRPG/Utility/Win32.hpp>
