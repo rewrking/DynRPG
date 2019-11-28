@@ -223,7 +223,7 @@ $(TARGET): $(_PCH_GCH) $(OBJS) $(ASMS) $(TEST_DIR)
 	$(if $(_CLEAN),@echo; echo 'Linking: $(TARGET)')
 ifeq ($(BUILD_STATIC),true)
 	-$(_Q)rm -rf $(BLD_DIR)/lib$(_NAMENOEXT).a
-	ar.exe -r -s $(BLD_DIR)/lib$(_NAMENOEXT).a $(OBJS)
+	$(_Q)ar.exe -r -s $(BLD_DIR)/lib$(_NAMENOEXT).a $(OBJS)
 else
 	-$(_Q)rm -rf $(BLD_DIR)/lib$(_NAMENOEXT).def $(BLD_DIR)/lib$(_NAMENOEXT).a
 	$(_Q)$(CC) -shared -Wl,--output-def="$(BLD_DIR)/lib$(_NAMENOEXT).def" -Wl,--out-implib="$(BLD_DIR)/lib$(_NAMENOEXT).a" -Wl,--dll $(_LIB_DIRS) $(OBJS) -o $@ -s $(_LINK_LIBRARIES) $(BUILD_FLAGS)
