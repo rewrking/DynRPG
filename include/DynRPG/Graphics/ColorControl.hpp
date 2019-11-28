@@ -4,7 +4,7 @@
 namespace RPG
 {
 //! \cond
-class Image;
+struct Image;
 //! \endcond
 
 /*! \brief Color effect settings for RPG::Image objects

@@ -1,7 +1,7 @@
 #ifndef RPG_BATTLE_COMMAND_HPP
 #define RPG_BATTLE_COMMAND_HPP
 
-#include <DynRPG/Battle/BatleCommandArchetype.hpp>
+#include <DynRPG/Battle/BattleCommandArchetype.hpp>
 #include <DynRPG/Delphi/DStringPtr.hpp>
 
 namespace RPG

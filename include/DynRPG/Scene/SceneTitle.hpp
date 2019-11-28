@@ -10,7 +10,7 @@ namespace RPG
 /*! \brief Access to the title screen parameters.
 	\sa RPG::title
 */
-class SceneTitle
+struct SceneTitle
 {
 	// clang-format off
 	void** vTable;

@@ -241,6 +241,7 @@
 	#include <DynRPG/Utility/DBitmap.hpp>
 	#include <DynRPG/Utility/Defines.hpp>
 	#include <DynRPG/Utility/Win32.hpp>
+	#include <DynRPG/Utility/PluginConfig.hpp>
 	//
 	#include <DynRPG/Variable/Variable.hpp>
 	#include <DynRPG/Variable/Variables.hpp>

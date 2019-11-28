@@ -18,9 +18,8 @@ namespace RPG
 	\sa RPG::TerrainBattleType
 	\sa RPG::TerrainGridDepth
 */
-class Terrain
+struct Terrain
 {
-public:
 	void** vTable;
 	int id; //!< ID of the terrain
 	DStringPtr name; //!< The name of the terrain in the database

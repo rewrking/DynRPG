@@ -9,11 +9,10 @@ namespace RPG
 {
 // would be nice if this ItemTable class worked, so that one could use RPG::inventory->items[#]->id, RPG::inventory->items[#]->amount and RPG::inventory->items[#]->uses instead of RPG::inventory->items[#] RPG::inventory->itemitemAmount[#] and RPG::inventory->itemUses[#]
 // Need to research this more...
-/*class ItemTable {
-	public:
-		short id;
-		char *amount;
-		char *uses;
+/*struct ItemTable {
+	short id;
+	char *amount;
+	char *uses;
 };*/
 
 /*! \brief Used for the inventory data and statistics of the current game being played.

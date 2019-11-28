@@ -1,6 +1,7 @@
 #ifndef RPG_BATTLE_DATA_HPP
 #define RPG_BATTLE_DATA_HPP
 
+#include <DynRPG/Battle/BattleEncounterCondition.hpp>
 #include <DynRPG/Battle/BattleNavigationLevel.hpp>
 #include <DynRPG/Battle/BattlePartyFormation.hpp>
 #include <DynRPG/Battle/BattlePhase.hpp>

@@ -2,6 +2,7 @@
 #define RPG_BATTLE_SETTINGS_HPP
 
 #include <DynRPG/Battle/BattleCommand.hpp>
+#include <DynRPG/Battle/RandomEncounterDeath.hpp>
 #include <DynRPG/Battler/Battler.hpp>
 #include <DynRPG/Catalog/CatalogPtr.hpp>
 #include <DynRPG/Teleport/Teleport.hpp>
@@ -9,6 +10,10 @@
 
 namespace RPG
 {
+//! \cond
+// struct BattleCommand;
+//! \endcond
+
 /*! \brief Used for battle settings (layout, etc.)
 	\sa RPG::battleSettings
 	\sa RPG::BattleLayout

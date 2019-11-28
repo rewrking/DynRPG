@@ -1,12 +1,12 @@
 #ifndef RPG_PLUGIN_CALLBACKS_HPP
 #define RPG_PLUGIN_CALLBACKS_HPP
 
+#include <DynRPG/Scene/Scene.hpp>
 #include <DynRPG/Utility/Defines.hpp>
 #include <DynRPG/Utility/Win32.hpp>
 
 namespace RPG
 {
-enum class Scene;
 struct EventScriptLine;
 struct EventScriptData;
 struct ParsedCommentData;

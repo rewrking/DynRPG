@@ -25,7 +25,7 @@ namespace RPG
 	\sa RPG::WeaponRangedTargetting
 	\sa RPG::AnimationWeapon
 */
-class Item
+struct Item
 {
 	// clang-format off
 	void** vTable;
