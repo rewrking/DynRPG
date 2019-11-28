@@ -4,6 +4,8 @@
 #define _WIN32_WINNT 0x0502
 #include <DynRPG/Utility/Win32.hpp>
 
+#include <iostream>
+
 namespace RPG
 {
 /*! \brief Attach a console window to RPG_RT.exe for debugging
@@ -30,13 +32,36 @@ return true;
 
 struct Debug
 {
-	static void attachConsole(char*& pluginName);
-	~Debug();
+	inline static void attachConsole(char*& pluginName)
+	{
+		if (!AttachConsole(ATTACH_PARENT_PROCESS))
+		{
+			AllocConsole();
+			AttachConsole(GetCurrentProcessId());
+		}
+
+		freopen("CONOUT$", "w", stdout);
+
+		std::cout << "\n====== " << pluginName << " ======\n"
+				  << std::endl;
+
+		s_consoleAttached = true;
+
+		atexit(&freeConsole);
+	}
+	~Debug()
+	{
+		freeConsole();
+	};
 
 private:
-	static void freeConsole();
+	inline static void freeConsole()
+	{
+		if (s_consoleAttached)
+			FreeConsole();
+	}
 
-	static bool s_consoleAttached;
+	inline static bool s_consoleAttached = false;
 };
 }
 
