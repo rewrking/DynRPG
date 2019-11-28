@@ -1,0 +1,47 @@
+{
+	"DynRPG Header File": {
+		"prefix": "dyn",
+		"body": [
+			"#ifndef RPG_${1:HEADER_GUARD}_HPP",
+			"#define RPG_${1:HEADER_GUARD}_HPP",
+			"",
+			"namespace RPG",
+			"{",
+			"${0}",
+			"}",
+			"",
+			"#endif // RPG_${1:HEADER_GUARD}_HPP",
+			""
+		],
+		"description": "DynRPG Header File"
+	},
+	"DynRPG Implementation File": {
+		"prefix": "dync",
+		"body": [
+			"#define DYNRPG_STATIC",
+			"#include <DynRPG/${1:ClassName}.hpp>",
+			"",
+			"namespace RPG",
+			"{",
+			"}",
+			""
+		],
+		"description": "DynRPG Implementation File"
+	},
+	"DynRPG Include": {
+		"prefix": "incl",
+		"body": [
+			"#include <DynRPG${0}>"
+		],
+		"description": "DynRPG Include"
+	},
+	"Separator": {
+		"prefix": "sep",
+		"body": [
+			"/******************************************************************************",
+			" * ",
+			" *****************************************************************************/"
+		],
+		"description": "Separator"
+	}
+}

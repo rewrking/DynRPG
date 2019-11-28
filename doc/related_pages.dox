@@ -1,0 +1,750 @@
+/*! \page patch The Patch
+  <h1><a class="anchor" id="installation_patch"></a>
+Installation</h1>
+<p>It couldn't be easier: You just run the patcher (that's the file called <code>dynrpg_patcher.exe</code>), select your project's <code>RPG_RT.exe</code> file and that's it, at least in most of the cases. DynRPG should be compatible with all other 1.08-based patches.</p>
+<p>In case you don't have <code>RPG_RT.exe</code> version 1.08, the patcher will offer you to install it. However, this will remove all existing modifications (other patches, custom icon, etc.). But don't worry, in case anything goes wrong there is always a backup (that's the file with the <code>.bak</code> extension). If you install the patch "over" an existing (older) version of the DynRPG Patch, there will also be a backup of the <code>dynloader.dll</code> file.</p>
+<p>You don't need to include the backup files (ending with <code>.bak</code>) in your finished game. Also, players don't need to install anything special to run a game which uses DynRPG.</p>
+<p>The patcher will also automatically create a <code>DynPlugins</code> folder for you, so you can immediately start adding and using plugins.</p>
+<h1><a class="anchor" id="features_patch"></a>
+Extra Features</h1>
+<p>Of course, the main feature of the DynRPG Patch is interfacing the DynRPG Loader, which then loads the plugins. (See <a class="el" href="index.html#parts">Parts</a> for more information.) </p>
+<dl class="section note"><dt>Note</dt><dd>You cannot use more than 50 plugins at the same time.</dd></dl>
+<p>But that's not everything, the patch also comes with several <b>improvements and bugfixes</b> for the RPG Maker: </p>
+<ul>
+<li>
+<b>Improvement: <em>More pictures!</em></b> You can now use 2000 pictures instead of 50, and pictures #1001 to #2000 are not erased when the player goes to a new map! Please read the <a class="el" href="patch.html#more_pics">About the pictures</a> section below to find out what you need to know about this feature. </li>
+<li>
+<b>Improvement: <em>On-the-fly application of IPS patches!</em></b> This means that IPS patches can now be used in a similar manner as plugins, by simply copying them to a folder. This means they can easily be removed again by deleting the file. Please read the <a class="el" href="patch.html#onthefly_ips">On-the-fly IPS patches</a> section for further details. </li>
+<li>
+<b>Improvement: <em>Quickpatches!</em></b> This feature allows you to add simple patches as small lines of text which can easily be shared on the Internet. Those simple patches can also be customized (such as having a configurable value for something). Please read the <a class="el" href="patch.html#quickpatches">Quickpatches</a> section below for detailed instructions! </li>
+<li>
+<b>Improvement:</b> Monsters are now flashed more intensively when they do their turn. Before, it was hard to follow what was going on in battle, especially if a monster used the "Attack" command. </li>
+<li>
+<b>Improvement:</b> Picture operations now also work while a message is displayed. (Yes, that's the same thing the <a href="http://cherrytree.at/download/?did=16">UnlockPics Patch</a> does.) </li>
+<li>
+<b>Improvement:</b> The game doesn't completely close when an error occurs. Instead it goes back to the title screen. </li>
+<li>
+<b>Improvement:</b> You can now press <code>F11</code> to go to the save menu at any time (in test play only). </li>
+<li>
+<b>Improvement:</b> The "Input Number" event command will now use the existing value in the variable as initial value. Before, it always started with zero. </li>
+<li>
+<b>Improvement:</b> When you press <code>ESC</code> at a "Show Choice" command where the cancel behavior is set to "Ignore", now the buzzer sound is played. </li>
+<li>
+<b>Improvement:</b> Transparent message windows will now also work with the "Traditional" battle layout (at least out of the battle). You have to change the battle layout so that the "Transparent" checkbox becomes enabled, check or uncheck it and then change the battle layout back. </li>
+<li>
+<b>Bugfix:</b> The game would crash when you removed an actor in battle when this actor was the last to do his turn. </li>
+<li>
+<b>Bugfix:</b> The "Enemy Attack" sound was never played. </li>
+<li>
+<b>Bugfix:</b> The game would crash if a skill was reflected on an actor with an ID higher than the number of actors in the party. </li>
+<li>
+<b>Bugfix:</b> The battle status window was gone while the skill selection window was open. </li>
+<li>
+<b>Bugfix:</b> If you had selected "Small Window" in the "Battle
+                              Layout" tab of the database, the action selection window would only display 3 lines plus an ugly empty one at the bottom and also the item and skill selection windows would not display the last line correctly. Additionally, the selection cursor for "Show choice" windows was misaligned in battle. </li>
+<li>
+<b>Bugfix:</b> The "Order" menu (used for rearranging party members) didn't play the cancel sound when you exited. </li>
+<li>
+<b>Bugfix:</b> When the shop system was used, the events weren't updated, which means that if you bought an item in the shop, events which used this item as start condition wouldn't execute immediately. </li>
+<li>
+<b>Bugfix:</b> HP display in the save menu was misaligned when the HP had 4 digits. </li>
+<li>
+<b>Bugfix:</b> The game would crash if the player would open the item window in battle, then close it again using ESC and then execute a battle command of type "Link to Event". </li>
+<li>
+<b>Bugfix:</b> The game would crash with a "Division by zero" error on certain edge cases of picture operations (especially pictures with small zoom level partly outside the screen). </li>
+<li>
+<b>Bugfix:</b> Enemies were flashed even when they executed the "Do nothing" action.</li>
+</ul>
+<h1><a class="anchor" id="more_pics"></a>
+About the pictures</h1>
+<p>The DynRPG patch increases the picture limit to 2000. You might have heard that <a href="http://cherrytree.at/download/?did=10">Hyper Patcher 2</a> is able to increase this limit to a crazy 9999, but this is not so healthy in this case. Using that many pictures takes several seconds to load on starting or loading a game or going to title screen, plus you would have very bad performance with DynRPG because the DynRPG SDK allows plugins to intercept picture drawing. Each plugin is called once before and once after the picture is to draw, so you can imagine that 9999 pictures would mean 5 times more plugin calls than 2000 pictures, so I decided that 2000 pictures would be the best compromise.</p>
+<p>Please keep in mind that <b>only pictures #1 to #1000 will be erased on map change</b>! The fact that pictures with an ID greater than 1000 won't be erased automatically allows you to use pictures for cross-map purposes more easily.</p>
+<p>However, there is one thing you need to do (unless you are already using <a href="http://cherrytree.at/download/?did=19">PicPointerPatch</a>): You need to modify the RPG Maker editor itself too, otherwise you won't be able to select picture IDs greater than 50 in the event editor. There are two ways to do this: </p>
+<ul>
+<li>
+<b>The easy way:</b> You need to use <a href="http://cherrytree.at/ultimate">RPG Maker 2009 Ultimate</a>. You then just need to create a file called <code>morepictures.ini</code> (or whatever name you like) in RPG Maker 2009 Ultimate's <code>uimod</code> folder and put the following text into it: <div class="fragment"><div class="line">[FormEvCmd11110]</div>
+<div class="line">DialEdit1.MaxValue=100000</div>
+<div class="line"></div>
+<div class="line">[FormEvCmd11120]</div>
+<div class="line">DialEdit1.MaxValue=100000</div>
+<div class="line"></div>
+<div class="line">[FormEvCmd11130]</div>
+<div class="line">DialEdit1.MaxValue=100000</div>
+</div><!-- fragment --> Then you need to edit the <code>ultimate.ini</code> file: Open it in a text editor, go to the section <code>[UIMod]</code> and add your file at the end of the section. </li>
+<li>
+<b>The hard way:</b> If you do not want to use RPG Maker 2009 Ultimate, you need to directly edit your <code>RPG2003.exe</code> file: <ol>
+<li>
+Download <a href="http://www.snapfiles.com/get/resourcehacker.html">Resource Hacker</a>. </li>
+<li>
+Open your <code>RPG2003.exe</code> file in it. </li>
+<li>
+Navigate to <code>RCDATA &gt; TFORMEVCMD11110 &gt; 0</code>. </li>
+<li>
+In the script on the right side, look for the following line: <div class="fragment"><div class="line">MaxValue = 50</div>
+</div><!-- fragment --> If you have an older RPG Maker version, it might be <code>40</code> instead of <code>50</code>. Increase this value, for example, to <code>100000</code>. The reason we use such a high value is that higher values might be used for extra features (for example, with the <a href="http://cherrytree.at/download?did=19">PicPointerPatch</a>). </li>
+<li>
+Click <code>Compile Script</code>. </li>
+<li>
+Repeat steps 4 and 5 for the pages <code>RCDATA &gt; TFORMEVCMD11120 &gt; 0</code> and <code>RCDATA &gt; TFORMEVCMD11130 &gt; 0</code>. </li>
+<li>
+Save your changes and exit Resource Hacker.</li>
+</ol>
+</li>
+</ul>
+<h1><a class="anchor" id="onthefly_ips"></a>
+On-the-fly IPS patches</h1>
+<p>DynRPG can parse IPS files and apply them to the game in memory. This means you can add IPS patches without actually modifying any file on your harddisk, making it easy to remove the patch again. There is a folder <code>DynPatches</code> in which the loader will look for IPS files and apply them on-the-fly. Please note that the loader will fail to apply a patch if it tries to modify regions of the <code>RPG_RT.exe</code> which would affect DynRPG itself or lie outside of the areas which are mapped to memory. (Don't worry, nothing will explode, it will just trigger an error message.)</p>
+<h1><a class="anchor" id="quickpatches"></a>
+Quickpatches</h1>
+<p>Quickpatches are simple text "codes" which instruct DynRPG to modify certain bytes in the game's memory. They are added to a special section in your <code>DynRPG.ini</code> file called <code>[QuickPatches]</code>. Each quickpatch has a name, which can be arbitrary and is completely ignored by the loader.</p>
+<p><b>End users:</b> Simply copy and paste a quickpatch from the Internet into your <code>[QuickPatches]</code> section (create the section if it does not exist). If you don't like it, remove it again or disable it by prepending a semicolon. Quickpatches may contain configurable values, the developer should normally tell you what their effect is.</p>
+<p><b>Developers:</b> The format of quickpatches is very simple: </p>
+<div class="fragment"><div class="line">PatchName=Address1,Values1,Address2,Values2,Address3,Values3,...</div>
+</div><!-- fragment --><p> You can specify one of more virtual address to modify, together with the values to write to that address. These "values" may use one of those 3 formats: </p>
+<ul>
+<li>
+<b>Hex bytes:</b> One or more bytes in simple two-digit hexadecimal notation. For example, <code>401234,90</code> will write byte <code>0x90</code> at address <code>0x401234</code>, <code>401234,1A2B3C</code> will write byte <code>0x1A</code> at address <code>0x401234</code>, byte <code>0x2B</code> at address <code>0x401235</code> and byte <code>0x3C</code> at address <code>0x401236</code>. </li>
+<li>
+<b>8-bit decimal value:</b> Decimal value (may be negative) prepended by a percent sign, which will occupy one byte. Meant to be easily customizable by end users. For example, <code>401234,%32</code> will write byte <code>0x20</code> at address <code>0x401234</code>. </li>
+<li>
+<b>32-bit decimal value:</b> Decimal value (may be negative) prepended by a sharp sign, which will occupy four bytes. Meant to be easily customizable by end users. For example, <code>401234,#1000</code> will write byte <code>0xE8</code> at address <code>0x401234</code>, byte <code>0x03</code> at address <code>0x401235</code>, and two <code>0x00</code> bytes at addresses <code>0x401236</code> and <code>0x401237</code>.</li>
+</ul>
+<p>Example for two "real-life" quickpatches: </p>
+<div class="fragment"><div class="line">; Hides EXP in main menu and save <a class="code" href="group__game__objects.html#ga79ab87216775ec74cb63127296311fef">screen</a></div>
+<div class="line">HideEXP=49E148,EB71,49F1CA,EB67,49F095,EB21</div>
+<div class="line">; Moves the window on the title <a class="code" href="group__game__objects.html#ga79ab87216775ec74cb63127296311fef">screen</a> to coordinates 144/56</div>
+<div class="line">MoveTitleWindow=490821,#144,490828,#56</div>
+</div><!-- fragment --><p> For this example please note that the RPG Maker uses the X coordinate for the middle of the window, while the Y coordinate is used for the top of the window. </p>
+*/
+
+
+
+
+
+/*! \page guidelines Rules and guidelines for plugin developers
+  <h1><a class="anchor" id="rules"></a>
+Rules</h1>
+<p>The RPG Maker is written in Delphi (and I didn't have access to the source code of its classes, etc.), while my SDK uses C++. Thus, many things are not working the way you might expect.</p>
+<p>There is a set of rules which you must follow under all circumstances when you are developing a DynRPG Plugin: </p>
+<ul>
+<li>
+<b>Do not try to use members which are not documented.</b> They are either unknown or used internally and dangerous. (Of course, if you <em>know</em> what a member does, it's a different story.) </li>
+<li>
+<b>Do not instantiate <a class="el" href="namespace_r_p_g.html" title="The one and only namespace in which all DynRPG classes, variables and functions reside, except for callbacks. ">RPG</a> classes.</b> Always use pointers to existing instances you get from DynRPG. It is especially dangerous to use these "home-made" objects with functions from the <a class="el" href="namespace_r_p_g.html" title="The one and only namespace in which all DynRPG classes, variables and functions reside, except for callbacks. ">RPG</a> namespace. It might seem to work, but will most likely corrupt data. This will cause the game to behave strangely or suddenly crash some minutes later. <b>An exception to this rule are the <a class="el" href="class_r_p_g_1_1_music.html" title="Used for background music settings. ">RPG::Music</a> and <a class="el" href="class_r_p_g_1_1_sound.html" title="Used for sound effect settings. ">RPG::Sound</a> classes.</b> </li>
+<li>
+<b>Do not assign <a class="el" href="namespace_r_p_g.html" title="The one and only namespace in which all DynRPG classes, variables and functions reside, except for callbacks. ">RPG</a> objects.</b> The result is mostly undefined. An exception are pointers to <a class="el" href="class_r_p_g_1_1_image.html" title="Used for image buffers (8 bit) ">RPG::Image</a> objects, as long as you don't forget to destroy the old object using <a class="el" href="class_r_p_g_1_1_image.html#a0f5c9e8d56d2f54dede69cff9f7ee123" title="Destroys an image. ">RPG::Image::destroy</a> (unless you want to use it before). </li>
+<li>
+<b>Do not randomly return <code>false</code> from a callback function.</b> This will "lock out" all plugins which are called after yours. Only return <code>false</code> if you really want this behavior. </li>
+<li>
+<b>Never change the <code>vTable</code> member of a class.</b> This will make the game crash sooner or later (probably sooner). </li>
+<li>
+<b>Never assign a <code>char *</code> to an <a class="el" href="class_r_p_g_1_1_d_string.html" title="Helper class representing a Delphi string. ">RPG::DString</a> pointer.</b> It will appear to work, but it will cause the game to crash with an "Invalid pointer operation" error when the RPG Maker tries to free the string. Also, do not store <a class="el" href="class_r_p_g_1_1_d_string_ptr.html" title="Mighty wrapper class for RPG::DString pointers, the string class for RPG Maker strings. ">RPG::DStringPtr</a> objects or <a class="el" href="class_r_p_g_1_1_d_string.html" title="Helper class representing a Delphi string. ">RPG::DString</a> pointers inside your plugin, but copy their content to a <code>std::string</code> instead, since <a class="el" href="class_r_p_g_1_1_d_string.html" title="Helper class representing a Delphi string. ">RPG::DString</a> objects may suddenly vanish. </li>
+<li>
+<b>Do not change the current directory.</b> </li>
+<li>
+<b>Do not do stuff every frame which takes longer than one millisecond.</b> This is alredy the very maximum. The less time you use, the better. If you need to do something which takes longer, do it in another thread. An exception are things which happen only rarely, like when a game is loaded or saved, or once when a battle starts, etc. If something should intentionally take longer than one frame, you could use the <a class="el" href="class_r_p_g_1_1_screen.html#a8ff0bfeb7fbc80d22e7f169fab8dc828">RPG::Screen::update</a> or <a class="el" href="namespace_r_p_g.html#a765f07f75f93a473e60e285c46fd5686" title="Updates the battle, including actions, ATB, animations, etc. ">RPG::updateBattle</a> function, respectively.</li>
+</ul>
+<h1><a class="anchor" id="guidelines_sec"></a>
+Guidelines</h1>
+<p>There is also a set of guidelines which you are strongly advised to follow, but there might be cases in which there is a better solution.</p>
+<h2><a class="anchor" id="event_comments"></a>
+Event comments</h2>
+<p>Comments in event scripts are a great way to let events scripts invoke functions of your plugin. Please follow the following guidelines: </p>
+<ul>
+<li>
+Use the following pattern for "special comments": <div class="fragment"><div class="line">@@command parameter1, parameter2, parameter3, ...</div>
+</div><!-- fragment -->  </li>
+<li>
+New-line characters should be generally ignored. </li>
+<li>
+The comment has to start with an <code>@@</code> sign, immediately followed by the command name. </li>
+<li>
+The command name is case-insensitive. </li>
+<li>
+There should be three possible types of parameters: <ul>
+<li>
+<b>Number:</b> A simple number. Can also use the decimal point and the scientific notation (e.g. <code>5.5e+6</code> for 5.5 million). </li>
+<li>
+<b>String:</b> A simple string. Must be put between doublequotes. To use a doublequote in a string, it is written twice (e.g. <code>He said ""hello"" and smiled</code>) </li>
+<li>
+<b>Token:</b> Some identifier. Tokens are not put between quotes, and they may not contain spaces (spaces are removed). Tokens are case-insensitive. They may be used for keywords.</li>
+</ul>
+There are special tokens for referencing variables and actor names: <ul>
+<li>
+<b>Variables:</b> To reference a variable, the user should be able to write a <code>V</code> character prior to the variable ID. This should also work with multiple levels of dereferencing. </li>
+<li>
+<b>Actor names:</b> To reference an actor's name, the user should be able to write a <code>N</code> character prior the the actor ID. This should also work together with <code>V</code>.</li>
+</ul>
+</li>
+<li>
+The command name and tokens should be case-insensitive. </li>
+<li>
+Always return <code>false</code> from <a class="el" href="group__callbacks.html#ga34d2df4a9ab63ace5683670869fe28d4">onComment</a> when you found a known command, regardless whether the parameters were valid or not. </li>
+<li>
+Always return <code>true</code> from <a class="el" href="group__callbacks.html#ga34d2df4a9ab63ace5683670869fe28d4">onComment</a> when you didn't find a known command, even though you may have found an <code>@@</code> sign at the beginning of the comment.</li>
+</ul>
+<p><b>Use the <code>parsedData</code> parameter of your <a class="el" href="group__callbacks.html#ga34d2df4a9ab63ace5683670869fe28d4">onComment</a> handler to get the comment data in an already nicely parsed form!</b> </p>
+<dl class="section note"><dt>Note</dt><dd>The maximum number of parameters is 100. The maximum number of characters per parameter (or command name) is 200. You have to parse the comment yourself if you need more.</dd></dl>
+<p>Example for a "special" comment: </p>
+<div class="fragment"><div class="line">@@FooBar 123, <span class="stringliteral">&quot;abc&quot;</span>, V55, VV66, N7, NV8, Nothing</div>
+</div><!-- fragment --><p> The command name is <code>foobar</code>.<br/>
+ The first parameter is numerical.<br/>
+ The second parameter is a string.<br/>
+ The third parameter is a numerical value read from variable #55.<br/>
+ The fourth parameter is a numerical value read from the variable whose ID is stored in variable #66.<br/>
+ The fifth parameter is a string, read from the name of actor #7.<br/>
+ The sixth parameter is a string, read from the name of the actor whose ID is stored in variable #8.<br/>
+ The seventh parameter is a token named <code>nothing</code>.</p>
+<p>You might advise users to download <a href="http://cherrytree.at/ultimate">RPG Maker 2009 Ultimate</a> if they need to enter comments longer than 4 lines.</p>
+<h2><a class="anchor" id="configuration"></a>
+Configuration</h2>
+<p>Many plugins need some kind of configuration. An important rule is: <b>Make as many things configurable as possible.</b></p>
+<p>If possible, store configuration in a <code>DynRPG.ini</code> file. Also, you should use your plugin's name which you get as parameter to the <a class="el" href="group__callbacks.html#ga6bfef5822ad3965700c61a3a8198235b">onStartup</a> function as section name. If you need several sections, you can append an underscore and an additional identifier to the name and use it as section name. This will prevent conflicts with other plugins while still combining all relevant configuration of a game in one file.</p>
+<p>You may use the <a class="el" href="namespace_r_p_g.html#ac5d74aacdf19b478634ce103c3d636c6" title="Returns a std::map containing configuration from an INI file. ">RPG::loadConfiguration</a> function as a convenient way to load configuration data to a <code>std::map&lt;std::string, std::string&gt;</code> in the <a class="el" href="group__callbacks.html#ga6bfef5822ad3965700c61a3a8198235b">onStartup</a> function.</p>
+<p>If you need more or more complex configuration, like XML data, use a filename containing your plugin's name.</p>
+<h2><a class="anchor" id="ingame_data"></a>
+In-game data</h2>
+<p>Your plugin may also use data which is changed in-game and needs to be preserved. Savestate-independent data (like a highscore) should be stored in the <code>DynRPG.ini</code> file together with configuration (use the WinAPI function <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms725501(v=vs.85).aspx">WritePrivateProfileString</a>).</p>
+<p>Savestate-related data (data which should be saved when the user saves the game and loaded when the use loads a saved game) should be saved using the function passed as <code>savePluginData</code> parameter to the <a class="el" href="group__callbacks.html#ga1279e3ef952454b563f56268f066fc17">onSaveGame</a> function. When the user loads the savestate again, you will get the same data back, in the parameters to the <a class="el" href="group__callbacks.html#gae52aca905b274e1ec086b39bdb236c7f">onLoadGame</a> function. Internally, this data is saved in a file called <code>SaveXX.dyn</code> where <code>XX</code> is the savestate ID.</p>
+<p>An example usage of savestate-related plugin data is shown here: </p>
+<div class="fragment"><div class="line"><span class="comment">// Plugin-related data</span></div>
+<div class="line"><span class="keywordtype">int</span> score;</div>
+<div class="line"><span class="keywordtype">int</span> level;</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// ...</span></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="group__callbacks.html#gae52aca905b274e1ec086b39bdb236c7f">onLoadGame</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, <span class="keywordtype">char</span> *data, <span class="keywordtype">int</span> length) {</div>
+<div class="line">               <span class="keywordflow">if</span>(length == <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>) * 2) { <span class="comment">// make sure it is valid data</span></div>
+<div class="line">                              <span class="keywordtype">int</span> *dataArray = (<span class="keywordtype">int</span> *)data;</div>
+<div class="line">                              score = dataArray[0];</div>
+<div class="line">                              level = dataArray[1];</div>
+<div class="line">               }</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="group__callbacks.html#ga1279e3ef952454b563f56268f066fc17">onSaveGame</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, <span class="keywordtype">void</span> __cdecl (*savePluginData)(<span class="keywordtype">char</span> *data, <span class="keywordtype">int</span> length)) {</div>
+<div class="line">               <span class="keywordtype">int</span>[2] dataArray;</div>
+<div class="line">               dataArray[0] = score;</div>
+<div class="line">               dataArray[1] = level;</div>
+<div class="line">               savePluginData((<span class="keywordtype">char</span> *)dataArray, <span class="keyword">sizeof</span>(dataArray));</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> (Of course, the same result could have been achieved by saving <code>score</code> and <code>level</code> in in-game variables which are automatically saved.)</p>
+<h2><a class="anchor" id="optimization"></a>
+Optimization</h2>
+<p><b>Time is a very important factor.</b> Especially with many plugins, it is important to use as little time as possible in your callback handlers, otherwise the game will eventually start lagging. Thus, try to optimize your code where you can. If possible, always test your plugin with several other plugins in a "real-life situation" to see whether your plugin slows the game down too much. Remember that most of your code will be executed a minimum of 60 times per second (many parts more often than that, for example <a class="el" href="group__callbacks.html#ga47d59f3d222f083c095f7ebbae86b779">onCheckEventVisibility</a> will be called 900 times per second if there are 150 events on the map).</p>
+<p>Here is a bit of advice how to optimize your plugin code: </p>
+<ul>
+<li>
+<b>Do not allocate and deallocate memory or objects over and over again.</b> Try to use static variables wherever possible. </li>
+<li>
+Try to use functions in the <a class="el" href="class_r_p_g_1_1_image.html" title="Used for image buffers (8 bit) ">RPG::Image</a> and <a class="el" href="class_r_p_g_1_1_canvas.html" title="Image buffer with 16 bit color depth, used as canvas for multiple 8-bit images ">RPG::Canvas</a> classes as little as possible. The slowest functions are <a class="el" href="class_r_p_g_1_1_image.html#a21ba9ccb9b4f660004b725106554438a" title="Draws text onto the image. ">RPG::Image::drawText</a> and <a class="el" href="class_r_p_g_1_1_canvas.html#a37bb56fb355bafaf1dcf93c0c0ab946c" title="Draws an RPG::Image or a part of it onto the canvas. ">RPG::Canvas::draw</a>. </li>
+<li>
+Try to cache text in an <a class="el" href="class_r_p_g_1_1_image.html" title="Used for image buffers (8 bit) ">RPG::Image</a> if possible, only update it if necessary. </li>
+<li>
+Try to cache as much with the same palette as possible on the same <a class="el" href="class_r_p_g_1_1_image.html" title="Used for image buffers (8 bit) ">RPG::Image</a> so that you don't have to call <a class="el" href="class_r_p_g_1_1_canvas.html#a37bb56fb355bafaf1dcf93c0c0ab946c" title="Draws an RPG::Image or a part of it onto the canvas. ">RPG::Canvas::draw</a> too often. </li>
+<li>
+If possible, don't use a transparent color in <a class="el" href="class_r_p_g_1_1_image.html#ab4576b2fdb7dc8eb26a752d1ba18e551" title="Copies pixels into the image. ">RPG::Image::draw</a> (set <code>maskColor</code> to <a class="el" href="namespace_r_p_g.html#a64e5271b05e1f6d4b12a3cd777f47b4ca2ff71939cb156a114857b37851058504" title="Used for RPG::Image::draw if no transparent color should be used. ">RPG::MASK_NONE</a>). The same rule applies for <a class="el" href="class_r_p_g_1_1_canvas.html#a37bb56fb355bafaf1dcf93c0c0ab946c" title="Draws an RPG::Image or a part of it onto the canvas. ">RPG::Canvas::draw</a>, see also <a class="el" href="class_r_p_g_1_1_image.html#a745122005d521e88f98f1c204bf954d3" title="If true, color 0 will be used as transparent color. ">RPG::Image::useMaskColor</a>. </li>
+<li>
+Try to skip frames if possible. This means: Try to update some things only every 2 or 3 frames if possible. </li>
+<li>
+If you are "WinAPI-literate", you can use the <a class="el" href="class_r_p_g_1_1_canvas.html#af3a3ee88dc1156944caad0283d61dda2" title="Underlying 16-bit bitmap. ">RPG::Canvas::bitmap</a> member and the <a class="el" href="class_r_p_g_1_1_d_bitmap.html#ac2858762fe9bb4a64de999ead16c077e" title="Returns the HBITMAP. ">RPG::DBitmap::getHBITMAP</a> and <a class="el" href="class_r_p_g_1_1_d_bitmap.html#af424b90a2c30746df0be9e1a1fdc75f3" title="Returns the HDC. ">RPG::DBitmap::getHDC</a> functions to get handles to the corresponding GDI objects and manipulate them directly. </li>
+<li>
+If you need to calculate something more complex (like a 3D image, etc.) you better do this in a new thread, cache its graphics and draw them to the screen only after calculation was finished, without letting the main thread wait.</li>
+</ul>
+*/
+
+
+
+
+
+/*! \page changelog Changelog
+<h1><a class="anchor" id="v0_31"></a>
+Version 0.31 Unofficial (2016/05)</h1>
+<ul>
+<li>Added RPG::Action::switchIdOn & RPG::Action::switchIdOn</li>
+<li>Updated RPG::Input (thanks bugmenot!)</li>
+<li>Updated RPG::Map::getTerrainId(int tileId) since that did not actually use the X & Y coordinates.</li>
+<li>Added RPG::Map::getEventAt(int x, int y)</li>
+<li>Added RPG::MapGraphics::chipsetImage</li>
+<li>Added RPG::SceneMenu::ScrollUpCountItem & RPG::SceneMenu::scrollUpCountSkill</li>
+<li>Added RPG::SystemGraphic::exFont</li>
+<li>Updated RPG::Window and various sub-classes, although only editing existing windows works well. Most functions have been marked as experimental for now.</li>
+<li>Added RPG::ScreenEffect</li>
+<li>Added RPG::Actor::getTwoWeaponAttack() & RPG::Actor::getTwoWeaponAgility</li>
+<li>Added RPG::Image::drawString(int x, int y, std::string text, int color) as a DynRPG 0.20+ version of drawText, since that function seems to be broken</li>
+<li>Added some custom RPG::Scene and RPG::MenuSubScreen definitions to prevent duplicate ID usage</li>
+<li>Added RPG::SceneFile::doesSaveExist(int saveId), RPG::SceneFile::saveFile(int saveId), RPG::SceneFile::loadFile(int saveId), RPG::SceneFile::loadFileUnpatch(), RPG::loadFileSimple(int saveId)</li>
+<li>Added RPG::getDiceRoll(int maxValue)</li>
+<li>Added RPG::goToTitle()</li>
+<li>Added RPG::quitGame()</li>
+<li>Added RPG::getAvgPartyAgl()</li>
+<li>Added RPG::getAvgMonsterPartyAgl()</li>
+<li>Added RPG::openMenu(RPG::MenuSubScreen screen, int heroId, int skillOrItemId) & RPG::OpenMenuUnpatch(). Both experimental so far (thanks bugmenot!)</li>
+<li>Added RPG::Actor::isSkillKnown(int skillId)</li>
+<li>Added RPG::Monster::transform(int monsterId)</li>
+<li>Added RPG::Screen::toggleFullScreen(bool fullScreen) & RPG::Screen::toggleLargeWindow(bool largeWindow)</li>
+<li>Added RPG::Inventory::isItemOwned(int id)</li>
+<li>Added RPG::Hero::act() & RPG::Event::act()</li>
+<li>Changed RPG::Character::onMap to RPG::Character::eventUpdatedThisFrame. (thanks EasyRPG team!)</li>
+<li>Changed RPG::Actor::autoBattle to RPG::Actor::aiControl to match common RPG Advocate translation</li>
+<li>Added resizeValue to DArray template to fix a resizing issue with conditions and attributes within RPG::DBClass, RPG::DBActor and RPG::DBMonster (and documented expected behavior)</li>
+<li>Updated various other bits of documentation</li>
+</ul>
+
+<h1><a class="anchor" id="v0_30"></a>
+Version 0.30 Unofficial (2015/01)</h1>
+(Not including enumerations. Review them in the classes as needed)
+<ul>
+<li>Added RPG::Animation and RPG::battleAnimations object.</li>
+<li>Added RPG::AnimationEffect </li>
+<li>Added RPG::AnimationFrame </li>
+<li>Added RPG::AnimationFrameCel </li>
+<li>Added RPG::Animation2 and RPG::battlerAnimations object.</li>
+<li>Added RPG::Animation2Pose </li>
+<li>Added RPG::Animation2Weapon </li>
+<li>Added RPG::AnimationCurrent, RPG::AnimationInBattle and RPG::currentBattleAnimation object.</li>
+<li>Added RPG::Item, RPG::AnimationWeapon and RPG::items object.</li>
+<li>Added RPG::BattleData and RPG::battleData object.</li>
+<li>Added RPG::BattleEvent </li>
+<li>Added RPG::BattleEventPage </li>
+<li>Added RPG::BattleEventTrigger </li>
+<li>Added RPG::BattleCommand</li>
+<li>Added RPG::DBMonster and RPG::dbMonsters object.</li>
+<li>Added RPG::DBMonsterGroup and RPG::dbMonsterGroups object.</li>
+<li>Added RPG::MonsterBehavior</li>
+<li>Added RPG::Skill, RPG::AnimationSkill  and RPG::skills object.</li>
+<li>Added RPG::Inventory and RPG::inventory object.</li>
+<li>Added RPG::Attribute and RPG::attributes object.</li>
+<li>Added RPG::Condition and RPG::conditions object.</li>
+<li>Added RPG::SceneMenu and RPG::menu object. </li>
+<li>Added RPG::SceneShop and RPG::shop object. </li>
+<li>Added RPG::SceneEnterName and RPG::enterName object. </li>
+<li>Added RPG::SceneTitle and RPG::title object.</li>
+<li>Added RPG::SceneFile and RPG::fileSaveLoad object.</li>
+<li>Added RPG::SceneGameOver and RPG::gameOver object.</li>
+<li>Added RPG::SceneDebug and RPG::debug object. (because I could)</li>
+<li>Added RPG::Teleport and RPG::teleportHero() function.</li>
+<li>Added RPG::Panorama and RPG::panorama object.</li>
+<li>Added RPG::vocabulary object.</li>
+<li>Added RPG::Vehicle (part of Character.h) as well as RPG::vehicleSkiff, RPG::vehicleShip, and RPG::vehicleAirship objects </li>
+<li>Added RPG::Window</li>
+<li>Added RPG::WindowMessage and RPG::winMessage object.</li>
+<li>Added RPG::WindowMenuTarget, RPG::WindowMenuItem, RPG::WindowMenuSkill, RPG::WindowMenuEquip, RPG::WindowMenuEnd, RPG::WindowMenuStatus, RPG::WindowMenuOrder, RPG::WindowSaveFile</li>
+<li>Updated RPG::Character, RPG::Event, RPG::Hero</li>
+<li>Updated RPG::Actor </li>
+<li>Updated RPG::DBActor & added RPG::SkillProgression </li>
+<li>Updated RPG::DBSystem </li>
+<li>Updated RPG::BattleSettings </li>
+<li>Updated RPG::Character and RPG::Hero </li>
+<li>Updated RPG::Map </li>
+<li>Functions added: RPG::getDiceRoll(int), RPG::goToTitle(), RPG::getAvgPartyAgl(), RPG::getAvgMonsterPartyAgl(), RPG::addItemToInventory(), RPG::flashBattler(Actor, int, int, int, int, int), RPG::getLowerLayerTileId(Map, int, int), RPG::getUpperLayerTileId(Map, int, int), RPG::getTerrainId(Map, int)
+<li>and more... (to be documented & added)</li>
+</ul>
+
+<h1><a class="anchor" id="v0_20"></a>
+Version 0.20 (2013/12/31)</h1>
+<ul>
+<li>
+On-the-fly patching using IPS files or quick patches in DynRPG.ini added. See the corresponding <a class="el" href="patch.html#onthefly_ips">On-the-fly IPS patches</a> and <a class="el" href="patch.html#quickpatches">Quickpatches</a> sections. </li>
+<li>
+Partial Hyper Patcher 2 picture limit changing support removed, it never worked correctly in the first place. </li>
+<li>
+<code>AUTO_DLLMAIN</code> define removed, now a <code>DllMain</code> function is always inserted by default, use <code>#define CUSTOM_DLLMAIN</code> to prevent this behaviour. </li>
+<li>
+The automatic <code>DllMain</code> function now stores the plugin's instance handle in the global variable <code>hInstance</code> (only if <code>CUSTOM_DLLMAIN</code> is not defined). </li>
+<li>
+<b>Critical bug fixed:</b> Game could hang when loading a game after a new plugin has been added due to an infinite loop bug during <code>Save</code>??.dyn file parsing. </li>
+<li>
+<b>Critical bug fixed:</b> Transparency of events (including the hero) behaved weirdly (changed depending on Y position) and was thus unusable. This bug also slowed down the event rendering a lot. </li>
+<li>
+<b>Bug fixed:</b> Class <a class="el" href="class_r_p_g_1_1_d_list.html" title="Class representing Delphi&#39;s TList (without resizing for the moment) ">RPG::DList</a> had members <code>count</code> and <code>items</code> swapped. Because DynRPG classes need to have the same memory layout as the RPG Maker's internal Delphi counterparts, all accesses of <a class="el" href="class_r_p_g_1_1_d_list.html" title="Class representing Delphi&#39;s TList (without resizing for the moment) ">RPG::DList</a> classes (most notably <a class="el" href="group__game__objects.html#ga854ff7a467102ae957f43839360d72fc" title="Array of monsters in the current monster group. ">RPG::monsters</a>) crashed the game. </li>
+<li>
+<b>Bug fixed:</b> <a class="el" href="class_r_p_g_1_1_catalog.html#ad82b1933f4419a1058b015914cfe253f" title="Returns the number of items in the list. ">RPG::Catalog::count</a> didn't work (tried to access <code>list.count</code> where it should have been <code>list.list-&gt;count</code>, causing a compiler error.) </li>
+<li>
+<b>Bug fixed:</b> <a class="el" href="class_r_p_g_1_1_image.html#a8527d9c8677ff4b062ed1ad2d24eeb5d" title="Copies an RPG::Image with all its attributes to another. ">RPG::Image::copy</a> was broken (didn't set the new image size but silently leaked an <a class="el" href="class_r_p_g_1_1_image.html" title="Used for image buffers (8 bit) ">RPG::Image</a> instance instead). </li>
+<li>
+<b>Bug fixed:</b> <a class="el" href="class_r_p_g_1_1_actor.html" title="Used for the data of actors which can be changed in-game. ">RPG::Actor</a> and <a class="el" href="class_r_p_g_1_1_system.html" title="Used for system data which can change in-game. ">RPG::System</a> methods sometimes returned wrong strings (i.e. for <a class="el" href="class_r_p_g_1_1_battler.html#a0ce50a81b85adad31fda38e1715266a3" title="Returns the name of the actor or monster. ">RPG::Actor::getName</a>) if they encountered a default value in the database. </li>
+<li>
+<b>Bug fixed:</b> Due to missing string termination, the <a class="el" href="class_r_p_g_1_1_parsed_comment_parameter.html#a2b6b7fd31ede0356d1aa5d26481e0303" title="Text value (if type is RPG::PARAM_STRING or RPG::PARAM_TOKEN) ">RPG::ParsedCommentParameter::text</a> member of a comment command's last parameter often had garbage appended at the end. </li>
+<li>
+<b>Bug fixed:</b> Negative numbers in comment command parameters were incorrectly parsed as <a class="el" href="namespace_r_p_g.html#afce2acee93d2a8a4980b47eb842692c5ae1290f3a97401b7330c1fa2f35758873" title="The parameter is a token. ">RPG::PARAM_TOKEN</a> instead of <a class="el" href="namespace_r_p_g.html#afce2acee93d2a8a4980b47eb842692c5a562b9d9526eb5db01e11109363f78d15" title="The parameter is a number. ">RPG::PARAM_NUMBER</a>. </li>
+<li>
+<b>Bug fixed:</b> <a class="el" href="class_r_p_g_1_1_event.html#af5fd0565f182b2f78b9d3d81e07f0b1c" title="Checks whether a certain event page exists. ">RPG::Event::doesEventPageExist</a> was broken. </li>
+<li>
+<b>Bug fixed:</b> <a class="el" href="namespace_r_p_g.html#ae512df5a6928c2d02bff7d573c768b20" title="Allows transparent windows in outside of the map too. ">RPG::transparentWindowsEverywhere</a> was broken. </li>
+<li>
+Modified library to work with newer GCC compilers. Now GCC version 4.7.1 is required. (For tech-guys: Why the hell can GCC now use the <code>ESP</code> register for an inline asm parameter with the <code>"g"</code> constraint?!) </li>
+<li>
+<b>Bug fixed:</b> The "cross-map" pictures #1001 to #2000 were not erased when a new game was started. </li>
+<li>
+Fixed an RPG Maker bug which caused the HP display in the save menu to be misaligned when the HP had 4 digits. </li>
+<li>
+Removed the longer skill/item window visibility "improvement" for most scenarious because it turned out to disrupt battle event processing. Only the info window shown when a monster executes a skill is still shown longer, but now only for 50 frames (old DynRPG used 90 frames which turned out to be annoyingly long, original RPG Maker used 30 frames which I think is too short to be readable). </li>
+<li>
+Fixed an RPG Maker bug which would cause the game to crash when a "Link to Event" battle command was used right after the item menu has been opened and then closed with ESC. </li>
+<li>
+Added <a class="el" href="class_r_p_g_1_1_actor.html#acbcb7302a4894224a7977c1198da9f15" title="Can the actor hold two weapons? ">RPG::Actor::twoWeapons</a>, RPG::Actor::lockEquipment, <a class="el" href="class_r_p_g_1_1_actor.html#a6853ec7d69ad4ea7b526966ac47ff027" title="Is the battle AI activated for this actor? ">RPG::Actor::autoBattle</a> and <a class="el" href="class_r_p_g_1_1_actor.html#a847f32b790eb77b923862ee8b7c9b980" title="Is the &quot;mighty guard&quot; mode activated for this actor? ">RPG::Actor::mightyGuard</a> fields. </li>
+<li>
+<a class="el" href="class_r_p_g_1_1_system.html#a634af3b1349307851309df6fbd59cf5a" title="Background music which should be restored after the vehicle has been exited. ">RPG::System::pedestrianBGM</a> added. Funny name, I know. </li>
+<li>
+The maximum number of plugins has been raised from 30 to 50. </li>
+<li>
+<b>Bug fixed:</b> Under some circumstances, the game would crash during event command execution. It's hard to describe the exact triggers, but they included "Erase event" commands in common events, loading a game which was saved while a "Wait until key press" was active and some other, rarer situations. </li>
+<li>
+Fixed two RPG Maker bugs with "Small window" mode in battle: The action, item and skill selection windows had an empty line at the bottom even though there would have been enough space. This was especially confusing for the battle action window because it looked like the actor had only 3 commands available. Also, the selection cursor for "Show choice" windows in battle was not correctly aligned with the choice texts. </li>
+<li>
+Removed the "higher action window" workaround for the small battle window mode because a real fix has been implemented now. </li>
+<li>
+<b>Bug fixed:</b> DynRPG would sometimes refuse to load a plugin with no valid reason, depending on the constellation of files in the DynPlugins directory. </li>
+<li>
+Fixed an RPG Maker bug which would crash the game with a "Division
+                              by zero" error on certain edge cases of picture operations (especially pictures with small zoom level partially outside the screen). This bug also affected <a class="el" href="class_r_p_g_1_1_canvas.html#ab651a89edf447624a84e948b78063d67" title="Draws an RPG::Image or a part of it onto the canvas, centered to a certain point, and zooms it as spe...">RPG::Canvas::drawCenteredZoomed</a>. </li>
+<li>
+<b>Bug fixed:</b> The enemy attack sound was also played if the enemy wasn't doing anything at all. Additionally, sometimes sleeping or paralyzed enemies would even flash white and the "Punch A" sound would play. </li>
+<li>
+Fixed an RPG Maker bug which caused enemies to be flashed even when they executed the "Do nothing" action. </li>
+<li>
+The <a class="el" href="group__callbacks.html#gab74a93460c2597fd92043b32327be635">onDoBattlerAction</a> callback has now a second parameter <code>firstTry</code> which will be <code>true</code> only at the first attempt of executing the action. This allows plugins to execute code only once per action. Before, the <a class="el" href="group__callbacks.html#gab74a93460c2597fd92043b32327be635">onDoBattlerAction</a> callback could be called multiple times without a way to distinguish between a new action and a new attempt to execute the same action. Because the information about an action's success has to be stored somewhere, the RPG::Action::userData2 member has been repurposed and is now called <a class="el" href="class_r_p_g_1_1_action.html#aff8158fdb1931b70a076b59fbdbbbec7" title="true if the last try to execute the action failed ">RPG::Action::retrying</a>. Old plugin DLLs which are unaware of the new <code>firstTry</code> parameter will still work, but if any old plugin tries to use the RPG::Action::userData2 member it will cause problems. However I've got the impression that it's unlikely that there is such a plugin out there. </li>
+<li>
+The member RPG::Action::userData1 has been removed from public access because I realized it's not a good idea to have generic fields without defined purpose, as this could easily cause conflicts between different plugins.</li>
+</ul>
+<h1><a class="anchor" id="v0_14a"></a>
+Version 0.14a (2012/02/15)</h1>
+<p>Only the SDK was updated. The patch still shows version 0.13b. </p>
+<ul>
+<li>
+RPG::Character::mapID was renamed to <a class="el" href="class_r_p_g_1_1_character.html#acb22dfed42c18d60a74df68d74395d35" title="Map ID (only relevant for vehicles which are not supported yet) ">RPG::Character::mapId</a> to follow the naming convention used at all other places. </li>
+<li>
+The documentation now doesn't show inherited members anymore unless you click <code>List of all members</code>. </li>
+<li>
+<b>Bug fixed:</b> <a class="el" href="class_r_p_g_1_1_map.html#af7cac99b6f26b31f6e5e657ed7b52c24" title="Returns the width of the current map. ">RPG::Map::getWidth</a> and <a class="el" href="class_r_p_g_1_1_map.html#a6e8555a51ba9bf494ae95a33381ad41b" title="Returns the height of the current map. ">RPG::Map::getHeight</a> were returning nonsense due to a typo (again).</li>
+</ul>
+<h1><a class="anchor" id="v0_14"></a>
+Version 0.14 (2012/02/15)</h1>
+<p>Only the SDK was updated. The patch still shows version 0.13b. </p>
+<ul>
+<li>
+<a class="el" href="namespace_r_p_g.html#a8f800d514ef09bf4883839b8fc309073" title="The test play flag. ">RPG::isBattleTest</a> and <a class="el" href="namespace_r_p_g.html#a287a8509f52cc7c82b4d83cf1b4e5baf" title="Should the title screen be shown (according to the &quot;Show Title&quot; button in the RPG Maker)...">RPG::showTitle</a> added. </li>
+<li>
+<b>Critical bug fixed:</b> The big bugfix done in version 0.13 created new bugs because I forgot to update a few things in the changed <code>asm</code> statements. Sorry for that. </li>
+<li>
+<b>Bug fixed:</b> I had confused the parameters of <a class="el" href="class_r_p_g_1_1_character.html#add6bcce58af79214c8fce50ff4ce2fc7" title="Moves a character. ">RPG::Character::move</a>. </li>
+<li>
+<b>Bug fixed:</b> Nasty typo in <a class="el" href="namespace_r_p_g.html#adcd9c59a1b15e7b20ba6f29c43ef36cd" title="Encodes a numerical value for use with RPG::Character::move. ">RPG::encode</a> caused it to produce garbage. </li>
+<li>
+Type of <code>message</code> parameter of <a class="el" href="namespace_r_p_g.html#a5eaf0925dc7a98e4ba5953ad6dc30dd9" title="Shows an error message and asks whether the game should be continued or not. ">RPG::showError</a> changed from <code>char *</code> to <code>std::string</code>. </li>
+<li>
+Type of <code>data</code> parameter of <a class="el" href="class_r_p_g_1_1_character.html#add6bcce58af79214c8fce50ff4ce2fc7" title="Moves a character. ">RPG::Character::move</a> changed from <code>char *</code> to <code>const char*</code>.</li>
+</ul>
+<h1><a class="anchor" id="v0_13b"></a>
+Version 0.13b (2012/02/15)</h1>
+<ul>
+<li>
+<b>Bug fixed:</b> If version 0.13a was patched over version 0.13, the game wouldn't start anymore. Patching 0.13b over 0.13a should fix the problem.</li>
+</ul>
+<h1><a class="anchor" id="v0_13a"></a>
+Version 0.13a (2012/02/13)</h1>
+<ul>
+<li>
+<b>Bug fixed:</b> Due to a silly typo the game crashed as soon as you would try to buy something in a shop.</li>
+</ul>
+<h1><a class="anchor" id="v0_13"></a>
+Version 0.13 (2012/02/11)</h1>
+<ul>
+<li>
+<b>Critical bug fixed:</b> The <code>asm</code> statements in the SDK didn't properly tell the compiler that the <code>eax</code>, <code>edx</code> and <code>ecx</code> registers may be changed even though they often aren't used as output registers. This could randomly lead to faulty code (depending on the surrounding code and the compiler options) which would then result in strange crashes. <b>Please recompile all modules of your plugin with the new version of the header files and the library!</b> </li>
+<li>
+<b>Bug fixed:</b> The <a class="el" href="class_r_p_g_1_1_parsed_comment_data.html#ad3aeab64e0bd63168ee542b31be7107a" title="Command name (empty if it&#39;s no &quot;special&quot; comment at all) ">RPG::ParsedCommentData::command</a> string wasn't terminated properly. </li>
+<li>
+I realized that Code::Blocks is far better than Dev-C++ and changed the <a class="el" href="getting_started.html">Getting Started</a> page accordingly. </li>
+<li>
+The <a class="el" href="namespace_r_p_g.html#a5eaf0925dc7a98e4ba5953ad6dc30dd9" title="Shows an error message and asks whether the game should be continued or not. ">RPG::showError</a> function was added.</li>
+</ul>
+<h1><a class="anchor" id="v0_12"></a>
+Version 0.12 (2012/02/07)</h1>
+<ul>
+<li>
+<a class="el" href="class_r_p_g_1_1_canvas.html#a8830e62e6b1b41c02e2ddffa8ac18555" title="Draws an RPG::Image or a part of it onto the canvas, stretched to a certain rectangle. ">RPG::Canvas::drawStretched</a> and <a class="el" href="class_r_p_g_1_1_canvas.html#ab651a89edf447624a84e948b78063d67" title="Draws an RPG::Image or a part of it onto the canvas, centered to a certain point, and zooms it as spe...">RPG::Canvas::drawCenteredZoomed</a> added. </li>
+<li>
+<b>Bug fixed:</b> The DynRPG Patch caused the battle status window to be always fully opaque in battle layout "alternative", even if "transparent" was enabled. If the latter was the case, additionally the ATB bar wasn't shown. </li>
+<li>
+Added "Powered by" on top of the DynRPG logo.</li>
+</ul>
+<h1><a class="anchor" id="v0_11"></a>
+Version 0.11 (2012/02/06)</h1>
+<p>Only the SDK was updated. The patch still shows version 0.10. </p>
+<ul>
+<li>
+<a class="el" href="class_r_p_g_1_1_battle_settings.html" title="Used for battle settings (layout, etc.) ">RPG::BattleSettings</a> class and <a class="el" href="group__game__objects.html#ga65d90a2c967669602fcd1acd5dba5aac" title="Battle settings. ">RPG::battleSettings</a> object added.</li>
+</ul>
+<h1><a class="anchor" id="v0_10"></a>
+Version 0.10 (2012/02/05)</h1>
+<p>This is the first release. I started this project on 2012/01/23, by the way. Just in case somebody wants to know. </p>
+</ul>
+*/
+
+
+
+
+
+/*! \page getting_started Getting Started
+<dl class="section note"><dt>Note</dt><dd>This page describes how to get started with the <b>SDK</b>. If you want to know how to get started with the <b>Patch</b>, see <a class="el" href="patch.html">The Patch</a>.</dd></dl>
+<h1><a class="anchor" id="sdk_preconditions"></a>
+The right C++ Compiler</h1>
+<p>The DynRPG SDK works on a very low level. This means, small differences between compilers can break everything. The DynRPG was developed and tested using <a href="http://gcc.gnu.org/">GCC</a>, thus you should use GCC too. This DynRPG version only works with GCC version 4.7.1 and higher. You might use the <a href="http://www.codeblocks.org">Code::Blocks</a> IDE, for example.</p>
+<h1><a class="anchor" id="sdk_installation"></a>
+Installation</h1>
+<p>Installing the SDK is easy - all you need to do is copying the files from the <code>include</code> and <code>lib</code> directories of the download archive into the corresponding folders of your compiler environment.</p>
+<h1><a class="anchor" id="sdk_header"></a>
+Header and library</h1>
+<p>In order to use the DynRPG in your C++ project, you need to include <code>DynRPG/DynRPG.h</code>: </p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;DynRPG/DynRPG.h&gt;</span></div>
+</div><!-- fragment --> <dl class="section warning"><dt>Warning</dt><dd>If you use more than one code module, you need to put the following line before the include statement in all modules except one: <div class="fragment"><div class="line"><span class="preprocessor">#define NOT_MAIN_MODULE</span></div>
+</div><!-- fragment --></dd></dl>
+<p>DynRPG automatically creates a <code>DllMain</code> function for you which stores the plugin's instance handle in a global variable called <code>hInstance</code>. You can suppress this behaviour by defining <code>CUSTOM_DLLMAIN</code> before including the header file.</p>
+<p>The header file automatically includes the headers <code>string</code>, <code>map</code>, <code>windows.h</code> because they are needed for the declarations.</p>
+<dl class="section warning"><dt>Warning</dt><dd>Since the RPG Maker is Non-Unicode, your plugin should be Non-Unicode too!</dd></dl>
+<p>You also need to add the library <code>DynRPG</code> (<code>libDynRPG.a</code>) to your project. See your IDE's help file if you don't know how to do this. (Normally you need to add the parameter <code>-lDynRPG</code> to the linker's command line.)</p>
+<h1><a class="anchor" id="sdk_callbacks"></a>
+Callbacks</h1>
+<p>Together with the <a class="el" href="getting_started.html#sdk_game_objects">Game objects</a>, callbacks are important ways to interface your plugin with the game. Callbacks are functions which you can define in your plugin. On certain events in the game (for example, a picture is drawn - see <a class="el" href="group__callbacks.html#ga1e8ef8c8c5006ef05ff76be4936b5fe2">onDrawPicture</a>) certain callbacks will be called by DynRPG. Callbacks either return <code>void</code> or <code>bool</code>. If you return <code>false</code> in <code>bool</code> callbacks, this will prevent other plugins from receiveing the same notification and sometimes it will also prevent some event from happening in the game. For example, if you return <code>false</code> from your <code>onDrawPicture</code> callback, the picture won't be drawn and other plugins (after yours) won't receive <code>onDrawPicture</code> for that picture.</p>
+<p>You only need to define those callback functions which you actually use.</p>
+<p>For a list of available callbacks, click here: <a class="el" href="group__callbacks.html">Callbacks</a></p>
+<h1><a class="anchor" id="sdk_game_objects"></a>
+Game objects</h1>
+<p>The game objects are the second important way to interface your plugin with the game. Most of the <a class="el" href="namespace_r_p_g.html" title="The one and only namespace in which all DynRPG classes, variables and functions reside, except for callbacks. ">RPG</a> classes are tied to a game object and should only be used through it. For example, the game object tied to <a class="el" href="class_r_p_g_1_1_actor.html" title="Used for the data of actors which can be changed in-game. ">RPG::Actor</a> is called <a class="el" href="group__game__objects.html#gaf7c74183fc737af4a8f2ea23acb2c7c9" title="Array of actors from the database, used for properties which can change in-game. ">RPG::actors</a>.</p>
+<p>Game objects represent certain "things" in the game. For example, the <a class="el" href="group__game__objects.html#ga954a17b75271b2850538d5fc9feb84d9" title="The current map environment (camera, events, etc.) ">RPG::map</a> object (the corresponding class is called <a class="el" href="class_r_p_g_1_1_map.html" title="Used for accessing and manipulating the current map environment. ">RPG::Map</a>) represents the current map. So, to get the width of the current map, you may call the <a class="el" href="class_r_p_g_1_1_map.html#af7cac99b6f26b31f6e5e657ed7b52c24" title="Returns the width of the current map. ">RPG::Map::getWidth</a> function like this: </p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> mapWidth = <a class="code" href="group__game__objects.html#ga954a17b75271b2850538d5fc9feb84d9">RPG::map</a>-&gt;<a class="code" href="class_r_p_g_1_1_map.html#af7cac99b6f26b31f6e5e657ed7b52c24">getWidth</a>();</div>
+</div><!-- fragment --><p>For a list of available game objects, click here: <a class="el" href="group__game__objects.html">Game objects</a></p>
+<h1><a class="anchor" id="sdk_hello_world"></a>
+Hello World - Our first plugin</h1>
+<p>It's time to create our first plugin. It's going to be <em>really</em> simple - all it is going to do is displaying a message box asking whether we really want to play before actually starting the game. We'll call it <code>are_you_sure</code>.</p>
+<p>First, create an RPG Maker 2003 project to test the plugin and apply <a class="el" href="patch.html">The Patch</a> to it. Then, create a new C++ project in your favorite IDE and select <b>DLL</b> as project type. It might be convinient to store the source code in a subfolder of the <code>DynPlugins</code> directory of your test project and set the compiler output directory to the <code>DynPlugins</code> directory.</p>
+<dl class="section warning"><dt>Warning</dt><dd>If you are using Windows Vista or Windows 7, make sure you have write access to your project directory! You better put it into your <code>Documents</code> folder. Otherwise make sure you run both RPG Maker 2003 and your IDE (e.g. Code::Blocks) with administrator privileges!</dd></dl>
+<p>Okay, I'll be give a bit more step-by-step instructions now - of course you can do it differently if you know how, but this should help people who are not familiar with Code::Blocks to get started: </p>
+<ol>
+<li>
+Download Code::Blocks <a href="http://www.codeblocks.org/downloads/binaries">here</a>. Make sure you select the "bigger" package which contains MinGW which includes the GNU C++ compiler (which we need). </li>
+<li>
+Install Code::Blocks. It's okay if you don't change the default feature selection. Please remember or write down to path you are installing Code::Blocks to (e.g. <code>C:\Program Files (x86)\CodeBlocks</code>)! </li>
+<li>
+Open the path where you installed Code::Blocks in Windows Explorer. </li>
+<li>
+There should be a subfolder called <code>MinGW</code>. Open it. There should be folders called <code>include</code> and <code>lib</code> inside, among others. </li>
+<li>
+Copy the <code>include</code> and <code>lib</code> folders from your DynRPG download (in the <code>sdk</code> subfolder) into the <code>MinGW</code> folder. Confirm merging the folders. </li>
+<li>
+Start Code::Blocks. </li>
+<li>
+Click <code>Create new project...</code>. </li>
+<li>
+Select <code>Dynamic Link Library</code> and click <code>Go</code>. </li>
+<li>
+Click <code>Next</code>. </li>
+<li>
+Enter the name of your plugin (here: <code>are_you_sure</code>). To avoid problems later, do not use spaces. </li>
+<li>
+In the second field, select the <code>DynPlugins</code> folder of your RM2k3 test project. The actual filename of the Code::Blocks project file (shown in the last field) should be similar to this: <code>C:\\Users\\</code><em><code>My Username</code></em><code>\\Documents\\</code><em><code>My Test Project</code></em><code>\DynPlugins\are_you_sure\are_you_sure.cbp</code> </li>
+<li>
+Click <code>Next</code>. </li>
+<li>
+Make sure <code>GNU GCC Compiler</code> is selected in the first field. </li>
+<li>
+Uncheck <code>Create "Debug" configuration</code>. <dl class="section note"><dt>Note</dt><dd>Of course, if you know how you use them, you may create debug builds too. As said, these step-by-step instructions are for beginners. </dd></dl>
+</li>
+<li>
+Change the <code>Output dir.</code> at the <code>"Release" options</code> to <code>..\\</code> (two dots and then a backslash). This will create the plugin DLL directly in the <code>DynRPG</code> folder if you have followed step 11 correctly. </li>
+<li>
+Click <code>Finish</code>. </li>
+<li>
+Open the <code>Project</code> menu, select <code>Build options...</code>. </li>
+<li>
+Go to the <code>Linker settings</code> tab. </li>
+<li>
+At the <code>Link libraries</code> section, click <code>Add</code>. </li>
+<li>
+Enter <code>DynRPG</code> and click <code>OK</code>. </li>
+<li>
+Go to the pre/post build steps tab. </li>
+<li>
+Enter the following line into the bottom box: <code>cmd /c del ..*.a &amp; del ..*.def</code> </li>
+<li>
+Click <code>OK</code> again. </li>
+<li>
+Open the <code>Project</code> menu, select <code>Set programs' arguments...</code>. </li>
+<li>
+Click the button at the right end of the <code>Host application</code> field and select your game's <code>RPG_RT.exe</code> file. This will allow you to use the <code>Run</code> and <code>Build and run</code> buttons in Code::Blocks to run your game. </li>
+<li>
+If you want the game to automatically start in windowed test play mode when you start it from Code::Blocks, put <code>TestPlay ShowTitle Window</code> into the <code>Program arguments</code> field. </li>
+<li>
+Click <code>OK</code>. </li>
+<li>
+Now, Code::Blocks has created two files for you: <code>main.cpp</code> (find it in the <code>Sources</code> folder of the tree view) and <code>main.h</code> (find it in the <code>Headers</code> folder of the tree view). Delete the contents of both of them. In our examples, we don't need the <code>main.h</code> file at all, you may right-click it and choose <code>Remove file from project</code> if you want. In <code>main.cpp</code>, copy the code provided below:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;DynRPG/DynRPG.h&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">// Handler called on startup</span></div>
+<div class="line"><span class="keywordtype">bool</span> <a class="code" href="group__callbacks.html#ga6bfef5822ad3965700c61a3a8198235b">onStartup</a>(<span class="keywordtype">char</span> *pluginName) {</div>
+<div class="line">               <span class="keywordflow">if</span>(MessageBox(</div>
+<div class="line">                              nullptr, <span class="comment">// We don&#39;t need a window handle</span></div>
+<div class="line">                              <span class="stringliteral">&quot;This is such a haaaaard game. Are you SURE you want to play it now?&quot;</span>, <span class="comment">// Text</span></div>
+<div class="line">                              <span class="stringliteral">&quot;The Are You Sure Plugin&quot;</span>, <span class="comment">// Title</span></div>
+<div class="line">                              MB_YESNO | MB_ICONQUESTION <span class="comment">// Flags (yes/no buttons and question icon)</span></div>
+<div class="line">               ) == IDYES) {</div>
+<div class="line">                              <span class="comment">// The user clicked &quot;Yes&quot;, we may continue</span></div>
+<div class="line">                              <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">               } <span class="keywordflow">else</span> {</div>
+<div class="line">                              <span class="comment">// The user clicked &quot;No&quot;, so we need to abort</span></div>
+<div class="line">                              <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">               }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Okay, that's really simple. It uses Windows' <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms645505%28v=vs.85%29.aspx">MessageBox</a> function to display a message. If the user clicked "Yes", the game will continue, otherwise it will not start.</p>
+<p>This simple plugin uses the <a class="el" href="group__callbacks.html#ga6bfef5822ad3965700c61a3a8198235b">onStartup</a> callback. This callback is called before the game starts. If you return <code>false</code> in this callback, the game won't start. (You only need to define those callbacks which you want to use.)</p>
+<p>So, if you compile this plugin, make sure the DLL file (<code>are_you_sure.dll</code>) was put into the <code>DynPlugins</code> directory and your test project was successfully patched using <a class="el" href="patch.html">The Patch</a>, you should see the DynRPG logo when you start the game, followed by our message box.</p>
+<p>By the way, the DynRPG logo cannot be removed. Yes, that's intentional.</p>
+<h1><a class="anchor" id="sdk_condition_icons"></a>
+Condition Icons - More Advanced</h1>
+<p>Enough of nonsense. Now we are going to create something useful. We are going to create a plugin which displays the conditions of actors and monsters over their head, as icons.</p>
+<p>These are its features: </p>
+<ul>
+<li>
+It will read the filenames of the icons from the configuration file. </li>
+<li>
+It will load the files on demand (when they are needed the first time). </li>
+<li>
+It will display them over the head of the battlers, horizontally centered, vertically aligned at the bottom (in case the images don't have the same height). </li>
+<li>
+It will disable the default info window which is shown on target selection so that we don't show the conditions twice.</li>
+</ul>
+<p>First, in the <a class="el" href="group__callbacks.html#ga6bfef5822ad3965700c61a3a8198235b">onStartup</a> handler, we will load the configuration and store it in a global variable called <code>configuration</code>.</p>
+<p>Then, in the <a class="el" href="group__callbacks.html#ga829eadd14d35be031a4d4050c923ec1f">onBattlerDrawn</a> handler, we will iterate through all conditions the battler has, check if the images we need are loaded, if not, load them. We will also calculate the total width of all icons for that battler here. Then we will draw all the icons and finally clear the <a class="el" href="class_r_p_g_1_1_battler.html#ad21309b7603cb479642232a913e3d41b" title="Conditions which will be displayed in the info window (see details) ">RPG::Battler::displayedConditions</a> array so that no info window is displayed when the target selection is active.</p>
+<p>Finally, in the <a class="el" href="group__callbacks.html#gadebb361e9c302af3bee3958768be2596">onExit</a> handler, we will unload all images.</p>
+<p>This is the content of our <code>condition_icons.cpp</code> file: </p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;DynRPG/DynRPG.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;sstream&gt;</span> <span class="comment">// For std::stringstream</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">// We store the configuration here</span></div>
+<div class="line">std::map&lt;std::string, std::string&gt; configuration;</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// We store the images of the conditions here</span></div>
+<div class="line">std::map&lt;int, RPG::Image *&gt; images;</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// This handler is called on startup</span></div>
+<div class="line"><span class="keywordtype">bool</span> <a class="code" href="group__callbacks.html#ga6bfef5822ad3965700c61a3a8198235b">onStartup</a>(<span class="keywordtype">char</span> *pluginName) {</div>
+<div class="line">               <span class="comment">// We load the configuration from the DynRPG.ini file here</span></div>
+<div class="line">               configuration = <a class="code" href="namespace_r_p_g.html#ac5d74aacdf19b478634ce103c3d636c6">RPG::loadConfiguration</a>(pluginName);</div>
+<div class="line">               <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// Don&#39;t forget to return true so that the start of the game will continue!</span></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// This handler is called after a battler is drawn</span></div>
+<div class="line"><span class="keywordtype">bool</span> <a class="code" href="group__callbacks.html#ga829eadd14d35be031a4d4050c923ec1f">onBattlerDrawn</a>(<a class="code" href="class_r_p_g_1_1_battler.html">RPG::Battler</a> *battler, <span class="keywordtype">bool</span> isMonster, <span class="keywordtype">int</span> <span class="keywordtype">id</span>) {</div>
+<div class="line">               <span class="keywordtype">int</span> totalWidth = 0; <span class="comment">// We store the total width of the condition icons here</span></div>
+<div class="line"></div>
+<div class="line">               <span class="comment">// We loop through all the elements of the battler&#39;s &quot;conditions&quot; array here</span></div>
+<div class="line">               <span class="comment">// Note that the &quot;condition&quot; array is one-based, thus we start at index 1</span></div>
+<div class="line">               <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 1; i &lt;= battler-&gt;<a class="code" href="class_r_p_g_1_1_battler.html#aa2e8d085d0500808bb96928bbef6093e">conditions</a>.<a class="code" href="class_r_p_g_1_1_d_array.html#a85cce7fc2d1aa3ff61a0d841ff729cae">size</a>; i++) {</div>
+<div class="line">                              <span class="comment">// If the battler has the condition (see documentation)...</span></div>
+<div class="line">                              <span class="keywordflow">if</span>(battler-&gt;<a class="code" href="class_r_p_g_1_1_battler.html#aa2e8d085d0500808bb96928bbef6093e">conditions</a>[i] &gt; 0) {</div>
+<div class="line">                                             <span class="comment">// If the image isn&#39;t loaded yet...</span></div>
+<div class="line">                                             <span class="keywordflow">if</span>(!images[i]) {</div>
+<div class="line">                                                            <span class="comment">// First, we create an RPG::Image object</span></div>
+<div class="line">                                                            images[i] = <a class="code" href="class_r_p_g_1_1_image.html#a7cae7d4bd7869b74534f0b78a42fdd84">RPG::Image::create</a>();</div>
+<div class="line"></div>
+<div class="line">                                                            <span class="comment">// Yes, we want to use the transparent color</span></div>
+<div class="line">                                                            images[i]-&gt;useMaskColor = <span class="keyword">true</span>;</div>
+<div class="line"></div>
+<div class="line">                                                            <span class="comment">// Now, we put the key name for the configuration entry together</span></div>
+<div class="line">                                                            <span class="comment">// It should be &quot;Condition12&quot; for condition 12, for example</span></div>
+<div class="line">                                                            std::stringstream keyName;</div>
+<div class="line">                                                            keyName &lt;&lt; <span class="stringliteral">&quot;Condition&quot;</span> &lt;&lt; i;</div>
+<div class="line"></div>
+<div class="line">                                                            <span class="comment">// Now, we try to load the image. If loading the image fails,</span></div>
+<div class="line">                                                            <span class="comment">// nothing special will happen (because of the &quot;false&quot; at the</span></div>
+<div class="line">                                                            <span class="comment">// &quot;showErrors&quot; parameter), the image will just be empty.</span></div>
+<div class="line">                                                            images[i]-&gt;loadFromFile(configuration[keyName.str()], <span class="keyword">false</span>);</div>
+<div class="line">                                             }</div>
+<div class="line"></div>
+<div class="line">                                             <span class="comment">// We add the image&#39;s width to the total width</span></div>
+<div class="line">                                             totalWidth += images[i]-&gt;width;</div>
+<div class="line">                              }</div>
+<div class="line">               }</div>
+<div class="line"></div>
+<div class="line">               <span class="comment">// Now we need to know the Y coordinate of the top of the battler</span></div>
+<div class="line">               <span class="keywordtype">int</span> topY;</div>
+<div class="line">               <span class="keywordflow">if</span>(isMonster) {</div>
+<div class="line">                              <span class="comment">// It is a monster. We just use the monster&#39;s image to find out</span></div>
+<div class="line">                              <span class="comment">// its size.</span></div>
+<div class="line">                              <a class="code" href="class_r_p_g_1_1_monster.html">RPG::Monster</a> *monster = (<a class="code" href="class_r_p_g_1_1_monster.html">RPG::Monster</a> *)battler; <span class="comment">// First, we cast the &quot;battler&quot; to a &quot;Monster&quot;</span></div>
+<div class="line">                              topY = monster-&gt;<a class="code" href="class_r_p_g_1_1_battler.html#a59839350ec655946e823f1bc8800587d">y</a> - monster-&gt;<a class="code" href="class_r_p_g_1_1_monster.html#a5e6939fc9a4b0001976eb66b18331305">image</a>-&gt;<a class="code" href="class_r_p_g_1_1_image.html#a14f857491e64e2078d82e8fcece22b47">height</a> / 2; <span class="comment">// Now we calculate the top position</span></div>
+<div class="line">               } <span class="keywordflow">else</span> {</div>
+<div class="line">                              <span class="comment">// Okay, since we don&#39;t have a way to find out the size of an actor&#39;s</span></div>
+<div class="line">                              <span class="comment">// battle graphic, we will just &quot;guess&quot; that it&#39;s a normal BattleCharSet</span></div>
+<div class="line">                              <span class="comment">// which is 48 pixels tall.</span></div>
+<div class="line">                              <span class="comment">// In a &quot;good&quot; plugin, there would be a way to set the actual height</span></div>
+<div class="line">                              <span class="comment">// for each actor in the configuration, but this would be too much</span></div>
+<div class="line">                              <span class="comment">// for this tutorial.</span></div>
+<div class="line">                              topY = battler-&gt;<a class="code" href="class_r_p_g_1_1_battler.html#a59839350ec655946e823f1bc8800587d">y</a> - 48 / 2;</div>
+<div class="line">               }</div>
+<div class="line"></div>
+<div class="line">               <span class="comment">// We will use this variable to store the current X coordinate while we</span></div>
+<div class="line">               <span class="comment">// draw the images. We will increase this variable every time we draw an</span></div>
+<div class="line">               <span class="comment">// image.</span></div>
+<div class="line">               <span class="keywordtype">int</span> currentX = battler-&gt;<a class="code" href="class_r_p_g_1_1_battler.html#a2c279272e66fd1f79f7bc151cbbbc4ba">x</a> - totalWidth / 2;</div>
+<div class="line"></div>
+<div class="line">               <span class="comment">// Okay, let&#39;s loop again through the conditions. This is necessary</span></div>
+<div class="line">               <span class="comment">// because we first had to find out the total width before we could</span></div>
+<div class="line">               <span class="comment">// start drawing the images. Now we will draw them.</span></div>
+<div class="line">               <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 1; i &lt;= battler-&gt;<a class="code" href="class_r_p_g_1_1_battler.html#aa2e8d085d0500808bb96928bbef6093e">conditions</a>.<a class="code" href="class_r_p_g_1_1_d_array.html#a85cce7fc2d1aa3ff61a0d841ff729cae">size</a>; i++) {</div>
+<div class="line">                              <span class="comment">// If the battler has the condition (see documentation)...</span></div>
+<div class="line">                              <span class="keywordflow">if</span>(battler-&gt;<a class="code" href="class_r_p_g_1_1_battler.html#aa2e8d085d0500808bb96928bbef6093e">conditions</a>[i] &gt; 0) {</div>
+<div class="line">                                             <span class="comment">// Okay, here we actually draw the image on the screen!</span></div>
+<div class="line">                                             <a class="code" href="group__game__objects.html#ga79ab87216775ec74cb63127296311fef">RPG::screen</a>-&gt;<a class="code" href="class_r_p_g_1_1_screen.html#a5b8212bbbfdcf8eb064038b542fa2f47">canvas</a>-&gt;<a class="code" href="class_r_p_g_1_1_canvas.html#a37bb56fb355bafaf1dcf93c0c0ab946c">draw</a>(currentX, topY - images[i]-&gt;height, images[i]);</div>
+<div class="line"></div>
+<div class="line">                                             <span class="comment">// And we increase the current X coordinate.</span></div>
+<div class="line">                                             currentX += images[i]-&gt;width;</div>
+<div class="line">                              }</div>
+<div class="line">               }</div>
+<div class="line"></div>
+<div class="line">               <span class="comment">// Clear the condition cache which is normally used to determine which</span></div>
+<div class="line">               <span class="comment">// conditions should be shown in the &quot;info window&quot; on top of the screen</span></div>
+<div class="line">               <span class="comment">// during target selection (we don&#39;t need to display the conditions twice!)</span></div>
+<div class="line">               <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 5; i++) {</div>
+<div class="line">                              battler-&gt;<a class="code" href="class_r_p_g_1_1_battler.html#ad21309b7603cb479642232a913e3d41b">displayedConditions</a>[i] = 0;</div>
+<div class="line">               }</div>
+<div class="line"></div>
+<div class="line">               <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// It&#39;s okay that the battler is drawn, so we return true. Don&#39;t forget that!</span></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// This handler is called when the game exits</span></div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="group__callbacks.html#gadebb361e9c302af3bee3958768be2596">onExit</a>() {</div>
+<div class="line">               <span class="comment">// We will unload all images here.</span></div>
+<div class="line">               <span class="comment">// If you are not familiar with C++ iterators: This &quot;for&quot; loop just iterates</span></div>
+<div class="line">               <span class="comment">// through all items in &quot;images&quot;.</span></div>
+<div class="line">               <span class="keywordflow">for</span>(std::map&lt;int, RPG::Image *&gt;::const_iterator iter = images.begin(); iter != images.end(); ++iter ) {</div>
+<div class="line">                              <span class="comment">// The reason we don&#39;t use images[iter-&gt;first] instead of iter-&gt;second</span></div>
+<div class="line">                              <span class="comment">// is that RPG::Image::destroy also takes a reference and sets the</span></div>
+<div class="line">                              <span class="comment">// parameter to zero at the end.</span></div>
+<div class="line">                              <a class="code" href="class_r_p_g_1_1_image.html#a0f5c9e8d56d2f54dede69cff9f7ee123">RPG::Image::destroy</a>(images[iter-&gt;first]);</div>
+<div class="line">               }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>To try it, we just need to put the compiled DLL into the <code>DynPlugins</code> folder (if it isn't already there). Then we need to get some icons. For testing, I made some very simple 16x16 icons and put them into the <code>Picture</code> folder.</p>
+<p>Then we need to open our DynRPG.ini and put the filenames in it, like this: </p>
+<div class="fragment"><div class="line">[condition_icons]</div>
+<div class="line">Condition2=Picture\poison.png</div>
+<div class="line">Condition3=Picture\blind.png</div>
+<div class="line">Condition5=Picture\berserk.png</div>
+<div class="line">Condition6=Picture\confused.png</div>
+<div class="line">Condition7=Picture\sleep.png</div>
+</div><!-- fragment --><p>And hey presto, this is what we get:</p>
+<div class="image">
+<img src="files/screen_condition_icons.png" />
+</div>
+<p>You can download the source code as well as the finished plugin <a href="files/condition_icons.rar">here</a>.</p>
+<h1><a class="anchor" id="sdk_what_next"></a>
+What next?</h1>
+<p>You may now start developing your own plugins. You may first take a look at the <a class="el" href="group__callbacks.html">Callbacks</a>, the <a class="el" href="group__game__objects.html">Game objects</a>, and the members of the <a class="el" href="namespace_r_p_g.html" title="The one and only namespace in which all DynRPG classes, variables and functions reside, except for callbacks. ">RPG</a> namespace, to get an overview of what is possible and how to get to the result you want. Then, you might start with something easy (like a DynRPG-based version of the <a href="http://cherrytree.at/download/?did=19">PicPointerPatch</a> - hint: take a look at <a class="el" href="group__callbacks.html#ga3449a167d8426369cb44142110ee9776">onEventCommand</a>, <a class="el" href="class_r_p_g_1_1_event_script_line.html" title="Represents an event script line. ">RPG::EventScriptLine</a> and <a class="el" href="group__game__objects.html#gab62db73d3f0f5384af6b16901ec73eb2">RPG::variables</a>), then expand your knowledge until you can do nearly everything you want... or something like that. :-)</p>
+<p><b>Yes, I know, I am just throwing you out into the wilderness. Sorry for not providing you more examples how to use all the features. I just had no time for it yet. If you are clever, you will probably be able to create something useful with what you got in this documentation anyway. If not, more examples will come. I will create nice plugins and publish them with source code, etc.</b></p>
+<p>Oh, and don't forget to read and follow the <a class="el" href="guidelines.html">Rules and guidelines for plugin developers</a>!</p>
+<p>By the way: If you want to publish your plugin, it would be nice if you would publish the source code too.</p>
+<p>Have fun!<br/>
+ Best regards, Cherry </p>
+*/

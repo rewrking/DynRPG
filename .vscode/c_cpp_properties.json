@@ -1,0 +1,19 @@
+{
+	"configurations": [
+		{
+			"name": "Win32",
+			"intelliSenseMode": "gcc-x86",
+			"compilerPath": "C:/mingw32/bin/gcc.exe",
+			"includePath": [
+				"${workspaceFolder}/src",
+				"${workspaceFolder}/include"
+			],
+			"defines": [
+				"_DEBUG"
+			],
+			"cStandard": "c11",
+			"cppStandard": "c++17"
+		}
+	],
+	"version": 4
+}
