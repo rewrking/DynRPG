@@ -19,7 +19,7 @@ namespace RPG
 	\param filename Name of the INI file (defaults to \c DynRPG.ini)
 	\return All keys and values of the specified section from the INI file
 */
-std::map<std::string, std::string> loadConfiguration(char* sectionName, char* filename = NULL);
+std::map<std::string, std::string> loadConfiguration(char* sectionName, char* filename = nullptr);
 
 struct PluginConfig
 {

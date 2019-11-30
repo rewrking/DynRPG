@@ -90,7 +90,7 @@ int Actor::getBattleCommand(int index)
  *****************************************************************************/
 Actor* Actor::partyMember(int index)
 {
-	Actor* ret = NULL;
+	Actor* ret = nullptr;
 	asm volatile("call *%%esi"
 				 : "=a"(ret), "=d"(_edx)
 				 : "S"(0x4A6014), "a"(**(void***)0x4CDB74), "d"(index)

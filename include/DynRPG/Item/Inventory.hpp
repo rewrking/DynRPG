@@ -83,13 +83,6 @@ struct Inventory
 	bool timerTwoVisible; //!< Is the second timer visible?
 	bool timerTwoBattle; //!< Can the second timer be displayed in battle?
 
-	/*! \brief Checks if a particular RPG::Actor is in the party.
-
-		\param databaseId The database ID of the actor.
-		\return If the actor is in the party, their party index is returned (0-3), otherwise -1 is returned.
-	*/
-	int getPartyIndex(int databaseId);
-
 	/*! \brief Built-in RM2k3 function checks the inventory to see if an item is owned
 		\param id The database ID of the item
 		\return true if the item is owned, otherwise false

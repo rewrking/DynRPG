@@ -245,6 +245,6 @@ void Image::destroy(Image*& image)
 				 : "=a"(_eax), "=d"(_edx)
 				 : "S"(0x466DB4), "a"(image), "d"(1)
 				 : "ecx", "cc", "memory"); // TAuroraSheet_Destructor
-	image = NULL;
+	image = nullptr;
 }
 }

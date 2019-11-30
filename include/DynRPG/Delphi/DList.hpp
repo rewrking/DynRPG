@@ -28,7 +28,8 @@ struct DList
 	T get(int index)
 	{
 		if (index < 0 || index >= count)
-			return NULL;
+			return nullptr;
+
 		return items[index];
 	}
 };

@@ -50,21 +50,4 @@ void Inventory::incrementItemUses(int id)
 				 : "S"(0x4A63BC), "a"(this), "d"(id)
 				 : "ecx", "cc", "memory");
 }
-
-/******************************************************************************
- *
- *****************************************************************************/
-int Inventory::getPartyIndex(int databaseId)
-{
-	// Do not loop more times than the size of the party
-	for (int i = 0; i < inventory->party.size; i++)
-	{
-		// if the party's id matches the database ID of the hero being checked for
-		if (inventory->party[i] == databaseId)
-		{
-			return i;
-		}
-	}
-	return -1;
-}
 }

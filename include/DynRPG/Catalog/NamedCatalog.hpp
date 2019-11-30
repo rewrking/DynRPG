@@ -33,7 +33,7 @@ struct NamedCatalog : Catalog<T>
 	//! Array access method
 	T get(int index)
 	{
-		T ret = NULL;
+		T ret = nullptr;
 		asm volatile("call *%%esi"
 					 : "=a"(ret), "=d"(_edx)
 					 : "S"(0x475740), "a"(this), "d"(index)

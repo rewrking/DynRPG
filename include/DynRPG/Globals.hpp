@@ -153,6 +153,13 @@ void quitGame();
 
 }*/
 
+/*! \brief Checks if a particular RPG::Actor is in the party by their index.
+
+		\param databaseId The database ID of the actor.
+		\return If the actor is in the party, their party index is returned (0-3), otherwise -1 is returned.
+	*/
+int getPartyIndex(int databaseId);
+
 /*! \brief Built-in RM2k3 function that gets the party's average agility in battle
 	\return The agility average of the party
 */

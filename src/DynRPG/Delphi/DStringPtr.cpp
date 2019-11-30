@@ -12,7 +12,7 @@ namespace RPG
  *****************************************************************************/
 DStringPtr::DStringPtr()
 {
-	str = NULL;
+	str = nullptr;
 }
 
 /******************************************************************************
@@ -29,7 +29,7 @@ DStringPtr::DStringPtr(DStringPtr& s)
  *****************************************************************************/
 DStringPtr::DStringPtr(std::string s)
 {
-	str = NULL;
+	str = nullptr;
 	assign((char*)s.c_str(), s.length());
 }
 
@@ -152,6 +152,9 @@ void DStringPtr::assign(char* s, int len)
  *****************************************************************************/
 std::string DStringPtr::s_str()
 {
+	if (str == nullptr)
+		return "";
+
 	std::string s = *str;
 	return s;
 }
