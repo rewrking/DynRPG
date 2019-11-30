@@ -2,7 +2,7 @@
 MAX_PARALLEL_JOBS := 8
 CLEAN_OUTPUT := true
 DUMP_ASSEMBLY := false
-BUILD_STATIC := true
+BUILD_STATIC := false
 
 CC := g++.exe
 
@@ -16,6 +16,12 @@ LINK_LIBRARIES :=
 INCLUDE_DIRS := include
 
 PRODUCTION_FOLDER := build
+
+_MINGW := C:/mingw32/bin
+BUILD_DEPENDENCIES := \
+	$(_MINGW)/libgcc_s_dw2-1.dll \
+	$(_MINGW)/libstdc++-6.dll \
+	$(_MINGW)/libwinpthread-1.dll
 
 PRODUCTION_EXCLUDE := \
 	*.psd \
