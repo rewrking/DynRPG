@@ -11,7 +11,7 @@ namespace RPG
 	\note <b>Not all enumeration values are documented here</b>, scroll to the top
 	to see all possible values (in the general enum overview)!
 */
-enum class MoveType
+enum class MoveType : char
 {
 	MoveUp,
 	MoveRight,
