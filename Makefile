@@ -284,7 +284,8 @@ $(OBJ_DIR)/%.res: $(SRC_DIR)/%.rc $(DEP_DIR)/%.d | $(_DIRECTORIES)
 	$(_Q)$(RC_COMPILE)
 
 $(ASM_DIR)/%.o.asm: $(OBJ_DIR)/%.o
-	$(if $(_CLEAN),,$(color_reset))
+	@tput setaf 6
+	$(if $(_CLEAN),@echo "   $@")
 	$(_Q)$(ASM_COMPILE)
 
 $(TARGET): $(_PCH_GCH) $(OBJS) $(ASMS) $(TEST_DIR)
@@ -309,6 +310,7 @@ endif
 $(_DIRECTORIES):
 	$(if $(_CLEAN),,$(color_reset))
 	$(MKDIR) $@
+	$(if $(_CLEAN),,@echo)
 
 clean:
 	$(color_reset)
@@ -321,6 +323,7 @@ clean:
 
 rmprod:
 	$(color_reset)
+	@echo
 	-$(_Q)rm -rf $(if $(filter osx,$(PLATFORM)),$(PRODUCTION_FOLDER_MACOS),$(PRODUCTION_FOLDER))
 ifeq ($(PLATFORM),linux)
 	-$(_Q)rm -rf ~/.local/share/applications/$(NAME).desktop
@@ -332,14 +335,19 @@ mkdirprod:
 	$(MKDIR) $(PRODUCTION_FOLDER)
 .PHONY: mkdirprod
 
-define do_copy_to
+define do_copy_to_clean
 	@printf "\xE2\x9E\xA6"
 	@echo  "  Copying \"$(1)\" to \"$(CURDIR)/$(2)\""
 	$(shell cp -r $(1) $(2))
 endef
 
+define do_copy_to
+	@echo  "cp -r $(1) $(2)"
+	$(shell cp -r $(1) $(2))
+endef
+
 define copy_to
-	$(if $(wildcard $(2)/$(notdir $(1))),,$(call do_copy_to,$(1),$(2)))
+	$(if $(wildcard $(2)/$(notdir $(1))),,$(if $(_CLEAN),$(call do_copy_to_clean,$(1),$(2)),$(call do_copy_to,$(1),$(2))))
 endef
 
 releasetoprod: $(TARGET)
@@ -376,6 +384,7 @@ else ifeq ($(PLATFORM),linux)
 	$(_Q)cp $(PRODUCTION_FOLDER)/$(NAME).desktop ~/.local/share/applications
 else
 	$(_Q)cp $(TARGET) $(PRODUCTION_FOLDER)
+	$(if $(_CLEAN),,@echo)
 endif
 .PHONY: releasetoprod
 

@@ -137,7 +137,11 @@ buildprod() {
 	display_styled_symbol 3 "⬤" "Production Build: $BUILD (target: $NAME)"
 	echo
 	if [[ $BUILD == 'Release' ]]; then
-		if $MAKE_EXEC BUILD=$BUILD buildprod; then
+		RECIPE=buildprod
+		if [[ $1 != 'main' ]]; then
+			RECIPE=
+		fi
+		if $MAKE_EXEC BUILD=$BUILD $RECIPE; then
 			build_success
 		else
 			build_fail
