@@ -32,5 +32,8 @@ PRODUCTION_EXCLUDE := \
 
 PRODUCTION_DEPENDENCIES := \
 	bin/Release/libDynRPG.a \
-	bin/Release/libDynRPG.def
+	bin/Release/libDynRPG.def \
+	$(_MINGW)/libgcc_s_dw2-1.dll \
+	$(_MINGW)/libstdc++-6.dll \
+	$(_MINGW)/libwinpthread-1.dll
 
