@@ -304,7 +304,6 @@ endif
 	@echo
 ifneq ($(BUILD_DEPENDENCIES),)
 	$(foreach dep,$(BUILD_DEPENDENCIES),$(call copy_to,$(dep),$(BLD_DIR)))
-	@echo
 endif
 
 $(_DIRECTORIES):
@@ -333,10 +332,14 @@ mkdirprod:
 	$(MKDIR) $(PRODUCTION_FOLDER)
 .PHONY: mkdirprod
 
-define copy_to
+define do_copy_to
 	@printf "\xE2\x9E\xA6"
-	@echo "  Copying \"$(1)\" to \"$(CURDIR)/$(2)\""
+	@echo  "  Copying \"$(1)\" to \"$(CURDIR)/$(2)\""
 	$(shell cp -r $(1) $(2))
+endef
+
+define copy_to
+	$(if $(wildcard $(2)/$(notdir $(1))),,$(call do_copy_to,$(1),$(2)))
 endef
 
 releasetoprod: $(TARGET)

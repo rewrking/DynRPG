@@ -21,6 +21,8 @@ struct Character;
 struct Battler;
 }
 
+#define DYN_PLUGIN_EXPORT __declspec(dllexport) __cdecl
+
 #ifndef DYNRPG_STATIC
 extern "C"
 {

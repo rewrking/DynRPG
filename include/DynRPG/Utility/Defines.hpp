@@ -7,6 +7,4 @@
 	#define NULL 0
 #endif
 
-#define DYN_PLUGIN_EXPORT __declspec(dllexport) __cdecl
-
 #endif // RPG_DEFINES_HPP
