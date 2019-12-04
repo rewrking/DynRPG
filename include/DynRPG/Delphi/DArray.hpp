@@ -48,7 +48,7 @@ struct DArray
 					 : "S"(0x4027AC), "a"(&items), "d"(bytes)
 					 : "ecx", "cc", "memory");
 		for (int i = size; i < newSize; i++)
-			items[i] = resizeValue;
+			items[i] = static_cast<T>(resizeValue);
 		size = newSize;
 	}
 };

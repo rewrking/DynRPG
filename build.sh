@@ -1,5 +1,9 @@
 #!/bin/bash
 
+export BUILD_TARGETS=DynRPG
+
+#==============================================================================
+
 CMD=$1
 BUILD=$2
 VSCODE=$3
@@ -9,6 +13,164 @@ cwd=${PWD##*/}
 
 export GCC_COLORS="error=01;31:warning=01;33:note=01;36:locus=00;34"
 
+#==============================================================================
+# Function declarations
+
+display_styled_symbol() {
+	tput setaf $1
+	tput bold
+	echo "$2  $3"
+	tput sgr0
+}
+
+build_success() {
+	echo
+	display_styled_symbol 2 "✔" "Succeeded!"
+	echo
+}
+
+launch() {
+	display_styled_symbol 2 " " "Launching bin/$BUILD/$NAME"
+	echo
+}
+
+build_success_launch() {
+	echo
+	display_styled_symbol 2 "✔" "Succeeded!"
+	launch
+}
+
+build_fail() {
+	echo
+	display_styled_symbol 1 "✘" "Failed!"
+	display_styled_symbol 1 " " "Review the compile errors above."
+	echo
+	tput sgr0
+	exit 1
+}
+
+build_prod_error() {
+	echo
+	display_styled_symbol 1 "⭙" "Error: buildprod must be run on Release build."
+	tput sgr0
+	exit 1
+}
+
+profiler_done() {
+	echo
+	display_styled_symbol 2 "⯌" "Profiler Completed: View $PROF_ANALYSIS_FILE for details"
+	echo
+}
+
+profiler_error() {
+	echo
+	display_styled_symbol 1 "⭙" "Error: Profiler must be run on Debug build."
+	tput sgr0
+	exit 1
+}
+
+profiler_osx() {
+	display_styled_symbol 1 "⭙" "Error: Profiling (with gprof) is not supported on Mac OSX."
+	tput sgr0
+	exit 1
+}
+
+buildrun() {
+	display_styled_symbol 3 "⬤" "Build & Run: $BUILD (target: $NAME)"
+	echo
+	BLD=$BUILD
+	if [[ $BUILD == 'Tests' && $1 != 'main' ]]; then
+		BLD=Release
+	fi
+	if $MAKE_EXEC BUILD=$BLD; then
+		build_success_launch
+		if [[ $BUILD == 'Tests' ]]; then
+			bin/Release/$NAME $OPTIONS
+		else
+			bin/$BUILD/$NAME $OPTIONS
+		fi
+	else
+		build_fail
+	fi
+}
+
+build() {
+	display_styled_symbol 3 "⬤" "Build: $BUILD (target: $NAME)"
+	echo
+	BLD=$BUILD
+	if [[ $BUILD == 'Tests' && $1 != 'main' ]]; then
+		BLD=Release
+	fi
+	if $MAKE_EXEC BUILD=$BLD; then
+		build_success
+	else
+		build_fail
+	fi
+}
+
+rebuild() {
+	display_styled_symbol 3 "⬤" "Rebuild: $BUILD (target: $NAME)"
+	echo
+	BLD=$BUILD
+	if [[ $BUILD == 'Tests' && $1 != 'main' ]]; then
+		BLD=Release
+	fi
+	if $MAKE_EXEC BUILD=$BLD rebuild; then
+		build_success
+	else
+		build_fail
+	fi
+}
+
+run() {
+	display_styled_symbol 3 "⬤" "Run: $BUILD (target: $NAME)"
+	echo
+	launch
+	if [[ $BUILD == 'Tests' ]]; then
+		bin/Release/$NAME $OPTIONS
+	else
+		bin/$BUILD/$NAME $OPTIONS
+	fi
+}
+
+buildprod() {
+	display_styled_symbol 3 "⬤" "Production Build: $BUILD (target: $NAME)"
+	echo
+	if [[ $BUILD == 'Release' ]]; then
+		if $MAKE_EXEC BUILD=$BUILD buildprod; then
+			build_success
+		else
+			build_fail
+		fi
+	else
+		build_prod_error
+	fi
+}
+
+profile() {
+	display_styled_symbol 3 "⬤" "Profile: $BUILD (target: $NAME)"
+	echo
+	if [[ $PLATFORM == 'osx' ]]; then
+		profiler_osx
+	elif [[ $BUILD == 'Debug' ]]; then
+		if $MAKE_EXEC BUILD=$BUILD; then
+			build_success_launch
+			tput sgr0
+			bin/$BUILD/$NAME
+			tput setaf 4
+			gprof bin/Debug/$NAME gmon.out > $PROF_ANALYSIS_FILE 2> /dev/null
+			profiler_done
+		else
+			build_fail
+		fi
+	else
+		profiler_error
+	fi
+}
+
+#==============================================================================
+# Environment
+
 if [[ $CMD == '' ]]; then
 	CMD=buildprod
 fi
@@ -16,11 +178,16 @@ if [[ $BUILD == '' ]]; then
 	BUILD=Release
 fi
 
-if [[ $OSTYPE == 'msys' || $OSTYPE == 'win32' ]]; then
-	export PLATFORM=windows
-	if [[ $NAME == '' ]]; then
-		export NAME=$cwd.dll
+if [[ $OSTYPE == 'linux-gnu'* || $OSTYPE == 'cygwin'* ]]; then
+	if [[ $OSTYPE == 'linux-gnueabihf' ]]; then
+		export PLATFORM=rpi
+	else
+		export PLATFORM=linux
 	fi
+elif [[ $OSTYPE == 'darwin'* ]]; then
+	export PLATFORM=osx
+elif [[ $OSTYPE == 'msys' || $OSTYPE == 'win32' ]]; then
+	export PLATFORM=windows
 fi
 
 
@@ -28,6 +195,10 @@ if [[ $VSCODE != 'vscode' ]]; then
 	export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 	if [[ $PLATFORM == 'windows' ]]; then
 		export PATH="/c/SFML-2.5.1/bin:/c/mingw32/bin:$PATH"
+	else
+		if [[ $PLATFORM == 'rpi' ]]; then
+			export PATH="/usr/local/gcc-8.1.0/bin:$PATH"
+		fi
 	fi
 	echo
 	echo build.sh PATH=$PATH
@@ -43,95 +214,76 @@ if [[ $PLATFORM == 'windows' ]]; then
 	fi
 fi
 
-if [[ $BUILD != "Release" && $BUILD != 'Debug' ]]; then
+if [[ $BUILD != "Release" && $BUILD != 'Debug' && $BUILD != 'Tests' ]]; then
 	BUILD=Release
 fi
 
-dec=\=\=\=\=\=\=
+PROF_EXEC=gprof
+PROF_ANALYSIS_FILE=profiler_analysis.stats
 
-display_styled() {
-	tput setaf $1
-	tput bold
-	echo $dec $2 $dec
-	tput sgr0
-}
+#==============================================================================
+# Main script
 
-build_success() {
-	display_styled 2 "Build Succeeded"
-}
-
-build_success_launch() {
-	display_styled 2 "Build Succeeded: Launching bin/$BUILD/$NAME"
-	echo
-}
-
-build_fail() {
-	display_styled 1 "Build Failed: Review the compile errors above"
-	tput sgr0
-	exit 1
-}
-
-build_prod_error() {
-	display_styled 1 "Error: buildprod must be run on Release build."
-	tput sgr0
-	exit 1
-}
-
-launch() {
-	display_styled 2 "Launching bin/$BUILD/$NAME"
-	echo
-}
-
-launch_prod() {
-	display_styled 2 "Launching Production Build: $NAME"
-	echo
-}
-
-tput setaf 4
-if [[ $CMD == 'buildrun' ]]; then
-	if $MAKE_EXEC BUILD=$BUILD; then
-		build_success_launch
-		bin/$BUILD/$NAME $OPTIONS
-	else
-		build_fail
-	fi
-
-elif [[ $CMD == 'build' ]]; then
-	if $MAKE_EXEC BUILD=$BUILD; then
-		build_success
-	else
-		build_fail
-	fi
-
-elif [[ $CMD == 'rebuild' ]]; then
-	if $MAKE_EXEC BUILD=$BUILD rebuild; then
-		build_success
-	else
-		build_fail
-	fi
-
-elif [[ $CMD == 'run' ]]; then
-	launch
-	bin/$BUILD/$NAME $OPTIONS
-
-elif [[ $CMD == 'buildprod' ]]; then
-	if [[ $BUILD == 'Release' ]]; then
-		if $MAKE_EXEC BUILD=$BUILD buildprod; then
-			build_success
-		else
-			build_fail
-		fi
-	else
-		build_prod_error
-	fi
-
-else
-	tput setaf 1
-	tput bold
-	echo $dec Error: Command \"$CMD\" not recognized. $dec
-	tput sgr0
-	exit 1
+if [[ $BUILD_TARGETS == '' ]]; then
+	BUILD_TARGETS=main
+	NO_SRC_TARGET=1
 fi
 
-tput sgr0
+for target in $BUILD_TARGETS; do
+	if [[ $PLATFORM == 'windows' ]]; then
+		if [[ $target == 'main' ]]; then
+			export NAME=$cwd.exe
+			if [[ $BUILD == 'Tests' ]]; then
+				NAME=tests_$NAME
+			fi
+		else
+			if [[ $BUILD == 'Debug' ]]; then
+				export NAME=$target-d.dll
+			else
+				export NAME=$target.dll
+			fi
+		fi
+	else
+		if [[ $target == 'main' ]]; then
+			export NAME=$cwd
+			if [[ $BUILD == 'Tests' ]]; then
+				NAME=tests_$NAME
+			fi
+		else
+			if [[ $BUILD == 'Debug' ]]; then
+				export NAME=$target-d.so
+			else
+				export NAME=$target.so
+			fi
+		fi
+	fi
+
+	if [[ $NO_SRC_TARGET != 1 ]]; then
+		export SRC_TARGET=$target
+	fi
+
+	CHILD_CMD="$CMD $target"
+	if [[ $CMD == 'buildrun' && $target != 'main' ]]; then
+		CHILD_CMD=build
+	fi
+
+
+	tput setaf 4
+	if $CHILD_CMD ; then
+		tput sgr0
+	else
+		tput setaf 1
+		tput bold
+		echo $dec Error: Command \"$CHILD_CMD\" not recognized. $dec
+		tput sgr0
+		exit 1
+	fi
+
+	RESULT=$?
+	if [[ $RESULT != 0 ]]; then
+		break
+	fi
+
+done
+
 exit 0

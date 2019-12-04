@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include <DynRPG/Character/AnimationFrameCharset.hpp>
 #include <DynRPG/Character/AnimationType.hpp>
 #include <DynRPG/Character/Direction.hpp>
 #include <DynRPG/Character/Facing.hpp>
@@ -43,7 +44,7 @@ struct Character
 			<li>\c 2: Right</li>
 			<li>\c 3: Middle</li></ul>
 	*/
-	int step; //!< The stepping frame of the charset graphic
+	AnimationFrameCharset step; //!< The stepping frame of the charset graphic
 	int transparency; //!< Transparency value, between \c 0 (completely visible) to \c 8 (completely invisible)
 	/*! \brief Frames left until movement is completed (see details)
 
@@ -141,7 +142,7 @@ struct Character
 		\sa setNormalStep
 		\sa step
 	*/
-	void setFixedStep(int newStep);
+	void setFixedStep(AnimationFrameCharset newStep);
 
 	/*! \brief Removes a fixed step position and goes back to normal
 		\sa setFixedStep

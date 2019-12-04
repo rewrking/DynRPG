@@ -40,7 +40,7 @@ int Character::getScreenY()
 /******************************************************************************
  *
  *****************************************************************************/
-void Character::setFixedStep(int newStep)
+void Character::setFixedStep(AnimationFrameCharset newStep)
 {
 	stepFrameCounter = -1;
 	step = newStep;
@@ -52,7 +52,7 @@ void Character::setFixedStep(int newStep)
 void Character::setNormalStep()
 {
 	stepFrameCounter = 0;
-	step = 3;
+	step = AnimationFrameCharset::MiddleB;
 }
 
 /******************************************************************************
