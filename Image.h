@@ -18,6 +18,10 @@ namespace RPG {
 			int green; //!< Green value (\c 0 to \c 255)
 			int blue; //!< Blue value (\c 0 to \c 255)
 			int chroma; //!< Chroma value (\c 0 to \c 255)
+			int _unknown_18;
+			int _unknown_1C;
+			int _unknown_20;
+			int _unknown_24;
 	};
 
 	/*! \brief Used for image buffers (8 bit)

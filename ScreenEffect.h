@@ -1,4 +1,16 @@
 namespace RPG {
+	struct WeatherParticle {
+		int t; //!< Particle time left
+		int x; //!< Particle x positon
+		int y; //!< Particle y position
+
+		int alpha; //!< Particle alpha factor 0: fully transparent, 255: fully opaque (sandstorm only)
+		double vx; //!< Particle x velocity (sandstorm only)
+		double vy; //!< Particle y velocity (sandstorm only)
+		double ax; //!< Particle x acceleration (sandstorm only)
+		double ay; //!< Particle y accelration (sandstorm only)
+	};
+
 	/*! \brief Screen effects
 		\sa RPG::Screen
 	*/
@@ -36,15 +48,12 @@ namespace RPG {
 				changed during "Tint Screen" event commands.
 			*/
 			int tintSaturation;
+
 				int _unknown_14;
-				int _unknown_18;
-				int _unknown_1C;
-				int _unknown_20;
-				int _unknown_24;
-				int _unknown_28;
-				int _unknown_2C;
-				int _unknown_30;
-				int _unknown_34;
+				double _unknown_18;
+				double _unknown_20;
+				double _unknown_28;
+				double _unknown_30;
 				
 			/*! \brief Screen tint's transition timer (in frames)
 				
@@ -56,8 +65,7 @@ namespace RPG {
 			int flashR; //!< Red value during "Flash Screen"
 			int flashG; //!< Green value during "Flash Screen"
 			int flashB; //!< Blue value during "Flash Screen"
-				int _unknown_48;
-				int _unknown_4C;
+				double _unknown_48;
 			
 			/*! \brief "Flash Screen" timer (in frames)
 				
@@ -120,17 +128,6 @@ namespace RPG {
 
 			int _unknown_94; // Always 0?
 
-			struct Particle {
-				int t; //!< Particle time left
-				int x; //!< Particle x positon
-				int y; //!< Particle y position
-
-				int alpha; //!< Particle alpha factor 0: fully transparent, 255: fully opaque (sandstorm only)
-				double vx; //!< Particle x velocity (sandstorm only)
-				double vy; //!< Particle y velocity (sandstorm only)
-				double ax; //!< Particle x acceleration (sandstorm only)
-				double ay; //!< Particle y accelration (sandstorm only)
-			};
 
 			/*! \brief Particles used for weather effects
 
@@ -138,7 +135,17 @@ namespace RPG {
 				Fog uses the first 2 particles for the 2 fog layer movement and uses only x.
 				Sandstorm uses the first 2 particles the same as fog and the remaining 253 particles and all the fields for the move sand particles.
 			*/
-			Particle weather_particles[255];
+			WeatherParticle weather_particles[255];
+
+			int fog_back_opacity; //<! Opacity for the back fog layer. Values are based on strength:  0->32, 1->64, 2->96
+			int fog_front_opacity; //<! Opacity for the front fog layer. Values are based on strength: 0->64, 1->80, 2->160
+
+			/*! \brief the image used for the fog effect
+
+				This 16x18 texture is randomly generated each time RPG_RT starts.
+				It is used for both font and back fog layers.
+			*/
+			Image* fog_image;
 	};
 
 	void RPG::ScreenEffect::flash(int r, int g, int b, int intensity, int duration) {
