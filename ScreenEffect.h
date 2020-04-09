@@ -74,7 +74,7 @@ namespace RPG {
 			int shakeStr; //!< Shake strength value used in "Shake Screen" command (0-9). Can be set higher than the default
 			int shakeSpd; //!< Shake speed value used in "Shake Screen" command (0-9). Can be set higher than the default
 			int shakeOffsetX; //!< The screen offset value during a "Shake Screen" command.
-				int _unknown_60; // shakeOffsetY somehow?
+			int shakeOffsetY; //!< An unused Y offset for a vertical Shake Screen. Affects the screen, but gets reset to 0 every frame.
 			
 			/*! \brief "Shake Screen" timer (in frames)
 				
@@ -93,8 +93,54 @@ namespace RPG {
 				\param duration	Duration in frames
 			*/
 			void flash(int r, int g, int b, int intensity, int duration);
+
+			int _unknown_68; // Always some big number?
+			int _unknown_6C; // Always 0?
+			int _unknown_70; // Always 0?
+			int _unknown_74; // Always 0?
+			int _unknown_78; // Always 0?
+			int _unknown_7C; // Always 0?
+			int _unknown_80; // Always 0?
+			int _unknown_84; // RPG_RT crashes if you set this to a non-zero value.
+			int _unknown_88; //Always 38073260?
+
+			/*! \brief Which weather effect is active
+			    0 - None
+				1 - Rain
+				2 - Snow
+				3 - Fog
+				4 - Sandstorm
+			*/
+			int weather_type;
+			/*! \brief the strength level of the current weather effect
+
+				Valid values are 0,1, and 2. Values >= 3 work but produce glitchy effects.
+			*/
+			int weather_strength;
+
+			int _unknown_94; // Always 0?
+
+			struct Particle {
+				int t; //!< Particle time left
+				int x; //!< Particle x positon
+				int y; //!< Particle y position
+
+				int alpha; //!< Particle alpha factor 0: fully transparent, 255: fully opaque (sandstorm only)
+				double vx; //!< Particle x velocity (sandstorm only)
+				double vy; //!< Particle y velocity (sandstorm only)
+				double ax; //!< Particle x acceleration (sandstorm only)
+				double ay; //!< Particle y accelration (sandstorm only)
+			};
+
+			/*! \brief Particles used for weather effects
+
+				Rain and Snow use 100 particles and only t, x, and y.
+				Fog uses the first 2 particles for the 2 fog layer movement and uses only x.
+				Sandstorm uses the first 2 particles the same as fog and the remaining 253 particles and all the fields for the move sand particles.
+			*/
+			Particle weather_particles[255];
 	};
-	
+
 	void RPG::ScreenEffect::flash(int r, int g, int b, int intensity, int duration) {
 		asm volatile("push %%eax" : : "a" (b));
 		asm volatile("push %%eax" : : "a" (intensity));
@@ -105,6 +151,6 @@ namespace RPG {
 			: "S" (0x4C2D68), "a" (this), "c" (g), "d" (r)
 			: "cc", "memory");
 	}
-	
+
 }
-	
+
