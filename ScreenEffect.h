@@ -17,31 +17,31 @@ namespace RPG {
 	class ScreenEffect {
 		public:
 			void **vTable;
-			/*! \brief Screen tint's red value
+			/*! \brief Screen tint's final red value
 				
 				Supported values are from \c 0 (completely black) to \c 200
 				(completely red). \c 100 is the normal value. This value is
 				changed during "Tint Screen" event commands.
 			*/
-			int tintR;
-			
-			/*! \brief Screen tint's green value
+			int tintFinalR;
+
+			/*! \brief Screen tint's final green value
 				
 				Supported values are from \c 0 (completely black) to \c 200
 				(completely green). \c 100 is the normal value. This value is
 				changed during "Tint Screen" event commands.
 			*/
-			int tintG;
-			
-			/*! \brief Screen tint's blue value
+			int tintFinalG;
+
+			/*! \brief Screen tint's final blue value
 				
 				Supported values are from \c 0 (completely black) to \c 200
 				(completely blue). \c 100 is the normal value. This value is
 				changed during "Tint Screen" event commands.
 			*/
-			int tintB;
-			
-			/*! \brief Screen tint's saturation value
+			int tintFinalB;
+
+			/*! \brief Screen tint's final saturation value
 				
 				Supported values are from \c 0 (completely desaturated) to \c 200
 				(completely saturated). \c 100 is the normal value. This value is
@@ -49,12 +49,11 @@ namespace RPG {
 			*/
 			int tintSaturation;
 
-				int _unknown_14;
-				double _unknown_18;
-				double _unknown_20;
-				double _unknown_28;
-				double _unknown_30;
-				
+			double tintCurrentR; //!< current red value in tint screen animation.
+			double tintCurrentG; //!< current green value in tint screen animation.
+			double tintCurrentB; //!< current blue value in tint screen animation.
+			double tintCurrentSaturation; //<! current saturation valye in tint screen animation.
+
 			/*! \brief Screen tint's transition timer (in frames)
 				
 				Start with the # of frames to transition from, and each frame will 
@@ -65,7 +64,7 @@ namespace RPG {
 			int flashR; //!< Red value during "Flash Screen"
 			int flashG; //!< Green value during "Flash Screen"
 			int flashB; //!< Blue value during "Flash Screen"
-				double _unknown_48;
+			double flashIntensity; //<!Strength fo current flash
 			
 			/*! \brief "Flash Screen" timer (in frames)
 				
@@ -106,10 +105,10 @@ namespace RPG {
 			int _unknown_6C; // Always 0?
 			int _unknown_70; // Always 0?
 			int _unknown_74; // Always 0?
-			int _unknown_78; // Always 0?
+			int animationId; //<! Currently active battle animation id
 			int _unknown_7C; // Always 0?
-			int _unknown_80; // Always 0?
-			int _unknown_84; // RPG_RT crashes if you set this to a non-zero value.
+			int animationCurrentFrame; //<! Current animation id frame
+			int animationActive; //<! Whether or not animation is active
 			int _unknown_88; //Always 38073260?
 
 			/*! \brief Which weather effect is active
@@ -146,6 +145,12 @@ namespace RPG {
 				It is used for both font and back fog layers.
 			*/
 			Image* fog_image;
+
+			double continuousFlashIntensity; //!< Value to reset flash intensity when continuous flash repeats
+			int continuousFlashTimer; //!< Value to reset flashTimer when continuous flash repeats
+			int continuousFlashEnabled; //!< True if continuous flash is enabled.
+			int continuousShakeEnabled; //!< True if continuous shake is enabled.
+
 	};
 
 	void RPG::ScreenEffect::flash(int r, int g, int b, int intensity, int duration) {
