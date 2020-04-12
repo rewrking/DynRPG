@@ -150,7 +150,6 @@ namespace RPG {
 			int continuousFlashTimer; //!< Value to reset flashTimer when continuous flash repeats
 			int continuousFlashEnabled; //!< True if continuous flash is enabled.
 			int continuousShakeEnabled; //!< True if continuous shake is enabled.
-
 	};
 
 	void RPG::ScreenEffect::flash(int r, int g, int b, int intensity, int duration) {
