@@ -129,6 +129,7 @@ namespace RPG {
     #include "MapProperties.h"
 #include "Map.h" // Updated
     #include "CommonEvent.h"
+    #include "SceneMap.h"
     #include "SceneDebug.h"
     #include "SceneGameOver.h"
     #include "SceneTitle.h"
