@@ -82,7 +82,7 @@ if(battler->animationId == 9) battler->animationId = 0;
 				\endcode
 			*/
 			DArray<short, 1> conditions;
-				int _unknown_3C; // Random_Agi(?)
+			int battle_order_2k; // Computed from AGI and used in 2k battle to determine the order which battlers go.
 			bool isCharging; //!< Is the battler (monster) currently using the "Charge Up" action
 			/*! \brief Current value of the ATB bar (\c 0 to \c 300000 - see details)
 

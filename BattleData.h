@@ -41,6 +41,14 @@ namespace RPG {
 		BTYPE_ENCOUNTER_BY_EVENT_COMMAND
 	};
 
+	//! Possible results for a battle
+	enum BattleResult {
+		BRES_VICTORY,
+		BRES_ESCAPE,
+		BRES_DEFEAT,
+		BRES_ABORT
+	};
+
 	/*! \brief Used for the data and settings for the current battle. (OMG YES)
 
 		\sa RPG::battleData

@@ -45,6 +45,7 @@ namespace RPG {
 			int fontSet;  //!< The window's font set?
 				int _unknown_70;
 				int _unknown_74;
+				int _unknown_78;
 
 			// Functions
 			Window(); //!< Experimental
