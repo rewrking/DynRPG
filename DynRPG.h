@@ -27,6 +27,11 @@
 #error Sorry, this DynRPG version needs at least GNU C++ version 4.7.1! See gcc.gnu.org
 #endif
 
+// Set 2000 or 2003
+#ifndef RPG_RT_ENGINE
+#define RPG_RT_ENGINE 2003
+#endif
+
 #include <string>
 #include <map>
 #include <windows.h>

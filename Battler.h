@@ -84,6 +84,7 @@ if(battler->animationId == 9) battler->animationId = 0;
 			DArray<short, 1> conditions;
 			int battle_order_2k; // Computed from AGI and used in 2k battle to determine the order which battlers go.
 			bool isCharging; //!< Is the battler (monster) currently using the "Charge Up" action
+#if RPG_RT_ENGINE == 2003
 			/*! \brief Current value of the ATB bar (\c 0 to \c 300000 - see details)
 
 				Internally, the ATB bar can have a value between \c 0 and
@@ -150,6 +151,7 @@ if(battler->animationId == 9) battler->animationId = 0;
 				\note Conditions in the array are arranged from highest priority (0) to lowest (4).
 			*/
 			int displayedConditions[5];
+#endif // RPG_RT_ENGINE == 2003
 
 			/*! \brief Returns the name of the actor or monster
 				\return The name
