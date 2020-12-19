@@ -3,7 +3,6 @@
 (Now with source code, thanks to Cherry)
 
 ## Instructions
----
 
 1. Install [CMake](https://cmake.org/download/) (Windows win64-x64 Installer, latest version)
 2. Get a version of GCC: 
@@ -17,7 +16,7 @@
 6. Create plugins as usual. Link against ``lib/libDynRPG.a`` in each plugin, and make sure the same compiler is used each time.
 
 ## VS Code
----
+
 1. Follow steps 1-4 above
 2. Open the folder in VS Code
 3. Run the build task (this just calls the batch file anyway)
