@@ -9,7 +9,7 @@ namespace RPG
 /*! \brief Class used for teleporting.
 	\sa RPG::teleport
 	\sa RPG::teleportManagement
-	\sa RPG::teleportHero()
+	\sa RPG::Map::teleportHero()
 */
 struct Teleport
 {

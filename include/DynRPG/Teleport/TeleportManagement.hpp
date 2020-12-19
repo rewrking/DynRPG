@@ -6,7 +6,7 @@ namespace RPG
 /*! \brief Same as the "Teleport Target Management" event command.
 	\sa RPG::teleportManagement
 	\sa RPG::teleport
-	\sa RPG::teleportHero()
+	\sa RPG::Map::teleportHero()
 */
 struct TeleportManagement
 {

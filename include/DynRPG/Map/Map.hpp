@@ -102,6 +102,18 @@ struct Map
 	*/
 	int getEventAt(int x, int y);
 
+	/*! \brief Easily returns an event line.
+
+	Allows you to write <tt>RPG::getBattleEventLine(6,2,0)->command</tt> instead of <tt>RPG::mapCurrent->events[6]->pages[3]->scriptLines->list->items[0]->command</tt> which gets the first line on the 3rd page of the event 6.
+
+	\param eventId The monster group ID (one-based)
+	\param pageId The monster group's battle event page ID (zero-based)
+	\param lineId The line ID (zero-based)
+
+	\sa RPG::MapEventPage
+*/
+	static EventScriptLine* getEventLine(int eventId, int pageId, int lineId);
+
 	/*! \brief Returns the map properties information for the map that is
 		currently loaded
 		\return Pointer to the current map's properties
@@ -118,18 +130,6 @@ struct Map
 	\sa RPG::mapTree
 */
 static Map*& map = (**reinterpret_cast<Map***>(0x4CDD74));
-
-/*! \brief Easily returns an event line.
-
-	Allows you to write <tt>RPG::getBattleEventLine(6,2,0)->command</tt> instead of <tt>RPG::mapCurrent->events[6]->pages[3]->scriptLines->list->items[0]->command</tt> which gets the first line on the 3rd page of the event 6.
-
-	\param eventId The monster group ID (one-based)
-	\param pageId The monster group's battle event page ID (zero-based)
-	\param lineId The line ID (zero-based)
-
-	\sa RPG::MapEventPage
-*/
-static EventScriptLine* getEventLine(int eventId, int pageId, int lineId);
 
 }
 

@@ -149,7 +149,7 @@ int Map::getEventAt(int x, int y)
 /******************************************************************************
  *
  *****************************************************************************/
-EventScriptLine* getEventLine(int eventId, int pageId, int lineId)
+EventScriptLine* Map::getEventLine(int eventId, int pageId, int lineId)
 {
 	return map->events[eventId]->data->pages[pageId]->scriptLines->list->items[lineId];
 }

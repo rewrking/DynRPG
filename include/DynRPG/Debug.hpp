@@ -32,6 +32,8 @@ return true;
 
 struct Debug
 {
+	Debug() = delete;
+
 	inline static void attachConsole(char*& pluginName)
 	{
 		if (!AttachConsole(ATTACH_PARENT_PROCESS))

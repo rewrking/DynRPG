@@ -6,7 +6,7 @@ namespace RPG
 /******************************************************************************
  *
  *****************************************************************************/
-void teleportHero(int mapId = 1, int x = 0, int y = 0, TeleportDirection dir = TeleportDirection::RetainFacing)
+void Teleport::teleportHero(int mapId, int x, int y, TeleportDirection dir)
 {
 	teleport->mapId = mapId;
 	teleport->mapX = x;
