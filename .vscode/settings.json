@@ -1,0 +1,6 @@
+{
+	"terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+	"files.encoding": "utf8",
+	"files.trimTrailingWhitespace": true,
+	"files.eol": "\n",
+}
