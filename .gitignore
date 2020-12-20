@@ -1,6 +1,7 @@
 # Build system
 bin
 build
+lib
 gmon.out
 *.stats
 Thumbs.db
