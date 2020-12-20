@@ -19,5 +19,5 @@ set_target_properties(DynRPG PROPERTIES
 target_include_directories(DynRPG
 	PRIVATE
 		src/
-		include/
+		include/DynRPG
 )
