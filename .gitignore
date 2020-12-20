@@ -1,14 +1,8 @@
-# Build system
+# Build
 bin
 build
 lib
-gmon.out
-*.stats
+
+# Other
 Thumbs.db
 .DS_Store
-
-# VS Code
-.vscode/ipch
-
-# Project specific
-#
