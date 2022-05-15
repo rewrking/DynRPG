@@ -1,0 +1,69 @@
+{
+	"DynRPG Header File": {
+		"prefix": "dynh",
+		"description": "DynRPG Class hpp file",
+		"scope": "cpp",
+		"body": [
+			"#ifndef DYNRPG_${2:INCLUDE_GUARD}_H",
+			"#define DYNRPG_${2:INCLUDE_GUARD}_H",
+			"",
+			"namespace RPG",
+			"{",
+			"class ${1:ClassName}",
+			"{",
+			"public:",
+			"\t${1:ClassName}();",
+			"",
+			"};",
+			"}",
+			"",
+			"#endif // DYNRPG_${2:INCLUDE_GUARD}_H",
+			""
+		],
+	},
+	"DynRPG Implementation File": {
+		"prefix": "dync",
+		"description": "DynRPG Class cpp file",
+		"scope": "cpp",
+		"body": [
+			"#include <DynRPG/${1:ClassName}.h>",
+			"",
+			"namespace RPG",
+			"{",
+			"}",
+			""
+		],
+	},
+	"DynRPG Include Guard": {
+		"prefix": "dynguard",
+		"description": "DynRPG include guard",
+		"scope": "cpp",
+		"body": [
+			"#ifndef DYNRPG_${1:INCLUDE_GUARD}_H",
+			"#define DYNRPG_${1:INCLUDE_GUARD}_H",
+			"",
+			"#endif // DYNRPG_${1:INCLUDE_GUARD}_H",
+			""
+		],
+	},
+	"DynRPG Enum": {
+		"prefix": "dynenum",
+		"description": "DynRPG Enum",
+		"scope": "cpp",
+		"body": [
+			"#ifndef DYNRPG_${2:INCLUDE_GUARD}_H",
+			"#define DYNRPG_${2:INCLUDE_GUARD}_H",
+			"",
+			"namespace RPG",
+			"{",
+			"enum ${1:ClassName}",
+			"{",
+			"};",
+			"typedef unsigned char ${1:ClassName}_T;",
+			"}",
+			"",
+			"#endif // DYNRPG_${2:INCLUDE_GUARD}_H",
+			""
+		],
+	}
+}

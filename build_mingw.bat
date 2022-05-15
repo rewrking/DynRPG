@@ -10,4 +10,7 @@ cd build
 @REM echo %Path%
 
 cmake.exe -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release ..
-mingw32-make.exe -j8
+mingw32-make.exe
+@REM -j8
+
+cd ..

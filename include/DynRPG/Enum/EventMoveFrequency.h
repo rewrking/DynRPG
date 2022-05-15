@@ -1,0 +1,18 @@
+#ifndef DYNRPG_EVENT_MOVE_FREQUENCY_H
+#define DYNRPG_EVENT_MOVE_FREQUENCY_H
+
+namespace RPG
+{
+//! Possible values for the RPG::EventPage::moveSpeed member
+enum EventMoveFrequency
+{
+	EMS_ONE_EIGHTH_NORMAL = 1,
+	EMS_ONE_FOURTH_NORMAL,
+	EMS_ONE_HALF_NORMAL,
+	EMS_NORMAL,
+	EMS_TWICE_NORMAL,
+	EMS_FOUR_TIMES_NORMAL
+};
+}
+
+#endif // DYNRPG_EVENT_MOVE_FREQUENCY_H

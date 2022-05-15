@@ -1,6 +1,7 @@
 {
-	"terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+	"terminal.integrated.defaultProfile.windows": "Command Prompt",
 	"files.encoding": "utf8",
 	"files.trimTrailingWhitespace": true,
 	"files.eol": "\n",
+	"editor.formatOnSave": true
 }

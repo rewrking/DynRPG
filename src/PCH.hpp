@@ -1,0 +1,11 @@
+#ifndef DYNRPG_PRECOMPILED_HEADER_HPP
+#define DYNRPG_PRECOMPILED_HEADER_HPP
+
+#ifndef DYNRPG_EXPORTS
+	#define DYNRPG_EXPORTS
+#endif
+
+#include <DynRPG/DynRPGConfig.h>
+#include <DynRPG/DynRPGRegisters.h>
+
+#endif // DYNRPG_PRECOMPILED_HEADER_HPP
