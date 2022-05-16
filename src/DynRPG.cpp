@@ -15,10 +15,10 @@
 #include <DynRPG/NamedCatalogPtr.h>
 #include <DynRPG/SceneMenu.h>
 #include <DynRPG/Screen.h>
-#include <DynRPG/Switch.h>
+#include <DynRPG/Switches.h>
 #include <DynRPG/System.h>
 #include <DynRPG/Teleport.h>
-#include <DynRPG/Variable.h>
+#include <DynRPG/Variables.h>
 
 #include <sstream>
 #include <stdio.h>

@@ -32,11 +32,13 @@
 #include <DynRPG/Screen.h>
 #include <DynRPG/ScreenEffect.h>
 #include <DynRPG/Skill.h>
+#include <DynRPG/Switches.h>
 #include <DynRPG/System.h>
 #include <DynRPG/Teleport.h>
 #include <DynRPG/TeleportManagement.h>
 #include <DynRPG/Terrain.h>
 #include <DynRPG/Tileset.h>
+#include <DynRPG/Variables.h>
 #include <DynRPG/Vehicle.h>
 #include <DynRPG/WindowMessage.h>
 
@@ -57,6 +59,9 @@ bool& showingLogo = (**reinterpret_cast<bool**>(0x4CDADC));
 int& battleSpeed = (*reinterpret_cast<int*>(0x442600));
 
 bool& transparentWindowsEverywhere = (*reinterpret_cast<bool*>(0x442604));
+
+RPG::Switches switches __attribute__((unused));
+RPG::Variables variables __attribute__((unused));
 
 //
 

@@ -100,14 +100,14 @@
 #include <DynRPG/Skill.h>
 #include <DynRPG/SkillProgression.h>
 #include <DynRPG/Sound.h>
-#include <DynRPG/Switch.h>
+#include <DynRPG/Switches.h>
 #include <DynRPG/System.h>
 #include <DynRPG/SystemGraphic.h>
 #include <DynRPG/Teleport.h>
 #include <DynRPG/TeleportManagement.h>
 #include <DynRPG/Terrain.h>
 #include <DynRPG/Tileset.h>
-#include <DynRPG/Variable.h>
+#include <DynRPG/Variables.h>
 #include <DynRPG/Vehicle.h>
 #include <DynRPG/Vocabulary.h>
 #include <DynRPG/WinApi.h>

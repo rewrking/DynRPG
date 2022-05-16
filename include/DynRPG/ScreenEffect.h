@@ -147,8 +147,8 @@ public:
 };
 
 /*! \ingroup game_objects
-		\brief Pointer to the handler for various screen effects (WIP)
-	*/
+	\brief Pointer to the handler for various screen effects (WIP)
+*/
 extern DYNRPG_API ScreenEffect*& effect;
 }
 

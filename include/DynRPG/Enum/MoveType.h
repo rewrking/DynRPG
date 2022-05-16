@@ -49,14 +49,14 @@ enum MoveType
 
 		This command takes one integer parameter: The switch ID.
 		\sa RPG::MT_SWITCH_OFF
-		\sa RPG::Switches
+		\sa RPG::Switch
 	*/
 	MT_SWITCH_ON,
 	/*! \brief Turns a switch OFF
 
 		This command takes one integer parameter: The switch ID.
 		\sa RPG::MT_SWITCH_ON
-		\sa RPG::Switches
+		\sa RPG::Switch
 	*/
 	MT_SWITCH_OFF,
 	/*! \brief Changes the charset graphic of the character
