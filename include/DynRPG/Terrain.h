@@ -75,7 +75,7 @@ public:
 int temp = RPG::terrains[36]->frameBgHorScrollSpeed;
 	\endcode
 */
-extern NamedCatalogPtr<Terrain*>& terrains;
+extern DYNRPG_API NamedCatalogPtr<Terrain*>& terrains;
 }
 
 #endif // DYNRPG_TERRAIN_H

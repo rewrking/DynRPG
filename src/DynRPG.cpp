@@ -44,6 +44,7 @@ void showError(std::string message, int eventId, int pageId, int lineId)
 		s << "...at an unknown or battle event, line " << lineId + 1 << ".";
 	}
 	s << "\r\nContinue game?";
+
 	HWND hWnd = NULL;
 	if (RPG::screen)
 	{

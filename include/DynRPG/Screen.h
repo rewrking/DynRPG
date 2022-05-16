@@ -14,7 +14,7 @@ typedef void AuroraDrawMain;
 /*! \brief Used for the screen, including window properties and FPS
 	\sa RPG::screen
 */
-class Screen // TAuroraDraw
+class DYNRPG_API Screen // TAuroraDraw
 {
 public:
 	void** vTable;
@@ -113,7 +113,7 @@ public:
 	\brief The screen, including window properties, FPS and the drawing
 	canvas
 */
-extern RPG::Screen*& screen;
+extern DYNRPG_API RPG::Screen*& screen;
 
 }
 

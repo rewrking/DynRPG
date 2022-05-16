@@ -149,7 +149,7 @@ public:
 /*! \ingroup game_objects
 		\brief Pointer to the handler for various screen effects (WIP)
 	*/
-extern ScreenEffect*& effect;
+extern DYNRPG_API ScreenEffect*& effect;
 }
 
 #endif // DYNRPG_SCREEN_EFFECT_H

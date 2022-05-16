@@ -104,7 +104,7 @@ public:
 	which are not supposed to be changed in-game.
 	\sa RPG::system
 */
-extern RPG::DBSystem*& dbSystem;
+extern DYNRPG_API RPG::DBSystem*& dbSystem;
 }
 
 #endif // DYNRPG_DB_SYSTEM_H
