@@ -235,7 +235,7 @@ RPG::hero->move(moves.c_str(), moves.length());
 		\sa stop
 		\sa doStep
 	*/
-	void move(const char* data, int length, bool ignoreImpossible = true, bool repeatPattern = false, int frequency = 8);
+	void move(const char* data, int length, bool repeatPattern = false, bool ignoreImpossible = true, int frequency = 8);
 
 	/*! \brief Stops the current movement
 		\warning This is an experimental function.
