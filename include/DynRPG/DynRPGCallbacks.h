@@ -8,7 +8,7 @@
 extern "C"
 {
 #ifndef NOT_MAIN_MODULE
-	int DYNRPG_API linkVersion = DYNRPG_LINK_VERSION;
+	int DYNRPG_API_EXPORT linkVersion = DYNRPG_LINK_VERSION;
 	#ifndef CUSTOM_DLLMAIN
 	HINSTANCE hInstance;
 
@@ -40,7 +40,7 @@ extern "C"
 		\sa onInitFinished
 		\sa onExit
 	*/
-	bool DYNRPG_API __cdecl onStartup(char* pluginName);
+	bool DYNRPG_API_EXPORT __cdecl onStartup(char* pluginName);
 
 	/*!  @function
 		\brief Called after the RPG objects were initialized
@@ -49,16 +49,16 @@ extern "C"
 		function.
 		\sa onStartup
 	*/
-	void DYNRPG_API __cdecl onInitFinished();
+	void DYNRPG_API_EXPORT __cdecl onInitFinished();
 
 	/*!	\brief Called before the title screen is initialized
 
 		This function is called before the title screen fades in.
 	*/
-	void DYNRPG_API __cdecl onInitTitleScreen();
+	void DYNRPG_API_EXPORT __cdecl onInitTitleScreen();
 
 	//! Called before the player starts a new game
-	void DYNRPG_API __cdecl onNewGame();
+	void DYNRPG_API_EXPORT __cdecl onNewGame();
 
 	/*! \brief Called before the player loads a game from a savestate
 
@@ -71,7 +71,7 @@ extern "C"
 		\note \c data may be \c 0 if there is no data.
 		\sa onLoadGame
 	*/
-	void DYNRPG_API __cdecl onLoadGame(int id, char* data, int length);
+	void DYNRPG_API_EXPORT __cdecl onLoadGame(int id, char* data, int length);
 
 	/*! \brief Called before the player saves a game
 
@@ -84,7 +84,7 @@ extern "C"
 		call will take effect.
 		\sa onLoadGame
 	*/
-	void DYNRPG_API __cdecl onSaveGame(int id, void __cdecl (*savePluginData)(char* data, int length));
+	void DYNRPG_API_EXPORT __cdecl onSaveGame(int id, void __cdecl (*savePluginData)(char* data, int length));
 
 	/*! \brief Called before the game exits
 
@@ -98,7 +98,7 @@ extern "C"
 		is active, in case the other handler is pumping messages (for example,
 		it is currently displaying a message box).
 	*/
-	void DYNRPG_API __cdecl onExit();
+	void DYNRPG_API_EXPORT __cdecl onExit();
 
 	/*! \brief Called every frame, before the screen is refreshed (see details!)
 
@@ -126,7 +126,7 @@ extern "C"
 		\sa RPG::System::scene
 		\sa RPG::System::frameCounter
 	*/
-	void DYNRPG_API __cdecl onFrame(RPG::Scene scene);
+	void DYNRPG_API_EXPORT __cdecl onFrame(RPG::Scene scene);
 
 	/*! \brief Called before an in-game variable is set
 
@@ -141,7 +141,7 @@ extern "C"
 		command, but by any action which writes to a variable.
 		\sa onSetSwitch
 	*/
-	bool DYNRPG_API __cdecl onSetVariable(int id, int value);
+	bool DYNRPG_API_EXPORT __cdecl onSetVariable(int id, int value);
 
 	//! \cond
 	/*! \brief Called before an in-game variable is read
@@ -156,7 +156,7 @@ extern "C"
 		\sa onSetSwitch
 		\sa onGetSwitch
 	*/
-	//bool DYNRPG_API __cdecl onGetVariable(int id); // slow!
+	//bool DYNRPG_API_EXPORT __cdecl onGetVariable(int id); // slow!
 	//! \endcond
 
 	/*! \brief Called before an in-game switch is set
@@ -171,7 +171,7 @@ extern "C"
 		command, but by any action which writes to a switch.
 		\sa onSetVariable
 	*/
-	bool DYNRPG_API __cdecl onSetSwitch(int id, bool value);
+	bool DYNRPG_API_EXPORT __cdecl onSetSwitch(int id, bool value);
 
 	//! \cond
 	/*! \brief Called before an in-game switch is read
@@ -186,7 +186,7 @@ extern "C"
 		\sa onGetVariable
 		\sa onSetSwitch
 	*/
-	//bool DYNRPG_API __cdecl onGetSwitch(int id); // slow!
+	//bool DYNRPG_API_EXPORT __cdecl onGetSwitch(int id); // slow!
 	//! \endcond
 
 	/*! \brief Called before an event command is executed
@@ -235,7 +235,7 @@ extern "C"
 		RPG::EVCMD_STOP_EVENT).
 		\sa onComment
 	*/
-	bool DYNRPG_API __cdecl onEventCommand(RPG::EventScriptLine* scriptLine, RPG::EventScriptData* scriptData, int eventId, int pageId, int lineId, int* nextLineId);
+	bool DYNRPG_API_EXPORT __cdecl onEventCommand(RPG::EventScriptLine* scriptLine, RPG::EventScriptData* scriptData, int eventId, int pageId, int lineId, int* nextLineId);
 
 	/*! \brief Called when a "Comment" event command is encountered
 
@@ -272,7 +272,7 @@ extern "C"
 		refer to the \ref onEventCommand documentation.
 		\sa onEventCommand
 	*/
-	bool DYNRPG_API __cdecl onComment(const char* text, const RPG::ParsedCommentData* parsedData, RPG::EventScriptLine* nextScriptLine, RPG::EventScriptData* scriptData, int eventId, int pageId, int lineId, int* nextLineId);
+	bool DYNRPG_API_EXPORT __cdecl onComment(const char* text, const RPG::ParsedCommentData* parsedData, RPG::EventScriptLine* nextScriptLine, RPG::EventScriptData* scriptData, int eventId, int pageId, int lineId, int* nextLineId);
 
 	/*! \brief Called when the screen is drawn on the game window
 
@@ -288,7 +288,7 @@ extern "C"
 		certain screen transitions (where \ref onFrame doesn't work).
 		\sa onFrame
 	*/
-	void DYNRPG_API __cdecl onDrawScreen();
+	void DYNRPG_API_EXPORT __cdecl onDrawScreen();
 
 	/*! \brief Called before a picture is drawn
 
@@ -302,7 +302,7 @@ extern "C"
 		still be called.
 		\sa onPictureDrawn
 	*/
-	bool DYNRPG_API __cdecl onDrawPicture(RPG::Picture* picture);
+	bool DYNRPG_API_EXPORT __cdecl onDrawPicture(RPG::Picture* picture);
 
 	/*! \brief Called after a picture was drawn (or was supposed to be drawn)
 
@@ -315,7 +315,7 @@ extern "C"
 		\c false from its \ref onDrawPicture handler for this picture.
 		\sa onDrawPicture
 	*/
-	bool DYNRPG_API __cdecl onPictureDrawn(RPG::Picture* picture);
+	bool DYNRPG_API_EXPORT __cdecl onPictureDrawn(RPG::Picture* picture);
 
 	/*! \brief Called every frame to check whether an event should be drawn
 		even though it is out of sight
@@ -337,7 +337,7 @@ extern "C"
 		\sa onDrawEvent
 		\sa onEventDrawn
 	*/
-	bool DYNRPG_API __cdecl onCheckEventVisibility(RPG::Character* character);
+	bool DYNRPG_API_EXPORT __cdecl onCheckEventVisibility(RPG::Character* character);
 
 	/*! \brief Called before an event or the hero is drawn
 
@@ -357,7 +357,7 @@ extern "C"
 		event.
 		\sa onEventDrawn
 	*/
-	bool DYNRPG_API __cdecl onDrawEvent(RPG::Character* character, bool isHero);
+	bool DYNRPG_API_EXPORT __cdecl onDrawEvent(RPG::Character* character, bool isHero);
 
 	/*! \brief Called after an event or the hero was drawn (or was supposed to
 		be drawn)
@@ -376,7 +376,7 @@ extern "C"
 		event.
 		\sa onDrawEvent
 	*/
-	bool DYNRPG_API __cdecl onEventDrawn(RPG::Character* character, bool isHero);
+	bool DYNRPG_API_EXPORT __cdecl onEventDrawn(RPG::Character* character, bool isHero);
 
 	/*! \brief Called before a battler is drawn
 
@@ -395,7 +395,7 @@ extern "C"
 		fading out).
 		\sa onBattlerDrawn
 	*/
-	bool DYNRPG_API __cdecl onDrawBattler(RPG::Battler* battler, bool isMonster, int id);
+	bool DYNRPG_API_EXPORT __cdecl onDrawBattler(RPG::Battler* battler, bool isMonster, int id);
 
 	/*! \brief Called after a battler was drawn (or supposed to be drawn)
 
@@ -412,7 +412,7 @@ extern "C"
 		fading out).
 		\sa onDrawBattler
 	*/
-	bool DYNRPG_API __cdecl onBattlerDrawn(RPG::Battler* battler, bool isMonster, int id);
+	bool DYNRPG_API_EXPORT __cdecl onBattlerDrawn(RPG::Battler* battler, bool isMonster, int id);
 
 	/*! \brief Called before the battle status window is drawn
 
@@ -447,7 +447,7 @@ extern "C"
 		case, \c isVisible will be \c false.
 		\sa onBattleStatusWindowDrawn
 	*/
-	bool DYNRPG_API __cdecl onDrawBattleStatusWindow(int x, int selection, bool selActive, bool isTargetSelection, bool isVisible);
+	bool DYNRPG_API_EXPORT __cdecl onDrawBattleStatusWindow(int x, int selection, bool selActive, bool isTargetSelection, bool isVisible);
 
 	/*! \brief Called after the battle status window was drawn (or supposed to
 		be drawn)
@@ -473,7 +473,7 @@ extern "C"
 		more about the \c isTargetSelection parameter!
 		\sa onDrawBattleStatusWindow
 	*/
-	bool DYNRPG_API __cdecl onBattleStatusWindowDrawn(int x, int selection, bool selActive, bool isTargetSelection, bool isVisible);
+	bool DYNRPG_API_EXPORT __cdecl onBattleStatusWindowDrawn(int x, int selection, bool selActive, bool isTargetSelection, bool isVisible);
 
 	/*! \brief Called before the battle action window is drawn
 
@@ -505,7 +505,7 @@ extern "C"
 		case, \c isVisible will be \c false.
 		\sa onBattleStatusWindowDrawn
 	*/
-	bool DYNRPG_API __cdecl onDrawBattleActionWindow(int* x, int* y, int selection, bool selActive, bool isVisible);
+	bool DYNRPG_API_EXPORT __cdecl onDrawBattleActionWindow(int* x, int* y, int selection, bool selActive, bool isVisible);
 
 	/*! \brief Called before a battler's action is executed
 
@@ -531,7 +531,7 @@ extern "C"
 		\sa onBattlerActionDone
 		\sa RPG::Action
 	*/
-	bool DYNRPG_API __cdecl onDoBattlerAction(RPG::Battler* battler, bool firstTry);
+	bool DYNRPG_API_EXPORT __cdecl onDoBattlerAction(RPG::Battler* battler, bool firstTry);
 
 	/*! \brief Called after a battler's action is executed
 
@@ -552,7 +552,7 @@ extern "C"
 		\sa onDoBattlerAction
 		\sa RPG::Action
 	*/
-	bool DYNRPG_API __cdecl onBattlerActionDone(RPG::Battler* battler, bool success);
+	bool DYNRPG_API_EXPORT __cdecl onBattlerActionDone(RPG::Battler* battler, bool success);
 
 	/*! \brief Called after the system background was drawn
 
@@ -563,7 +563,7 @@ extern "C"
 		drawn, in the other menus, the whole screen is painted. Pay attention
 		to the \c rect parameter.
 	*/
-	bool DYNRPG_API __cdecl onSystemBackgroundDrawn(RECT* rect);
+	bool DYNRPG_API_EXPORT __cdecl onSystemBackgroundDrawn(RECT* rect);
 	/** @} */
 }
 
