@@ -1,0 +1,16 @@
+#ifndef DYNRPG_ANIMATION_FRAME_CHARSET_H
+#define DYNRPG_ANIMATION_FRAME_CHARSET_H
+
+namespace RPG
+{
+//! Possible values for RPG::Character::step
+enum AnimationFrameCharset
+{
+	ANI_FRAME_LEFT,
+	ANI_FRAME_MIDDLE_A,
+	ANI_FRAME_RIGHT,
+	ANI_FRAME_MIDDLE_B
+};
+}
+
+#endif // DYNRPG_ANIMATION_FRAME_CHARSET_H

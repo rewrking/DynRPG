@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Win32 (MinGW)",
+            "intelliSenseMode": "windows-gcc-x86",
+            "compilerPath": "C:/mingw32/bin/g++.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "includePath": [
+                "${workspaceFolder}/include"
+            ],
+            "defines": [
+                "_WIN32",
+                "_DEBUG",
+                "DYNRPG_EXPORTS"
+            ],
+            "forcedInclude": [
+                "${workspaceFolder}/src/PCH.hpp"
+            ]
+        }
+    ],
+    "version": 4
+}

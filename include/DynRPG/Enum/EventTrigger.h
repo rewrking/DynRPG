@@ -1,0 +1,18 @@
+#ifndef DYNRPG_EVENT_TRIGGER_H
+#define DYNRPG_EVENT_TRIGGER_H
+
+namespace RPG
+{
+//! Event trigger
+enum EventTrigger
+{
+	ET_ACTION_KEY,
+	ET_PLAYER_TOUCH,
+	ET_EVENT_TOUCH,
+	ET_AUTOSTART,
+	ET_PARALLEL,
+	ET_NONE
+};
+}
+
+#endif // DYNRPG_EVENT_TRIGGER_H

@@ -1,0 +1,19 @@
+#ifndef DYNRPG_BATTLE_COMMAND_ARCHETYPE_H
+#define DYNRPG_BATTLE_COMMAND_ARCHETYPE_H
+
+namespace RPG
+{
+//! Possible values for RPG::BattleCommands::archetype
+enum BattleCommandArchetype
+{
+	BCOM_ATTACK,
+	BCOM_SKILL,
+	BCOM_SKILL_SUBSET,
+	BCOM_DEFEND,
+	BCOM_ITEM,
+	BCOM_ESCAPE,
+	BCOM_LINK_TO_EVENT
+};
+}
+
+#endif // DYNRPG_BATTLE_COMMAND_ARCHETYPE_H
