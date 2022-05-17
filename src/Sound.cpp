@@ -1,5 +1,7 @@
 #include <DynRPG/Sound.h>
 
+#include <DynRPG/System.h>
+
 namespace RPG
 {
 Sound::Sound()

@@ -4,10 +4,7 @@ namespace RPG
 {
 DString::operator std::string() const
 {
-	std::string s = "";
-	if (this)
-		s = std::string(reinterpret_cast<const char*>(this), reinterpret_cast<const int*>(this)[-1]);
-	return s;
+	return std::string(reinterpret_cast<const char*>(this), reinterpret_cast<const int*>(this)[-1]);
 }
 
 DString::operator char*() const
@@ -17,8 +14,6 @@ DString::operator char*() const
 
 int DString::length()
 {
-	if (this)
-		return reinterpret_cast<const int*>(this)[-1];
-	return 0;
+	return reinterpret_cast<const int*>(this)[-1];
 }
 }

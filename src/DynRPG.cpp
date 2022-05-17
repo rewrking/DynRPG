@@ -357,6 +357,8 @@ void openMenu(MenuSubScreen screen, int heroId, int skillOrItemId)
 							 : "edx", "ecx", "cc", "memory");
 				break;
 			}
+			default:
+				break;
 		}
 	}
 }
