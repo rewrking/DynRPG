@@ -13,7 +13,9 @@
 	#error Sorry, this DynRPG version needs at least GNU C++ version 4.7.1! See gcc.gnu.org
 #endif
 
-#if !defined(DYNRPG_STATIC) && defined(__GNUC__)
+#define DYNLOADER_EXPORT __declspec(dllexport)
+
+#if defined(DYNRPG_SHARED) && defined(__GNUC__)
 	#define DYNRPG_API_EXPORT __declspec(dllexport)
 	#define DYNRPG_API_IMPORT __declspec(dllimport)
 #else

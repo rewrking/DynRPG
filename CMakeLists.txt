@@ -17,16 +17,22 @@ file(GLOB_RECURSE SOURCES
 	src/*.cpp
 )
 
-add_library(${TARGET_NAME} SHARED ${SOURCES})
-target_precompile_headers(${TARGET_NAME} PRIVATE src/PCH.hpp)
+if (DYNRPG_SHARED)
+	add_library(${TARGET_NAME} SHARED ${SOURCES})
+	set_target_properties(${TARGET_NAME} PROPERTIES PREFIX "")
+	set_target_properties(${TARGET_NAME} PROPERTIES IMPORT_SUFFIX ".a")
+	set_directory_properties(PROPERTIES COMPILE_DEFINITIONS "DYNRPG_SHARED")
+else()
+	add_library(${TARGET_NAME} STATIC ${SOURCES})
+endif()
 
-set_target_properties(${TARGET_NAME} PROPERTIES PREFIX "")
-set_target_properties(${TARGET_NAME} PROPERTIES IMPORT_SUFFIX ".a")
+target_precompile_headers(${TARGET_NAME} PRIVATE
+	src/PCH.hpp
+)
 set_target_properties(${TARGET_NAME} PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY
 		${CMAKE_SOURCE_DIR}/lib
 )
-
 target_include_directories(${TARGET_NAME}
 	PRIVATE
 		src/
