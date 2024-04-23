@@ -108,7 +108,7 @@ public:
 
 	Example:
 	\code
-int swordHitProb = RPG::items[36]->hitProb;
+	int swordHitProb = RPG::items[36]->hitProb;
 	\endcode
 	\sa RPG::inventory
 */

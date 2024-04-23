@@ -21,11 +21,7 @@ extern "C"
 	#endif // CUSTOM_DLLMAIN
 #endif // NOT_MAIN_MODULE
 
-	/*! \defgroup callbacks Callbacks
-		@{
-	*/
-
-	/*! @function
+	/*! \ingroup callbacks
 		\brief Called when the plugin was loaded
 
 		This callback handler should be used to check for fatal problems, like
@@ -42,7 +38,7 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onStartup(char* pluginName);
 
-	/*!  @function
+	/*! \ingroup callbacks
 		\brief Called after the RPG objects were initialized
 
 		Unlike in \ref onStartup, it is safe to access RPG objects from this
@@ -51,7 +47,8 @@ extern "C"
 	*/
 	void DYNLOADER_EXPORT __cdecl onInitFinished();
 
-	/*!	\brief Called before the title screen is initialized
+	/*!	\ingroup callbacks
+		\brief Called before the title screen is initialized
 
 		This function is called before the title screen fades in.
 	*/
@@ -60,7 +57,8 @@ extern "C"
 	//! Called before the player starts a new game
 	void DYNLOADER_EXPORT __cdecl onNewGame();
 
-	/*! \brief Called before the player loads a game from a savestate
+	/*! \ingroup callbacks
+		\brief Called before the player loads a game from a savestate
 
 		DynRPG loads plugin data which was previously saved in the
 		\ref onSaveGame function and passes it to this handler. See \ref ingame_data
@@ -73,7 +71,8 @@ extern "C"
 	*/
 	void DYNLOADER_EXPORT __cdecl onLoadGame(int id, char* data, int length);
 
-	/*! \brief Called before the player saves a game
+	/*! \ingroup callbacks
+		\brief Called before the player saves a game
 
 		Use the function passed in the \c savePluginData parameter to save
 		custom plugin data which will be passed back to the plugin when the
@@ -86,7 +85,8 @@ extern "C"
 	*/
 	void DYNLOADER_EXPORT __cdecl onSaveGame(int id, void __cdecl (*savePluginData)(char* data, int length));
 
-	/*! \brief Called before the game exits
+	/*! \ingroup callbacks
+		\brief Called before the game exits
 
 		\note It's recommended to wrap your code in a <tt>try..catch</tt> block
 		because if the game exits after an error (before \ref onInitFinished was
@@ -100,7 +100,8 @@ extern "C"
 	*/
 	void DYNLOADER_EXPORT __cdecl onExit();
 
-	/*! \brief Called every frame, before the screen is refreshed (see details!)
+	/*! \ingroup callbacks
+		\brief Called every frame, before the screen is refreshed (see details!)
 
 		This function is called after every frame (see details below!), right after the current game
 		scene was drawn, but before it becomes visible to the player. You may
@@ -128,7 +129,8 @@ extern "C"
 	*/
 	void DYNLOADER_EXPORT __cdecl onFrame(RPG::Scene scene);
 
-	/*! \brief Called before an in-game variable is set
+	/*! \ingroup callbacks
+		\brief Called before an in-game variable is set
 
 		This function can be used to give "Change Variable" commands a special
 		meaning. This might be suitable for applications for which a full
@@ -144,7 +146,8 @@ extern "C"
 	bool DYNLOADER_EXPORT __cdecl onSetVariable(int id, int value);
 
 	//! \cond
-	/*! \brief Called before an in-game variable is read
+	/*! \ingroup callbacks
+		\brief Called before an in-game variable is read
 
 		This function can be used to give variables special functions, for
 		example reading the mouse position. You may change the variable in
@@ -159,7 +162,8 @@ extern "C"
 	//bool DYNLOADER_EXPORT __cdecl onGetVariable(int id); // slow!
 	//! \endcond
 
-	/*! \brief Called before an in-game switch is set
+	/*! \ingroup callbacks
+		\brief Called before an in-game switch is set
 
 		This function can be used to give "Change Switch" commands a special
 		meaning.
@@ -174,7 +178,8 @@ extern "C"
 	bool DYNLOADER_EXPORT __cdecl onSetSwitch(int id, bool value);
 
 	//! \cond
-	/*! \brief Called before an in-game switch is read
+	/*! \ingroup callbacks
+		\brief Called before an in-game switch is read
 
 		This function can be used to give switches special functions, for
 		example reading a key's status. You may change the switch in this
@@ -189,7 +194,8 @@ extern "C"
 	//bool DYNLOADER_EXPORT __cdecl onGetSwitch(int id); // slow!
 	//! \endcond
 
-	/*! \brief Called before an event command is executed
+	/*! \ingroup callbacks
+		\brief Called before an event command is executed
 
 		You can use this function to intercept event commands, use them for a
 		different purpose or change their parameters.
@@ -237,7 +243,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onEventCommand(RPG::EventScriptLine* scriptLine, RPG::EventScriptData* scriptData, int eventId, int pageId, int lineId, int* nextLineId);
 
-	/*! \brief Called when a "Comment" event command is encountered
+	/*! \ingroup callbacks
+		\brief Called when a "Comment" event command is encountered
 
 		You can use this function to provide functions which are executed when
 		a special event comment is encountered. Please stick to the
@@ -274,7 +281,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onComment(const char* text, const RPG::ParsedCommentData* parsedData, RPG::EventScriptLine* nextScriptLine, RPG::EventScriptData* scriptData, int eventId, int pageId, int lineId, int* nextLineId);
 
-	/*! \brief Called when the screen is drawn on the game window
+	/*! \ingroup callbacks
+		\brief Called when the screen is drawn on the game window
 
 		Unlike \ref onFrame, this function is called when the screen content
 		is actually drawn on the game window. This means that if a section
@@ -290,7 +298,8 @@ extern "C"
 	*/
 	void DYNLOADER_EXPORT __cdecl onDrawScreen();
 
-	/*! \brief Called before a picture is drawn
+	/*! \ingroup callbacks
+		\brief Called before a picture is drawn
 
 		You can use this function to draw something below a certain picture,
 		or instead of the picture.
@@ -304,7 +313,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onDrawPicture(RPG::Picture* picture);
 
-	/*! \brief Called after a picture was drawn (or was supposed to be drawn)
+	/*! \ingroup callbacks
+		\brief Called after a picture was drawn (or was supposed to be drawn)
 
 		You can use this function to draw something above a certain picture.
 		\param picture The picture which is was drawn (or was supposed to be
@@ -317,7 +327,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onPictureDrawn(RPG::Picture* picture);
 
-	/*! \brief Called every frame to check whether an event should be drawn
+	/*! \ingroup callbacks
+		\brief Called every frame to check whether an event should be drawn
 		even though it is out of sight
 
 		Use this function in case you want to draw larger graphics instead of an
@@ -339,7 +350,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onCheckEventVisibility(RPG::Character* character);
 
-	/*! \brief Called before an event or the hero is drawn
+	/*! \ingroup callbacks
+		\brief Called before an event or the hero is drawn
 
 		You can use this function to draw something below a certain event,
 		or instead of the event.
@@ -359,7 +371,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onDrawEvent(RPG::Character* character, bool isHero);
 
-	/*! \brief Called after an event or the hero was drawn (or was supposed to
+	/*! \ingroup callbacks
+		\brief Called after an event or the hero was drawn (or was supposed to
 		be drawn)
 
 		You can use this function to draw something above a certain event.
@@ -378,7 +391,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onEventDrawn(RPG::Character* character, bool isHero);
 
-	/*! \brief Called before a battler is drawn
+	/*! \ingroup callbacks
+		\brief Called before a battler is drawn
 
 		You can use this function to draw something below a certain battler,
 		or instead of the battler.
@@ -397,7 +411,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onDrawBattler(RPG::Battler* battler, bool isMonster, int id);
 
-	/*! \brief Called after a battler was drawn (or supposed to be drawn)
+	/*! \ingroup callbacks
+		\brief Called after a battler was drawn (or supposed to be drawn)
 
 		You can use this function to draw something above a certain battler.
 		\param battler The battler which was drawn (or supposed to be drawn)
@@ -414,7 +429,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onBattlerDrawn(RPG::Battler* battler, bool isMonster, int id);
 
-	/*! \brief Called before the battle status window is drawn
+	/*! \ingroup callbacks
+		\brief Called before the battle status window is drawn
 
 		You can use this function to draw below the battle status window, or to
 		replace it entirely.
@@ -449,7 +465,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onDrawBattleStatusWindow(int x, int selection, bool selActive, bool isTargetSelection, bool isVisible);
 
-	/*! \brief Called after the battle status window was drawn (or supposed to
+	/*! \ingroup callbacks
+		\brief Called after the battle status window was drawn (or supposed to
 		be drawn)
 
 		You can use this function to draw something above the battle status
@@ -475,7 +492,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onBattleStatusWindowDrawn(int x, int selection, bool selActive, bool isTargetSelection, bool isVisible);
 
-	/*! \brief Called before the battle action window is drawn
+	/*! \ingroup callbacks
+		\brief Called before the battle action window is drawn
 
 		You can use this function to draw below the battle action window, or to
 		replace it entirely.
@@ -507,7 +525,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onDrawBattleActionWindow(int* x, int* y, int selection, bool selActive, bool isVisible);
 
-	/*! \brief Called before a battler's action is executed
+	/*! \ingroup callbacks
+		\brief Called before a battler's action is executed
 
 		This function can be used to modify a battler's action before it is
 		executed. For example, you might add a "random" skill which randomly
@@ -533,7 +552,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onDoBattlerAction(RPG::Battler* battler, bool firstTry);
 
-	/*! \brief Called after a battler's action is executed
+	/*! \ingroup callbacks
+		\brief Called after a battler's action is executed
 
 		\param battler The battler which is executing its action
 		\param success \c true if the action was successfully executed or
@@ -554,7 +574,8 @@ extern "C"
 	*/
 	bool DYNLOADER_EXPORT __cdecl onBattlerActionDone(RPG::Battler* battler, bool success);
 
-	/*! \brief Called after the system background was drawn
+	/*! \ingroup callbacks
+		\brief Called after the system background was drawn
 
 		This function can be used to draw your custom background in the menu,
 		etc.
@@ -564,7 +585,6 @@ extern "C"
 		to the \c rect parameter.
 	*/
 	bool DYNLOADER_EXPORT __cdecl onSystemBackgroundDrawn(RECT* rect);
-	/** @} */
 }
 
 #endif // DYNRPG_CALLBACKS_H

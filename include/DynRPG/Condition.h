@@ -73,7 +73,7 @@ public:
 
 	Example:
 	\code
-int condPercentage = RPG::conditions[9]->susC;
+	int condPercentage = RPG::conditions[9]->susC;
 	\endcode
 */
 extern DYNRPG_API RPG::NamedCatalogPtr<RPG::Condition*>& conditions;

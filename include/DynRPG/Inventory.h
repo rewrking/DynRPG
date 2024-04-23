@@ -120,7 +120,7 @@ public:
 
 	Example:
 	\code
-int goldAmount = RPG::inventory->goldAmount;
+	int goldAmount = RPG::inventory->goldAmount;
 	\endcode
 	\sa RPG::items
 */

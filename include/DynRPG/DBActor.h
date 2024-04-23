@@ -125,7 +125,7 @@ public:
 
 	Example:
 	\code
-int zackUnarmedAnimation = RPG::dbActors[1]->unarmedBattleAnimationId;
+	int zackUnarmedAnimation = RPG::dbActors[1]->unarmedBattleAnimationId;
 	\endcode
 	\sa RPG::actors
 */

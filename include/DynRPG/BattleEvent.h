@@ -41,7 +41,7 @@ public:
 
 	Example:
 	\code
-std::string temp = RPG::battleEvents->eventPageDone[0]);
+	std::string temp = RPG::battleEvents->eventPageDone[0]);
 	\endcode
 */
 extern DYNRPG_API RPG::BattleEvent*& battleEvents;

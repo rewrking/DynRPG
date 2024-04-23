@@ -11,10 +11,10 @@ namespace RPG
 
 	If you need to enumerate all items in an RPG::NamedCatalog, use
 	\code
-for(int i = 0; i < myCatalog.count(); i++) {
-SomeObjectType *item = myCatalog.list[i];
-// Processing here...
-}
+	for(int i = 0; i < myCatalog.count(); i++) {
+		SomeObjectType *item = myCatalog.list[i];
+		// Processing here...
+	}
 	\endcode
 	If you have an RPG::NamedCatalogPtr, it works the same way.
 	\sa RPG::Catalog

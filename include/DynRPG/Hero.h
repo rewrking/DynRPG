@@ -55,8 +55,12 @@ public:
 	*/
 	void act();
 
+	/*! \brief Check for event overlap
+	*/
 	void checkEventOverlapTrigger(EventTrigger triggerType, bool startedByActionButton);
 
+	/*! \brief Check for event in front
+	*/
 	void checkEventInFrontTrigger(EventTrigger triggerType, bool startedByActionButton);
 };
 

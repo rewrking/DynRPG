@@ -67,7 +67,7 @@ public:
 		exist". Use a failsafe like this (\c 0 stands for the idle
 		animation):
 		\code
-if(battler->animationId == 9) battler->animationId = 0;
+		if(battler->animationId == 9) battler->animationId = 0;
 		\endcode
 	*/
 	DArray<short, 1> conditions;

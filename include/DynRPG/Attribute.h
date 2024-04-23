@@ -35,7 +35,7 @@ public:
 
 	Example:
 	\code
-int attribPercentage = RPG::attributes[4]->dmgA;
+	int attribPercentage = RPG::attributes[4]->dmgA;
 	\endcode
 */
 extern DYNRPG_API RPG::NamedCatalogPtr<RPG::Attribute*>& attributes;

@@ -47,7 +47,7 @@ public:
 
 	Example:
 	\code
-std::string animationName = RPG::battleAnimations[4]->filename.s_str());
+	std::string animationName = RPG::battleAnimations[4]->filename.s_str());
 	\endcode
 */
 extern DYNRPG_API RPG::NamedCatalogPtr<RPG::Animation*>& battleAnimations;

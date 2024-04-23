@@ -30,7 +30,6 @@ public:
 
 		Allows you to write <tt>RPG::getCommonEventLine(12,1)->command</tt> instead of <tt>RPG::commonEvents[12]->scriptLines->list->items[1]->command</tt> which gets the 2nd line of common event 12.
 
-		\param id The common event ID (one-based)
 		\param lineId The line ID (zero-based)
 
 		\sa RPG::CommonEvent

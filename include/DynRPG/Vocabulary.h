@@ -11,7 +11,7 @@ namespace RPG
 
 	Example:
 	\code
-std::string victoryMessage = RPG::vocabulary[3]
+	std::string victoryMessage = RPG::vocabulary[3]
 	\endcode
 
 	Indexes are:

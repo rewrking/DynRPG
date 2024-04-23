@@ -53,8 +53,8 @@ public:
 
 		Example:
 		\code
-RPG::Sound newSound("Cursor2", 100, 100, 50);
-RPG::system->cursorSE->set(newSound);
+		RPG::Sound newSound("Cursor2", 100, 100, 50);
+		RPG::system->cursorSE->set(newSound);
 		\endcode
 		\sa Sound(RPG::Sound &)
 	*/

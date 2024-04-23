@@ -37,7 +37,6 @@ public:
 
 		Allows you to write <tt>RPG::getBattleEventLine(23,1,1)->command</tt> instead of <tt>RPG::dbMonsterGroups[23]->battleEventPages[1]->scriptLines->list->items[1]->command</tt> which gets the 2nd line on the 2nd page of monster group 23.
 
-		\param monsterGroup The monster group ID (one-based)
 		\param battleEventPage The monster group's battle event page ID (zero-based)
 		\param lineId The line ID (zero-based)
 
@@ -54,7 +53,7 @@ public:
 
 	Example:
 	\code
-int monCrit = RPG::dbMonsterGroups[1]->critPercentage;
+	int monCrit = RPG::dbMonsterGroups[1]->critPercentage;
 	\endcode
 */
 extern DYNRPG_API RPG::NamedCatalogPtr<RPG::DBMonsterGroup*>& dbMonsterGroups;

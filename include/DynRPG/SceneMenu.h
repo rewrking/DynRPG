@@ -38,6 +38,7 @@ public:
 	WindowMenuEquip* winEquip; //!< Pointer to the Equip window's objects. (See RPG::WindowMenuEquip)
 	WindowMenuEnd* winQuit; //!< Pointer to the Quit window's objects. (See RPG::WindowMenuEnd)
 	int scrollUpCountItem; //!< The number of rows off-screen after a scroll (for items)
+
 	/*! \brief The item selection index (relative to the screen).
 		\note indexes are zero-based starting from the top-left, and zig-zag to the right position, followed by the down-left position.
 	*/

@@ -118,7 +118,7 @@ public:
 	bool isFlying; //!< Flying flag for airship
 	DStringPtr charsetFilename; //!< Filename of the current charset
 	int charsetId; //!< ID of the current charset
-	bool eventUpdatedThisFrame; // corrected from onMap
+	bool eventUpdatedThisFrame; //!< Was the character's event updated this frame?
 	int flashR; //!< The red value for sprite flashing
 	int flashG; //!< The green value for sprite flashing
 	int flashB; //!< The blue value for sprite flashing
@@ -194,8 +194,8 @@ public:
 
 		Example:
 		\code
-char moves[] = {RPG::MT_MOVE_UP, RPG::MT_MOVE_RIGHT, RPG::MT_MOVE_RIGHT, RPG::MT_TURN_RANDOMLY, RPG::MT_MOVE_FORWARD};
-RPG::hero->move(moves, sizeof(moves));
+		char moves[] = {RPG::MT_MOVE_UP, RPG::MT_MOVE_RIGHT, RPG::MT_MOVE_RIGHT, RPG::MT_TURN_RANDOMLY, RPG::MT_MOVE_FORWARD};
+		RPG::hero->move(moves, sizeof(moves));
 		\endcode
 
 		There are, however, a few commands which take parameters:

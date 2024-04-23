@@ -72,7 +72,7 @@ public:
 
 	Example:
 	\code
-int temp = RPG::terrains[36]->frameBgHorScrollSpeed;
+	int temp = RPG::terrains[36]->frameBgHorScrollSpeed;
 	\endcode
 */
 extern DYNRPG_API NamedCatalogPtr<Terrain*>& terrains;

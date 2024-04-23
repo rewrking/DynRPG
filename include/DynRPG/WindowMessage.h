@@ -16,7 +16,7 @@ class DYNRPG_API WindowMessage : public Window
 public:
 	Window* winGold; //!< Pointer to gold window
 		//int _unknown_7C; // Message box text... not yet implemented // Doesn't crash: DList<DStringPtr > *text
-	WindowMessageBox* text;
+	WindowMessageBox* text; //!< Pointer to the message box text
 	int currentTextRow; //!< The current row of the text being drawn (1-4)
 	int currentTextColumn; //!< The current column of the text being drawn (1-??)
 	int currentTextX; //!< The x-coordinate of the text being drawn, relative to where the text started drawing

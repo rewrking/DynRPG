@@ -11,6 +11,16 @@ endif()
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if (NOT DEFINED DYNRPG_SHARED)
+	set(DYNRPG_SHARED ON)
+endif()
+message(STATUS "DYNRPG_SHARED: ${DYNRPG_SHARED}")
+
+if (NOT DEFINED DYNRPG_BUILD_DOCS)
+	set(DYNRPG_BUILD_DOCS ON)
+endif()
+message(STATUS "DYNRPG_BUILD_DOCS: ${DYNRPG_BUILD_DOCS}")
+
 set(TARGET_NAME DynRPG)
 
 file(GLOB_RECURSE SOURCES
@@ -38,3 +48,18 @@ target_include_directories(${TARGET_NAME}
 		src/
 		include
 )
+
+if(DYNRPG_BUILD_DOCS)
+	find_package(Doxygen COMPONENTS doxygen)
+
+	if(DOXYGEN_EXECUTABLE)
+		set(DOXYGEN_GENERATE_HTML ON)
+		add_custom_target(docs ALL BYPRODUCTS
+			COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Doxyfile.cfg
+			WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+			COMMENT "Generating API documentation with Doxygen"
+		)
+	else()
+		message(FATAL_ERROR "doxygen not found")
+	endif()
+endif()

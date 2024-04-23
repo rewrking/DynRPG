@@ -83,7 +83,7 @@ public:
 
 	Example:
 	\code
-int animationId = RPG::skills[4]->battleAnimId;
+	int animationId = RPG::skills[4]->battleAnimId;
 	\endcode
 */
 extern DYNRPG_API NamedCatalogPtr<Skill*>& skills;

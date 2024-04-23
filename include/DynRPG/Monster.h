@@ -40,7 +40,7 @@ public:
 	static AnimationInBattle*& animData;
 
 	/*! \brief Built-in RM2k3 function that transforms an enemy into a new monster (ATB unaltered)
-		\param id The database ID of the monster to transform into
+		\param monsterId The database ID of the monster to transform into
 	*/
 	void transform(int monsterId);
 
@@ -59,7 +59,7 @@ public:
 
 	Example:
 	\code
-int slimeHp = RPG::monsters[2]->hp; // read HP of third monster
+	int slimeHp = RPG::monsters[2]->hp; // read HP of third monster
 	\endcode
 	\sa RPG::Battler
 	\sa RPG::actors

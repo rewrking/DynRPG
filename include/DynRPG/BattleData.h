@@ -105,7 +105,7 @@ public:
 
 	Example:
 	\code
-std::string backdropName = RPG::battleData->backdropFilename.s_str());
+	std::string backdropName = RPG::battleData->backdropFilename.s_str());
 	\endcode
 */
 extern DYNRPG_API RPG::BattleData*& battleData;

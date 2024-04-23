@@ -74,7 +74,6 @@ public:
 	void updateEvents();
 
 	/*! \brief Gets the tile ID for the lower layer tile at the specified coordinate
-		\param map The map being checked. For now, just RPG::map is supported as it's not (yet?) possible to check maps the player isn't on
 		\param x The Y coordinate of the tile
 		\param y The Y coordinate of the tile
 		\sa RPG::Tileset::lowerTilePassability
@@ -82,7 +81,6 @@ public:
 	int getLowerLayerTileId(int x, int y);
 
 	/*! \brief Gets the tile ID for the upper layer tile at the specified coordinate
-		\param map The map being checked. For now, just RPG::map is supported as it's not (yet?) possible to check maps the player isn't on
 		\param x The Y coordinate of the tile
 		\param y The Y coordinate of the tile
 		\sa RPG::Tileset::upperTilePassability

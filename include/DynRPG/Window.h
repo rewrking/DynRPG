@@ -59,7 +59,6 @@ public:
 	~Window(); //!< Experimental
 
 	/*! \brief Experimental
-		\param window The window to be created
 		\param width The width of the window
 		\param height The height of the window
 		\param x The X-coordinate of the window, based on the upper-left
@@ -73,14 +72,12 @@ public:
 	void updateCursor(int choice); //!< Experimental
 
 	/*! \brief Clears the specified window of any text, so that it can be drawn on again.
-		\param window The window to be cleared
 	*/
 	void clear(); //!< Experimental
 
 	void refresh(); //!< Experimental
 
 	/*! \brief Removes the specified window object and all of its components
-		\param window The window to be cleared
 	*/
 	void destroy(); //!< Experimental
 

@@ -96,7 +96,7 @@ public:
 
 	Example:
 	\code
-int monCrit = RPG::dbMonsters[1]->critPercentage;
+	int monCrit = RPG::dbMonsters[1]->critPercentage;
 	\endcode
 	\sa RPG::monsters
 */

@@ -9,7 +9,9 @@ cd build
 
 @REM echo %Path%
 
-cmake.exe -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+@REM cmake.exe -G "MinGW Makefiles" -DDYNRPG_SHARED=ON -DCMAKE_BUILD_TYPE=Release -DDYNRPG_BUILD_DOCS=OFF ..
+cmake.exe -G "MinGW Makefiles" -DDYNRPG_SHARED=ON -DCMAKE_BUILD_TYPE=Release ..
+cmake.exe --version
 mingw32-make.exe -j8
 
 cd ..

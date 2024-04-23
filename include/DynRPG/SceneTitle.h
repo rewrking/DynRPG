@@ -31,10 +31,10 @@ public:
 
 	Example:
 	\code
-if (RPG::title->winStartLoadEnd) { // Moves the title screen window to position 0,32.
-RPG::title->winStartLoadEnd->x = 0;
-RPG::title->winStartLoadEnd->y = 32;
-}
+	if (RPG::title->winStartLoadEnd) { // Moves the title screen window to position 0,32.
+		RPG::title->winStartLoadEnd->x = 0;
+		RPG::title->winStartLoadEnd->y = 32;
+	}
 	\endcode
 */
 extern DYNRPG_API SceneTitle*& title;

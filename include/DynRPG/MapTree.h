@@ -41,8 +41,8 @@ public:
 
 	Example:
 	\code
-bool isThisAnArea = RPG::mapTree->properties[id]->isArea;
-int parent = RPG::mapTree->properties[RPG::mapTree->getMapTreeIndex(id)]->parentMapId;
+	bool isThisAnArea = RPG::mapTree->properties[id]->isArea;
+	int parent = RPG::mapTree->properties[RPG::mapTree->getMapTreeIndex(id)]->parentMapId;
 	\endcode
 	\sa RPG::map
 */

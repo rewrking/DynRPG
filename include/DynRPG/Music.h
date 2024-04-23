@@ -55,8 +55,8 @@ public:
 
 		Example:
 		\code
-RPG::Music newMusic("Boss1", 0, 100, 100, 50);
-RPG::system->battleBGM->set(newMusic);
+		RPG::Music newMusic("Boss1", 0, 100, 100, 50);
+		RPG::system->battleBGM->set(newMusic);
 		\endcode
 		\sa Music(Music &)
 	*/

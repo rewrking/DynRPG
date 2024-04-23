@@ -94,7 +94,7 @@ public:
 
 	Example:
 	\code
-int experience1 = RPG::dbClasses[1]->expPrimary;
+	int experience1 = RPG::dbClasses[1]->expPrimary;
 	\endcode
 	\sa RPG::actors
 */

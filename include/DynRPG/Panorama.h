@@ -38,7 +38,7 @@ public:
 
 	Example:
 	\code
-std::string panoramaName = RPG::panorama->filename.s_str());
+	std::string panoramaName = RPG::panorama->filename.s_str());
 	\endcode
 */
 extern DYNRPG_API Panorama*& panorama;

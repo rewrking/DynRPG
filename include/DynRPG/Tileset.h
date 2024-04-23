@@ -38,7 +38,7 @@ public:
 
 	Example:
 	\code
-if (RPG::tilesets[2]->lowerTilePassability[36] == (RPG::CP_STAR + RPG::CP_O)) do some stuff...
+	if (RPG::tilesets[2]->lowerTilePassability[36] == (RPG::CP_STAR + RPG::CP_O)) do some stuff...
 	\endcode
 */
 extern DYNRPG_API NamedCatalogPtr<Tileset*>& tilesets;

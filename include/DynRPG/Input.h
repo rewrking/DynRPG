@@ -107,7 +107,7 @@ public:
 
 		Example:
 		\code
-RPG::input->key(RPG::KEY_DECISION)[3] = VK_TAB;
+		RPG::input->key(RPG::KEY_DECISION)[3] = VK_TAB;
 		\endcode
 		This example would assign the \c TAB key as a new decision key
 		(the default decision keys are \c Enter, \c Space and \c Z,

@@ -123,13 +123,13 @@ DYNRPG_API std::string getSkillDescription(int id);
 DYNRPG_API std::string getConditionName(int id);
 
 /*! \brief Gets the name of a switch
-	\param id Database ID of the switch
+	\param index Index of the switch
 	\return The name of the switch
 */
 DYNRPG_API std::string getSwitchName(int index);
 
 /*! \brief Gets the name of a variable
-	\param id Database ID of the variable
+	\param index Index of the variable
 	\return The name of the variable
 */
 DYNRPG_API std::string getVariableName(int index);
