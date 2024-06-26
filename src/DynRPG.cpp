@@ -130,16 +130,20 @@ std::string getConditionName(int id)
 
 std::string getSwitchName(int index)
 {
-	NamedCatalogPtr<Switch*>& n = (**reinterpret_cast<NamedCatalogPtr<Switch*>**>(0x4CE060));
+	Switch* var = (**reinterpret_cast<NamedCatalogPtr<Switch*>**>(0x4CDFC4))[index];
+	if (!var)
+		return std::string();
 
-	return n[index]->name.s_str();
+	return var->name.s_str();
 }
 
 std::string getVariableName(int index)
 {
-	NamedCatalogPtr<Variable*>& n = (**reinterpret_cast<NamedCatalogPtr<Variable*>**>(0x4CDFC4));
+	Variable* var = (**reinterpret_cast<NamedCatalogPtr<Variable*>**>(0x4CDFC4))[index];
+	if (!var)
+		return std::string();
 
-	return n[index]->name.s_str();
+	return var->name.s_str();
 }
 
 RPG::EventScriptLine* getEventLine(int eventId, int pageId, int lineId)
