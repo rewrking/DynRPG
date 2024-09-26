@@ -1,6 +1,7 @@
 #ifndef DYNRPG_MAP_PROPERTIES_H
 #define DYNRPG_MAP_PROPERTIES_H
 
+#include <DynRPG/CharacterGraphics.h>
 #include <DynRPG/Enum/DungeonGenPassWidth.h>
 #include <DynRPG/Enum/DungeonGenType.h>
 #include <DynRPG/Enum/MapWrapping.h>
@@ -43,7 +44,7 @@ public:
 	int _unknown_3C; // Duplicate of map->events[##]->data (data is the same anyway...)
 	//NamedCatalogPtr<EventData *> events;  //!< The original definition. Points the array of map events on the current map (one-based) (again??)
 	MapGraphics* graphics; //!< The Tileset, along with the cached graphics?
-	void* charsetGraphics; //!< Not yet implemented. Wtf even is this?
+	CharacterGraphics* charsetGraphics; //!< The Character graphics cache
 	int _unknown_48;
 	bool useDungeonGenerator; //!< true if the current map uses the dungeon generator
 	DungeonGenType dGenType; //!< Dungeon generation guidelines (see RPG::DungeonGenType)

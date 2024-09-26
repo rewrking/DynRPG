@@ -134,6 +134,12 @@ DYNRPG_API std::string getSwitchName(int index);
 */
 DYNRPG_API std::string getVariableName(int index);
 
+/*! \brief Gets the name of a common event
+	\param index Index of the common event
+	\return The name of the common event
+*/
+DYNRPG_API std::string getCommonEventName(int index);
+
 /*! \brief Simple function for teleporting
 */
 DYNRPG_API void teleportHero(int mapId = 1, int x = 0, int y = 0, TeleportDirection dir = TP_DIR_RETAIN_FACING);

@@ -42,6 +42,7 @@
 #include <DynRPG/Catalog.h>
 #include <DynRPG/CatalogPtr.h>
 #include <DynRPG/Character.h>
+#include <DynRPG/CharacterGraphics.h>
 #include <DynRPG/ColorControl.h>
 #include <DynRPG/CommonEvent.h>
 #include <DynRPG/Condition.h>

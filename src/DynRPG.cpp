@@ -8,6 +8,7 @@
 #include <DynRPG/DynRPGGlobals.h>
 
 #include <DynRPG/Battler.h>
+#include <DynRPG/CommonEvent.h>
 #include <DynRPG/DStringPtr.h>
 #include <DynRPG/Enum/Scene.h>
 #include <DynRPG/Inventory.h>
@@ -140,6 +141,15 @@ std::string getSwitchName(int index)
 std::string getVariableName(int index)
 {
 	Variable* var = (**reinterpret_cast<NamedCatalogPtr<Variable*>**>(0x4CDFC4))[index];
+	if (!var)
+		return std::string();
+
+	return var->name.s_str();
+}
+
+std::string getCommonEventName(int index)
+{
+	CommonEvent* var = (**reinterpret_cast<NamedCatalogPtr<CommonEvent*>**>(0x4CDF40))[index];
 	if (!var)
 		return std::string();
 
