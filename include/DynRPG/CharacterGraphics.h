@@ -38,6 +38,13 @@ public:
 
 	int findIndex(std::string filename);
 
+	/**
+	 *
+	 * @example
+	 * int index = RPG::map->properties->charsetGraphics->findIndex("Monster1");
+	 * if (index == -1) index = RPG::map->properties->charsetGraphics->add("Monster1");
+	 * RPG::map->properties->charsetGraphics->draw(RPG::screen->canvas, 100, 100, index, 3, RPG::DIR_DOWN, RPG::ANI_FRAME_MIDDLE_A, RPG::TSD_DISP_NORMAL, false);
+	 */
 	void draw(Canvas* canvas, int x, int y, int fileIndex, int spriteIndex,
 		Direction direction, AnimationFrameCharset step, TerrainSpriteDisplay spriteDisplay,
 		bool isCharSet2);
