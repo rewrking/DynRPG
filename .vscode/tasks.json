@@ -6,7 +6,7 @@
 		{
 			"label": "build",
 			"type": "shell",
-			"command": ".\\build_mingw.bat",
+			"command": ".\\build_tdm.bat",
 			"group": {
 				"kind": "build",
 				"isDefault": true

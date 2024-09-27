@@ -16,7 +16,7 @@ class DYNRPG_API CharacterGraphics
 public:
 	void** vTable;
 	WindowMessageBox* filenames; // WindowMessageBox should actually be called DStringList
-	DList<Image*>* images;
+	DListPtr<Image*>* images;
 	DList<bool>* inUse;
 	bool useMaskColor;
 	int transparency; // 0-8 (corresponding to 255-15 opacity values in steps of 30)
@@ -33,21 +33,19 @@ public:
 
 	void cleanUp();
 
-	// Note: isCharSet2 in addFile/draw should be always false! It was intended for large charsets, a feature that was never finished. Setting it to true in addFile would attempt to load a hardcoded file "CharSet2\主人公1", in draw it has no effect.
-	int addFile(std::string filename, bool isCharSet2);
+	int addFile(const std::string& filename);
 
-	int findIndex(std::string filename);
+	int findIndex(const std::string& filename);
 
-	/**
-	 *
-	 * @example
-	 * int index = RPG::map->properties->charsetGraphics->findIndex("Monster1");
-	 * if (index == -1) index = RPG::map->properties->charsetGraphics->add("Monster1");
-	 * RPG::map->properties->charsetGraphics->draw(RPG::screen->canvas, 100, 100, index, 3, RPG::DIR_DOWN, RPG::ANI_FRAME_MIDDLE_A, RPG::TSD_DISP_NORMAL, false);
-	 */
-	void draw(Canvas* canvas, int x, int y, int fileIndex, int spriteIndex,
-		Direction direction, AnimationFrameCharset step, TerrainSpriteDisplay spriteDisplay,
-		bool isCharSet2);
+	int require(const std::string& filename);
+
+	/*! \brief
+		\example
+		int index = RPG::map->properties->charsetGraphics->findIndex("Monster1");
+		if (index == -1) index = RPG::map->properties->charsetGraphics->add("Monster1");
+		RPG::map->properties->charsetGraphics->draw(RPG::screen->canvas, 100, 100, index, 3, RPG::DIR_DOWN, RPG::ANI_FRAME_MIDDLE_A, RPG::TSD_DISP_NORMAL);
+	*/
+	void draw(Canvas* canvas, int x, int y, int fileIndex, int spriteIndex, Direction direction, AnimationFrameCharset step, TerrainSpriteDisplay spriteDisplay);
 };
 
 }

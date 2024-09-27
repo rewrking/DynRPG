@@ -16,7 +16,7 @@ DStringPtr::DStringPtr(DStringPtr& s)
 	assign((char*)tmp.c_str(), tmp.length());
 }
 
-DStringPtr::DStringPtr(std::string s)
+DStringPtr::DStringPtr(const std::string& s)
 {
 	str = NULL;
 	assign((char*)s.c_str(), s.length());

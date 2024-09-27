@@ -1,6 +1,6 @@
 @echo off
 
-set MINGW_PATH=C:\mingw32
+set MINGW_PATH=C:\TDM-GCC-32
 
 set Path=C:\Program Files\CMake\bin;%MINGW_PATH%\bin
 

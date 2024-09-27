@@ -29,9 +29,12 @@ void CharacterGraphics::cleanUp()
 		: "cc", "memory");
 }
 
-int CharacterGraphics::addFile(std::string filename, bool isCharSet2)
+// Note: isCharSet2 in addFile/draw should be always false! It was intended for large charsets, a feature that was never finished. Setting it to true in addFile would attempt to load a hardcoded file "CharSet2\主人公1", in draw it has no effect.
+//
+int CharacterGraphics::addFile(const std::string& filename)
 {
 	DStringPtr s(filename);
+	bool isCharSet2 = false;
 	int out;
 	asm volatile(
 		"call *%%esi"
@@ -41,7 +44,7 @@ int CharacterGraphics::addFile(std::string filename, bool isCharSet2)
 	return out;
 }
 
-int CharacterGraphics::findIndex(std::string filename)
+int CharacterGraphics::findIndex(const std::string& filename)
 {
 	DStringPtr s(filename);
 	int out;
@@ -53,11 +56,22 @@ int CharacterGraphics::findIndex(std::string filename)
 	return out;
 }
 
+int CharacterGraphics::require(const std::string& filename)
+{
+	int index = findIndex(filename);
+	if (index == -1)
+	{
+		index = addFile(filename);
+	}
+
+	return index;
+}
+
 void CharacterGraphics::draw(
 	Canvas* canvas, int x, int y, int fileIndex, int spriteIndex,
-	Direction direction, AnimationFrameCharset step, TerrainSpriteDisplay spriteDisplay,
-	bool isCharSet2)
+	Direction direction, AnimationFrameCharset step, TerrainSpriteDisplay spriteDisplay)
 {
+	bool isCharSet2 = false;
 	asm volatile(
 		"pushl %7;"
 		"pushl %8;"

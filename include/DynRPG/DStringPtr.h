@@ -22,7 +22,7 @@ public:
 
 	DStringPtr(); //!< Constructor (initializes the pointer to zero)
 	DStringPtr(DStringPtr& s); //!< Copy constructor
-	DStringPtr(std::string s); //!< Constructor (uses a \c std::string as template)
+	DStringPtr(const std::string& s); //!< Constructor (uses a \c std::string as template)
 	~DStringPtr(); //!< Destructor (deallocates the string when the class is destroyed)
 
 	operator std::string(); //!< Cast operator for \c std::string (recommended)
