@@ -21,6 +21,9 @@
 #include <DynRPG/Teleport.h>
 #include <DynRPG/Variables.h>
 
+#include "DbSwitch.h"
+#include "DbVariable.h"
+
 #include <sstream>
 #include <stdio.h>
 #include <windows.h>
@@ -131,7 +134,7 @@ std::string getConditionName(int id)
 
 std::string getSwitchName(int index)
 {
-	Switch* var = (**reinterpret_cast<NamedCatalogPtr<Switch*>**>(0x4CDFC4))[index];
+	DbSwitch* var = (**reinterpret_cast<NamedCatalogPtr<DbSwitch*>**>(0x4CDFC4))[index];
 	if (!var)
 		return std::string();
 
@@ -140,7 +143,7 @@ std::string getSwitchName(int index)
 
 std::string getVariableName(int index)
 {
-	Variable* var = (**reinterpret_cast<NamedCatalogPtr<Variable*>**>(0x4CDFC4))[index];
+	DbVariable* var = (**reinterpret_cast<NamedCatalogPtr<DbVariable*>**>(0x4CDFC4))[index];
 	if (!var)
 		return std::string();
 

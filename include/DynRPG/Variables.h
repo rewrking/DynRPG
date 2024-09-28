@@ -7,18 +7,6 @@
 
 namespace RPG
 {
-/*! \brief Access to variable names.
-	\sa RPG::variables::name(int)
-	\sa RPG::variables
-*/
-class Variable
-{
-public:
-	void** vTable;
-	void** id; //!< Not needed since its index is used in RPG::variables
-	DStringPtr name; //!< The name of the variable
-};
-
 /*! \brief Provides easy access to in-game variables
 	You may also use RPG::System::variables, but the RPG::Variables class
 	will also tolerate negative indexes and is less to type.
