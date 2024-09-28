@@ -123,6 +123,11 @@ public:
 	int maxHitNumber; //!< comboRepetitions * Weapon's hit #?
 	bool battlerSpawned; //!< Used internally at start of battler for loading
 
+	/*! \brief Returns the current name
+		\return Current name
+	*/
+	std::string getName();
+
 	/*! \brief Returns the current degree
 		\return Current degree
 	*/

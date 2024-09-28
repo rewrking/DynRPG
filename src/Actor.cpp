@@ -6,6 +6,14 @@ namespace RPG
 {
 RPG::AnimationInBattle*& RPG::Actor::animData = (**reinterpret_cast<RPG::AnimationInBattle***>(0x4CDDC8));
 
+std::string Actor::getName()
+{
+	if (name.s_str() == "\x01")
+		return dbActors[id]->name;
+
+	return name;
+}
+
 std::string Actor::getDegree()
 {
 	if (degree.s_str() == "\x01")
