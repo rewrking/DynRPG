@@ -39,10 +39,10 @@ public:
 
 	int require(const std::string& filename);
 
-	/*! \brief
+	/*! \brief Draws a character graphic from the cache. The coordinates specify the **bottom center** of the sprite! Also, in most cases you need to set the `transparency` value before drawing, because otherwise it will be whatever the last drawn graphic happened to use!
 		\example
-		int index = RPG::map->properties->charsetGraphics->findIndex("Monster1");
-		if (index == -1) index = RPG::map->properties->charsetGraphics->add("Monster1");
+		int index = RPG::map->properties->charsetGraphics->require("monster1");
+  		RPG::map->properties->charsetGraphics->transparency = 0;
 		RPG::map->properties->charsetGraphics->draw(RPG::screen->canvas, 100, 100, index, 3, RPG::DIR_DOWN, RPG::ANI_FRAME_MIDDLE_A, RPG::TSD_DISP_NORMAL);
 	*/
 	void draw(Canvas* canvas, int x, int y, int fileIndex, int spriteIndex, Direction direction, AnimationFrameCharset step, TerrainSpriteDisplay spriteDisplay);
