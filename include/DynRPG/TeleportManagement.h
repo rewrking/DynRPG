@@ -12,7 +12,7 @@ class TeleportManagement
 {
 public:
 	void** vTable;
-	int fromMapId = 0; //!< The current Map ID
+	int fromMapId; //!< The current Map ID
 	int _unknown_08;
 	int toMapId; //!< The Map ID to teleport to
 	int mapX; //!< The Map's X-Coordinate

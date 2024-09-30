@@ -6,7 +6,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_FLAGS "-fno-omit-frame-pointer -Wall -Wno-unused-variable -static-libgcc -static-libstdc++ -s ${CMAKE_CXX_FLAGS}")
 
 if(NOT CMAKE_CXX_STANDARD)
-	set(CMAKE_CXX_STANDARD 11)
+	set(CMAKE_CXX_STANDARD 98)
 endif()
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
