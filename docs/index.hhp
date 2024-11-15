@@ -13,7 +13,6 @@ Title=DynRPG
 main="DynRPG","index.hhc","index.hhk","index.html","index.html",,,,,0x23520,,0x10387e,,,,,,,,0
 
 [FILES]
-_c_1_2_dyn_r_p_g_2include_2_dyn_r_p_g_2_character_graphics_8h-example.html
 annotated.html
 changelog.html
 class_r_p_g_1_1_action-members.html
@@ -232,7 +231,6 @@ dir_83a51a8f81cc984652d5b28c32fb4c6c.html
 dir_d44c64559bbebec7f509842c48db8b23.html
 dir_d8c7451ad160f7132269b9d9aa4799d8.html
 doxygen_crawl.html
-examples.html
 functions.html
 functions_b.html
 functions_c.html

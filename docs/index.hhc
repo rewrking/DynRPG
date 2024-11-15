@@ -638,6 +638,7 @@
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="CharacterGraphics"><param name="Local" value="class_r_p_g_1_1_character_graphics.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="draw"><param name="Local" value="class_r_p_g_1_1_character_graphics.html#a77a9525d3e7ba475f0623c852537dca0"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="ColorControl"><param name="Local" value="class_r_p_g_1_1_color_control.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
@@ -2176,10 +2177,6 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="y"><param name="Local" value="functions_vars_y.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     </UL>
-  </UL>
-<LI><OBJECT type="text/sitemap"><param name="Name" value="Examples"><param name="Local" value="examples.html"><param name="ImageNumber" value="1"></OBJECT>
-  <UL>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="C:/DynRPG/include/DynRPG/CharacterGraphics.h"><param name="Local" value="_c_1_2_dyn_r_p_g_2include_2_dyn_r_p_g_2_character_graphics_8h-example.html"><param name="ImageNumber" value="11"></OBJECT>
   </UL>
 </UL>
 </BODY>

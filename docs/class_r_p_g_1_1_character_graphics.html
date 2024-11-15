@@ -41,7 +41,6 @@
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="topics.html"><span>Topics</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
     </ul>
   </div>
   <div id="navrow2" class="tabs2">
@@ -94,6 +93,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>require</b> (const std
 <tr class="separator:aaf4ccb491f67a7a2cac07a5f32622e83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77a9525d3e7ba475f0623c852537dca0" id="r_a77a9525d3e7ba475f0623c852537dca0"><td class="memItemLeft" align="right" valign="top"><a id="a77a9525d3e7ba475f0623c852537dca0" name="a77a9525d3e7ba475f0623c852537dca0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (<a class="el" href="class_r_p_g_1_1_canvas.html">Canvas</a> *canvas, int x, int y, int fileIndex, int spriteIndex, <a class="el" href="namespace_r_p_g.html#a8669d886d91bb02b87791f589254097c">Direction</a> direction, <a class="el" href="namespace_r_p_g.html#a24b7c9bfd31e738fb3d83d503a7afaae">AnimationFrameCharset</a> step, <a class="el" href="namespace_r_p_g.html#ad3dc42d108ddafcffc54b92efcf0c004">TerrainSpriteDisplay</a> spriteDisplay)</td></tr>
+<tr class="memdesc:a77a9525d3e7ba475f0623c852537dca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a character graphic from the cache. The coordinates specify the <b>bottom center</b> of the sprite! Also, in most cases you need to set the <code>transparency</code> value before drawing, because otherwise it will be whatever the last drawn graphic happened to use! int index = <a class="el" href="group__game__objects.html#ga0f7cb4c7d2a82886fbe9326ea98ed8a9" title="The current map environment (camera, events, etc.)">RPG::map</a>-&gt;properties-&gt;charsetGraphics-&gt;require("monster1"); <a class="el" href="group__game__objects.html#ga0f7cb4c7d2a82886fbe9326ea98ed8a9" title="The current map environment (camera, events, etc.)">RPG::map</a>-&gt;properties-&gt;charsetGraphics-&gt;transparency = 0; <a class="el" href="group__game__objects.html#ga0f7cb4c7d2a82886fbe9326ea98ed8a9" title="The current map environment (camera, events, etc.)">RPG::map</a>-&gt;properties-&gt;charsetGraphics-&gt;draw(<a class="el" href="group__game__objects.html#ga79ab87216775ec74cb63127296311fef" title="The screen, including window properties, FPS and the drawing canvas.">RPG::screen</a>-&gt;canvas, 100, 100, index, 3, <a class="el" href="namespace_r_p_g.html#a8669d886d91bb02b87791f589254097ca4bee0be299b47db9ac47a33c063249bf" title="Character moves down">RPG::DIR_DOWN</a>, RPG::ANI_FRAME_MIDDLE_A, RPG::TSD_DISP_NORMAL);. <br /></td></tr>
 <tr class="separator:a77a9525d3e7ba475f0623c852537dca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>

@@ -1306,6 +1306,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_scene_file.html#a8ea2c026b9d142903ea44109a6a7dcf0"><param name="Name" value="doesSaveExist(int saveId)"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_character.html#a70c9dee270055c4163304056df2c2cd0"><param name="Name" value="doStep(RPG::Direction direction)"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_picture.html#a4647bd51feb4e3e395cc5d30fd71aa55"><param name="Name" value="draw()"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_character_graphics.html#a77a9525d3e7ba475f0623c852537dca0"><param name="Name" value="draw(Canvas *canvas, int x, int y, int fileIndex, int spriteIndex, Direction direction, AnimationFrameCharset step, TerrainSpriteDisplay spriteDisplay)"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_image.html#af68dfeb2e46a2e9495472573754570d2"><param name="Name" value="draw(int x, int y, Image *image, int srcX=0, int srcY=0, int srcWidth=-1, int srcHeight=-1, int maskColor=0)"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_canvas.html#a37bb56fb355bafaf1dcf93c0c0ab946c"><param name="Name" value="draw(int x, int y, RPG::Image *image, int srcX=0, int srcY=0, int srcWidth=-1, int srcHeight=-1)"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_image.html#ab4576b2fdb7dc8eb26a752d1ba18e551"><param name="Name" value="draw(int x, int y, unsigned char *newPixels, int srcWidth, int srcHeight, int srcLineWidth, int maskColor=0)"></OBJECT>
@@ -6486,6 +6487,10 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_character.html#af9b5594e2aba973b0938499908b833ef"><param name="Name" value="y"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_character_graphics.html"><param name="Name" value="RPG::CharacterGraphics"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_character_graphics.html"><param name="Name" value="RPG::CharacterGraphics"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_character_graphics.html#a77a9525d3e7ba475f0623c852537dca0"><param name="Name" value="draw(Canvas *canvas, int x, int y, int fileIndex, int spriteIndex, Direction direction, AnimationFrameCharset step, TerrainSpriteDisplay spriteDisplay)"></OBJECT>
+  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_color_control.html"><param name="Name" value="RPG::ColorControl"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_r_p_g_1_1_color_control.html"><param name="Name" value="RPG::ColorControl"></OBJECT>
   <UL>
